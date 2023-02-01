@@ -8,6 +8,8 @@
 # include <unistd.h>
 # include <linux/limits.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 typedef struct pipex_data
 {

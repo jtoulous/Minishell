@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include <unistd.h>
 
 void	builtinz_multi_first(t_data *data)
 {
@@ -8,11 +9,11 @@ void	builtinz_multi_first(t_data *data)
 	if (pid == 0)
 	{
 		if (data->infile != -1)
-			dup2(data->infile, STDIN);
+			dup2(data->infile, STDIN_FILENO);
 		if (data->outfile != -1)
-			dup2(data->outfile, STDOUT);
+			dup2(data->outfile, STDOUT_FILENO);
 		else 
-			dup2(data->pipe[0][1], STDOUT);
+			dup2(data->pipe[0][1], STDOUT_FILENO);
 		close_all(data);
 		execbd(data);
 	}
@@ -35,7 +36,7 @@ void	builtinz_multi_first(t_data *data)
 
 void	multi_exec(t_data *data, int z)
 {
-	if (built_in?(data->argz[0]) == 1)
+	if (built_in(data->argz[0]) == 1)
 	{
 		if (z == 0)
 			builtinz_multi_first(data);

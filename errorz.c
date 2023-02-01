@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errorz.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/01 16:58:47 by agoichon          #+#    #+#             */
+/*   Updated: 2023/02/01 17:01:26 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	syntax_check(t_data *data)
+/*void	syntax_check(t_data *data)
 {
-}
+}*/
 
 void	check_closed_quotes(t_data *data)
 {
@@ -11,7 +23,7 @@ void	check_closed_quotes(t_data *data)
 	z = 0;
 	while (data->line[z])
 	{
-		if (data->line[z] == '"' || data->line[z] == ''')
+		if (data->line[z] == 34 || data->line[z] == 39)
 			skip_out(data->line, &z);
 		if (data->line[z] == '\0')
 			error_quotes(data);
@@ -27,7 +39,7 @@ void	check(t_data *data)
 	check_closed_quotes(data);
 	if (data->exec_stat == 1)
 		syntax_check(data);
-	nb_hdocs = nb_hdocs(data->line);
-	if (nb_doc != 0)
+	nb_docs = nb_hdocs(data->line);
+	if (nb_docs != 0)
 		hdoc_scan(data, nb_docs);
 }
