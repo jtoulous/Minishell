@@ -26,6 +26,9 @@ typedef struct pipex_data
 			/*DONE*/
 /*====================================================*/
 
+//built_in
+void	built_in(t_data *data);
+
 //errorz
 void	check(t_data *data);
 void	check_closed_quotes(t_data *data);

@@ -36,7 +36,7 @@ void	builtinz_multi_first(t_data *data)
 
 void	multi_exec(t_data *data, int z)
 {
-	if (built_in(data->argz[0]) == 1)
+	if (built_in(data) == 1)
 	{
 		if (z == 0)
 			builtinz_multi_first(data);
