@@ -18,9 +18,9 @@
 
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+	void		*entry;
+	struct 	s_list	*nxt;
+}		t_list;
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));

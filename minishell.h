@@ -3,11 +3,11 @@
 
 # define BUFFER_SIZE 1 
 
-typedef struct s_list
-{
-	char		*entry;
-	struct 	s_list	*nxt;
-}		t_list;
+# include "libft/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <linux/limits.h>
+#include <stdio.h>
 
 typedef struct pipex_data
 {
@@ -87,7 +87,7 @@ int	valid_hd(char *line, int spot);
 
 void	free_and_close_all(t_data *data, int opt);//si opt == 1, touche pas a env
 void	syntax_check(t_data *data);
-void	clean_dat_biach(char *line, int end)
+void	clean_dat_biach(char *line, int end);
 char	*extract_cmd(char *line);
 void	pipes_prep(int **pipes, int nb_cmdz);
 void	malloc_dat_shiat(t_data *data, int end);//malloc for **argz
