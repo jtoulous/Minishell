@@ -30,33 +30,47 @@ int	valid_inredir(char *line, int spot)
 	return (0);
 }
 
-void	set_up_inredir(t_data *data, int spot)//ICCCCCCCCCCCCCCCI
+int	set_up_inredir(t_data *data, int spot)//ICCCCCCCCCCCCCCCI
 {
 	char	*file;
 	
 	file = extract_redir(data->line, spot);
 	data->infile = open(file, O_RDONLY);
 	if (data->infile == -1)
-		error_msg("");
+	{	
+		error_inredir(file);
+		return (0);
+	}
 	trim_redir(data->line, spot);
 	free (file);
+	return (1);
 }
 
-void	check_inredir(t_data *data, int end)//////iciiciciciicic
+int	check_inredir(t_data *data, int end)//////iciiciciciicic
 {
 	int	z;
+	char	*file;
 	
 	z = 0;
 	while (z < end)
 	{
 		if (data->line[z] == '<' && valid_inredir(data->line, z) == 1)
 		{
-			if (the_last_inredir(line, spot) == 1)
-				set_up_inredir(data, z);//open, store in data->infile
+			if (the_last_inredir(line, spot) == 1
+				&& set_up_inredir(data, z) == 1)
+				return (1)//open, store in data->infile
 			else
-				if (access(extract_redir(data->line, z), F_OK) == 0)
-			return ;
+			{
+				file = extract_redir(data->line, z);			
+				if (access(failed, F_OK) != 0)
+				{
+					error_inredir(file);
+					return (0);
+				}	
+				free (file);
+			}
 		}
 		z++;
 	}
+	return (1);
 }

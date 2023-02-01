@@ -11,7 +11,7 @@ typedef struct u_list
 
 typedef struct env_list
 {
-	char			*line;
+	char			*entry;
 	struct env_list	*nxt;
 }		t_env;
 
@@ -100,7 +100,7 @@ void	trim_leftovers(char *line);//wipe all until next pipe(pipe included), or en
 void	reset_data(t_data *data);
 void	regular_multi(t_data *data, int z);
 void	builtinz_multi(t_data *data, int z);
-void	built_in?(char *arg);
+void	check_builtin(char *arg);
 void	execbd(char *path, char **argz, char **env);
 void	close_all(t_data *data);
 int	nb_hdocs(char *line);

@@ -36,7 +36,8 @@ void	parse(t_data *data)//efface la cmd qui vient d etre traiter
 	
 	end = end_of_cmd(data->line, 0);
 	clean_dat_biach(data->line, end);
-	check_inredir(data, end);//open in data->infile + trim
+	if (check_inredir(data, end) != 1)//open in data->infile + trim
+		return ;
 	check_outredir(data, end);//if multi out_redir create all(but close useless ones) save last one in data->outfile and trim them all away,
 	prep_exec(data, end);
 	trim_leftovers(data->line);//efface tout jusqu a la comm suivante

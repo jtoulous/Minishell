@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-void	error_inredir(t_data *data, char *failed_redir)
+void	error_inredir(char *failed_redir)
 {
-	data->exec_stat = 0;
 	ft_putstr_fd(failed_redir, STDOUT);
 	ft_putstr_fd(": No such file or directory", STDOUT);
+	free (failed);
 }
 
 void	error_quotes(t_data *data)

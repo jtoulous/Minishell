@@ -44,25 +44,25 @@ void	treat_command(t_data *data)
 			if (data->argz != NULL)
 				exec(data, z);//execbd pour built_in ou execve, check prev_outfile if != -1
 			if (z < data->nb_cmdz - 1)
-				reset_data(data);//restaure infile a -1 apres l avoir close, save outfile in old outfile if != -1, et tout le tralala
+				reset_data(data);//set infile a -1 after close, save outfile in old outfile if != -1
 			z++;
 		}
 	}
-	free_and_close_all(data, 1);//opt = 1 = don t free env,+ check access on heredoc.txt and unlink if nessessary
+	free_and_close_all(data, 1);//opt = 1 = don t free env,+ check access on .heredocs and unlink
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	
-	initialize_data(&data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ...
+	init_data(&data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{
-		ft_putstr_fd("Minichiass >", STDOUT);
+		ft_putstr_fd("ta_mere_en_string_2_guerre >", STDOUT);
 		data.line = get_next_line(STDIN);
 		data.nb_cmdz = nb_cmd(data->line);
 		treat_command(&data);
 	}
-	free_and_close_all(&data, 2);//every fucking thing
+	free_and_close_all(&data, 2);//every  thing
 	return (69);
 }

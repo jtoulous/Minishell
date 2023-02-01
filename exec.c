@@ -16,6 +16,7 @@ void	builtinz_multi_first(t_data *data)
 		close_all(data);
 		execbd(data);
 	}
+	wait (0);
 }
 
 /*void	builtinz_multi(t_data *data, int z)
