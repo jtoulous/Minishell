@@ -74,9 +74,7 @@ void	built_in_cd(t_data data)
 {
 	if (ft_strncmp(data.argz[0], "cd", 2) == 0)
 	{
-		if (data.argz[1] == "..")
-			chdir(OLDPWD);
-		else if (access(data.argz[1], F_OK) == 0 && data.argz[2] == NULL)
+		if (access(data.argz[1], F_OK) == 0 && data.argz[2] == NULL)
 			chdir(data.argz[1]);
 		else if (data.argz[2] != NULL)
 			ft_putstr_fd("too many arguments\n", 1);
@@ -148,10 +146,20 @@ void	built_in_env(t_data data)
 
 void	built_in_exit(t_data data)
 {
+	int	i;
+
+	i = 0;
 	if (ft_strncmp(data.argz[0], "exit", ft_strlen(data.argz[0])) == 0)
 	{
+		if (data.argz[1] != NULL)
+		{	
+			
+			i = ft_atoi(data.argz[1]);
+		}
 		ft_putstr_fd("exit", 0);
 		free_and_close_all(data, 2);
-		exit (0);
+		exit (i);
 	}	
-}	
+}
+
+
