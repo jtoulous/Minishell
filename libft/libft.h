@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:49:14 by agoichon          #+#    #+#             */
-/*   Updated: 2023/01/18 11:43:05 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:10:31 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# define BUFFER_SIZE 1000
 
 typedef struct s_list
 {
@@ -67,6 +66,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_itoa(int n);
-void	ft_sort_int_tab(int *tab);
 char	*get_next_line(int fd);
+void	ft_sort_int_tab(char *str);
 #endif

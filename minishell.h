@@ -11,7 +11,7 @@ typedef struct s_list
 
 typedef struct pipex_data
 {
-	t_env		*env;
+	t_lst	*env;
 	char		*line;
 	char		**argz;
 	int		**pipe;

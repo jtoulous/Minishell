@@ -6,34 +6,16 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/01 10:48:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:36:46 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
-//#include "minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <linux/limits.h>
 #include <stdio.h>
-typedef struct env_list
-{
-	char			*line;
-	struct env_list	*nxt;
-}		t_env;
-
-typedef struct pipex_data
-{
-	t_env		*env;
-	char		*line;
-	char		**argz;
-	int		**pipe;
-	int		infile;
-	int		outfile;
-	int		prev_outfile;
-	int		exec_stat;
-}		t_data;
 
 void	built_in_echo(t_data data)
 {
@@ -98,39 +80,51 @@ void	built_in_pwd(t_data data)
 	}	
 }
 
-void built_in_export(t_data data)
+void	built_in_export(t_data data)
 {
-	char *value;
-	char *new_value;
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int 	k;
+	char	*env_sort;
+	char	*variable;
+	char	*new_value;
 
-	j = 1;
-	if(ft_strncmp(data.argz[0], "export", ft_strlen(data.argz[0])) == 0)
+	if (ft_strncmp(data.argz[0], "export", ft_strlen(data.argz[0])) == 0)
 	{
-		i = 0;
-		k = 0;
-		while(ft_isprint(data.argz[j][i]) == 0)
+			if (data.argz[1] == NULL)
 		{
-			while (data.argz[j][i] != '=')
-			{	
-				value[k] = data.argz[j][i];
+			i = 0;
+			env_sort = ft_sort_int_tab(data.env);
+			while (env_sort[i])
+			{
+				printf("%s\n", env_sort[i]);
 				i++;
-				k++;
-			}	
-			if (data.argz[j][i] == '=')
-				j++;
-			k = 0;
-			while(data.argz[j][i] != '\0')
-			{	
-				new_value[k] = data.argz[j][i];
-				i++;
-				k++;
 			}
-			value = getenv(new_value);
+			return (0);
 		}	
-		j++;
+		else
+		{
+			i = 1;
+			j = 0;
+			while (data.argz[i][j])
+			{
+				while (data.argz[i][j] != '=')
+				{
+					variable[j] = data.argz[i][j];
+					j++;
+				}	
+				if (data.argz[i][j] == '=')
+					j++;
+				k = 0;
+				while (data.argz[i][j])
+				{
+					new_value[k] = data.argz[i][j];
+					i++;
+					k++;
+				}
+				ft_lstadd_back(data.env.entry, data.env.nxt);
+			}	
+		}	
 	}	
 }
 
@@ -139,8 +133,19 @@ void	built_in_unset(t_data data)
 
 }
 
-void	built_in_env(t_data data)
+void	built_in_env(t_data data, t_list *env)
 {
+	int	i;
+
+	i = 0;
+	if (ft_strncmp(data.argz[0], "env", ft_strlen(data.argz[0])) == 0)
+	{
+		while  (env[i])
+		{
+			printf("%s\n", env);
+			i++;
+		}
+	}	
 
 }	
 
@@ -166,6 +171,7 @@ int	built_in_exit(t_data data)
 			{	
 				if (ft_isdigit(data.argz[1][i]) == 1)
 				{
+					n =ft_atoi(data.argz[1]);
 					ft_putstr_fd("exit\n", 2);
 					ft_putstr_fd("numeric argument required\n", 2);
 					exit(2);
@@ -176,7 +182,7 @@ int	built_in_exit(t_data data)
 		}
 		ft_putstr_fd("exit", 1);
 		free_and_close_all(data, 2);
-		exit (i);
+		exit (n % 256);
 	}	
 }
 
