@@ -34,26 +34,27 @@ void	pipes_prep(int **pipes, int nb_cmdz)
 
 int	nb_cmd(char *line)
 {
-}
-
-int	check_hdoc_usage(char *line, int z, int end)
-{
-	while (z < end)
-	{
-		if (line[z] == '<' && valid_inredir(line, z) == 1)
-			return (0);
-		z++;
-	}
-	return (1);
-}
-
-void	unlinkz(char *new)//
-{
-	static t_list	*unlinks;
+	static int	count;
+	int		z;
 	
-	if (new)
+	z = 0;
+	if (line == NULL)
+		return (count);
+	count = 0;
+	while (line[z])
 	{
-		add_lst()
+		if (line[z] == '|' && valid_pipe(line, z) == 1)
+			count++;
 	}
+	return (count + 1);
+}
+
+int	end_of_cmd(char *line, int spot)
+{
+	while ((line[spot] != '|' 
+		|| valid_pipe(line, spot) != 1)
+		&& line[spot])
+		spot++;
+	return (spot);
 }
 

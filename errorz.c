@@ -27,7 +27,7 @@ void	check(t_data *data)
 	check_closed_quotes(data);
 	if (data->exec_stat == 1)
 		syntax_check(data);
-	nb_docs = nb_hdocs(data->line);
+	nb_hdocs = nb_hdocs(data->line);
 	if (nb_doc != 0)
 		hdoc_scan(data, nb_docs);
 }

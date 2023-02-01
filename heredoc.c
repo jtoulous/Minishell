@@ -47,7 +47,7 @@ void	prep_hdoc(t_data *data, int z)
 	int	fd;
 		
 	file = ft_strjoin(".heredoc", ft_itoa(z));
-	fd = open(file, O_WRITE | O_READ | O_CREAT, 0777)
+	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777)
 	get_doc_argz(fd, hdoc_limit(data->line, z));
 	replace_hdoc(data->line, file, z);
 	unlinkz(file);
@@ -78,8 +78,8 @@ void	hdoc_scan(t_data *data, int nb_docs)
 	z = 0;
 	while (data->line[z])
 	{
-		if (data->line[z] == '<' && data->line[z + 1] == '<'
-			&& in_or_out(data->line, z) == 0)
+		if (data->line[z] == '<' 
+			&& valid_hd(line, z) == 1)
 		{
 			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)//check si ta pas une autre redir dans la meme cmd  
 				prep_hdoc(data, z);

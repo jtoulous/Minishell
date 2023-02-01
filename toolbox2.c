@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	export_env(t_lst *env, char **envp)
+void	export_env(t_list *env, char **envp)
 {
 	int	z;
 	
@@ -29,4 +29,18 @@ void	reset_data(t_data *data)
 	data->outfile = -1;
 	free_loop(argz);
 	trim_leftovers(data->line);	
+}
+
+void	pipes_prep(int **pipes, int nb_cmdz)
+{
+	int	z;
+	
+	z = 0;
+	pipes = ft_calloc(nb_cmdz, sizeof(int *));
+	while (z < nb_cmdz)
+	{
+		pipes[z] = ft_calloc(2, sizeof(int));
+		pipe(pipes[z]);
+		z++;
+	}
 }

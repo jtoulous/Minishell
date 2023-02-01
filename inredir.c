@@ -14,22 +14,6 @@ int	the_last_inredir(char *line, int spot)
 	return (1);
 }
 
-int	valid_inredir(char *line, int spot)
-{
-	int	end;
-	
-	end = end_of_cmd(line, spot);
-	if (in_or_out(line, spot) != 0)
-		return (0);
-	while (spot < end)
-	{
-		if (line[spot] != ' ')
-			return (1);
-		spot++;
-	}
-	return (0);
-}
-
 int	set_up_inredir(char *file, t_data *data, int spot)//ICCCCCCCCCCCCCCCI
 {
 	data->infile = open(file, O_RDONLY);

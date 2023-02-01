@@ -61,6 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr_fd("ta_mere_en_string_2_guerre >", STDOUT);
 		data.line = get_next_line(STDIN);
 		data.nb_cmdz = nb_cmd(data->line);
+		add_history(data.line);
 		treat_command(&data);
 	}
 	free_and_close_all(&data, 2);//every  thing
