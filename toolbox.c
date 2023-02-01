@@ -46,3 +46,14 @@ int	check_hdoc_usage(char *line, int z, int end)
 	}
 	return (1);
 }
+
+void	unlinkz(char *new)//
+{
+	static t_list	*unlinks;
+	
+	if (new)
+	{
+		add_lst()
+	}
+}
+

@@ -40,5 +40,4 @@ void	parse(t_data *data)//efface la cmd qui vient d etre traiter
 		return ;
 	check_outredir(data, end);//if multi out_redir create all(but close useless ones) save last one in data->outfile and trim them all away,
 	prep_exec(data, end);
-	trim_leftovers(data->line);//efface tout jusqu a la comm suivante
 }

@@ -3,22 +3,15 @@
 
 # define BUFFER_SIZE 1 
 
-typedef struct u_list
+typedef struct s_list
 {
-	char		*file;
-	struct u_list	next;
-}		t_unlink;
-
-typedef struct env_list
-{
-	char			*entry;
-	struct env_list	*nxt;
-}		t_env;
+	char		*entry;
+	struct 	s_list	*nxt;
+}		t_lst;
 
 typedef struct pipex_data
 {
 	t_env		*env;
-	t_unlink	*doc_files
 	char		*line;
 	char		**argz;
 	int		**pipe;
@@ -34,9 +27,7 @@ typedef struct pipex_data
 //errorz
 void	check(t_data *data);
 void	check_closed_quotes(t_data *data);
-void	check_infiles(t_data *data);
-void	test_to_open(t_data *data, int spot);
-void	error_inredir(t_data *data, char *failed_redir);
+int	error_inredir(char *failed_redir);
 void	error_quotes(t_data *data);
 void	error_path(char **argz, char *cmd);
 
@@ -60,7 +51,7 @@ void	built_inz(t_data *data, int z);
 
 //inredir
 void	check_inredir(t_data *data, int end);
-void	set_up_inredir(t_data *data, int spot);
+void	set_up_inredir(char *file, t_data *data, int spot);
 int	valid_inredir(char *line, int spot);
 int	the_last_inredir(char *line, int spot);
 

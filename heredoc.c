@@ -24,7 +24,7 @@ void	replace_hdoc(char *line, char *file, int spot)
 	char	*ante;
 	char	*pre;
 	int	end_hd;
-	int	biach;
+	int	end_line;
 	
 	end_hd = spot;
 	while (line[end_hd] == '<' && line[end_hd] == ' ' && line[end_hd])
@@ -32,13 +32,13 @@ void	replace_hdoc(char *line, char *file, int spot)
 	while (line[end_hd] != ' ' && line[end_hd])
 		end_hd++;
 	biach = end_hd;
-	while (line[biach])
-		biach++;
+	while (line[end_line])
+		end_line++;
 	ante = ft_substr(line, 0, spot + 1);
-	pre = ft_substr(line, end_hd, biach - end_hd);
+	pre = ft_substr(line, end_hd, end_line - end_hd);
 	free (line);
 	line = triple_strjoin(ante, file, pre);
-	mega_free(ante, file, pre, NULL);
+	mega_free(ante, pre, NULL, NULL);
 }
 
 void	prep_hdoc(t_data *data, int z)
@@ -50,6 +50,7 @@ void	prep_hdoc(t_data *data, int z)
 	fd = open(file, O_WRITE | O_READ | O_CREAT, 0777)
 	get_doc_argz(fd, hdoc_limit(data->line, z));
 	replace_hdoc(data->line, file, z);
+	unlinkz(file);
 	close (fd);
 }
 
