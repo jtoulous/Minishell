@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/01/31 16:39:14 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/01 10:48:35 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	built_in_cd(t_data data)
 		if (access(data.argz[1], F_OK) == 0 && data.argz[2] == NULL)
 			chdir(data.argz[1]);
 		else if (data.argz[2] != NULL)
-			ft_putstr_fd("too many arguments\n", 1);
+			ft_putstr_fd("too many arguments\n", 2);
 		else if (access(data.argz[1], F_OK) != 0)
-			ft_putstr_fd("No such file or Directory\n", 1);
+			ft_putstr_fd("No such file or Directory\n", 2);
 	}
 }
 
@@ -91,7 +91,7 @@ void	built_in_pwd(t_data data)
 	{	
 		if (getcwd(cwd, sizeof(cwd)) == NULL)
 		{
-			ft_putstr_fd("Error getting cirrent workimg directory\n", 1);
+			ft_putstr_fd("Error getting current working directory\n", 1);
 		}
 		else
 			ft_putstr_fd(cwd, 0);
@@ -144,19 +144,37 @@ void	built_in_env(t_data data)
 
 }	
 
-void	built_in_exit(t_data data)
+int	built_in_exit(t_data data)
 {
 	int	i;
+	int n;
 
 	i = 0;
+	n = 0;
 	if (ft_strncmp(data.argz[0], "exit", ft_strlen(data.argz[0])) == 0)
-	{
+	{	
+		if (data.argz[2][j] != NULL)
+		{
+				ft_putstr_fd("exit\n", 1);
+				ft_putstr_fd("too many arguments\n", 1);
+				return (1);
+		}	
+
 		if (data.argz[1] != NULL)
 		{	
-			
-			i = ft_atoi(data.argz[1]);
+			while (data.argz[1][i])
+			{	
+				if (ft_isdigit(data.argz[1][i]) == 1)
+				{
+					ft_putstr_fd("exit\n", 2);
+					ft_putstr_fd("numeric argument required\n", 2);
+					exit(2);
+				}					
+				i++;	
+			}
+			n = ft_atoi(data.argz[1]);
 		}
-		ft_putstr_fd("exit", 0);
+		ft_putstr_fd("exit", 1);
 		free_and_close_all(data, 2);
 		exit (i);
 	}	
