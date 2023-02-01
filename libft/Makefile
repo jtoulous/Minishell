@@ -48,6 +48,7 @@ SRC	=	src/ft_isalpha.c\
 		src/ft_split.c\
 		src/ft_strcmp.c\
 		src/get_next_line.c\
+		src/ft_sort_int_tab.c\
 		
 SRC_BONUS =	src/ft_lstnew.c src/ft_lstadd_front.c src/ft_lstsize.c src/ft_lstlast.c src/ft_lstadd_back.c src/ft_lstdelone.c src/ft_lstclear.c src/ft_lstiter.c src/ft_lstmap.c
 
