@@ -28,10 +28,6 @@ int	in_or_out(char *line, int index)
 	return (0);
 }
 
-void	pipes_prep(int **pipes, int nb_cmdz)
-{
-}
-
 int	nb_cmd(char *line)
 {
 	static int	count;

@@ -48,7 +48,7 @@ void	treat_command(t_data *data)
 			z++;
 		}
 	}
-	free_and_close_all(data, 1);//opt = 1 = don t free env,+ check access on .heredocs and unlink
+	free_and_close_all(data, 1);// - env
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -64,6 +64,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(data.line);
 		treat_command(&data);
 	}
-	free_and_close_all(&data, 2);//every  thing
+	free_and_close_all(&data, 2);// + env
 	return (69);
 }

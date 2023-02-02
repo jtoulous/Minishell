@@ -46,6 +46,8 @@ int	nb_cmd(char *line);
 int	end_of_cmd(char *line, int spot);
 void	initialize_data(t_data *data, char **envp);
 void	reset_data(t_data *data);
+void	pipes_prep(int **pipes, int nb_cmdz);
+void	export_env(t_list *env, char **envp);
 
 //parse
 void	parse(t_data *data, int x);
@@ -92,9 +94,8 @@ int	valid_hd(char *line, int spot);
 
 void	free_and_close_all(t_data *data, int opt);//si opt == 1, touche pas a env
 void	syntax_check(t_data *data);
-void	clean_dat_biach(char *line, int end);
+void	clean_dat_biach(t_data *data, int end);
 char	*extract_cmd(char *line);
-void	pipes_prep(int **pipes, int nb_cmdz);
 void	malloc_dat_shiat(t_data *data, int end);//malloc for **argz
 void	path_finder(t_data *data, char *cmd);//path, access, tralala
 int	count_leftovers(char *line);//count le nombre d'option restant
@@ -104,4 +105,6 @@ void	builtinz_multi(t_data *data, int z);
 void	check_builtin(char *arg);
 void	execbd(char *path, char **argz, char **env);
 void	close_all(t_data *data);
+char	*env_search(t_list *env, char *var);
+
 #endif
