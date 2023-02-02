@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:48:18 by agoichon          #+#    #+#             */
-/*   Updated: 2022/10/12 15:40:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:10:33 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../libft.h"
@@ -23,5 +23,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	if (!new)
 		return ;
 	last = ft_lstlast(*lst);
-	last->next = new;
+	last->nxt = new;
 }

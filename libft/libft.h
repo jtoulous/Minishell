@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:49:14 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/01 15:10:31 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:12:48 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_list
 {
 	void		*entry;
+	char		*env_copy;
 	struct 	s_list	*nxt;
 }		t_list;
 

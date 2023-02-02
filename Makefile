@@ -30,18 +30,15 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		@make -C libft -s && echo "$(GREEN)libft compiled"
-		@make -C ft_printf -s && echo "$(GREEN) ft_printf compiled"
-		@clang $(OBJ) libft/libft.a ft_printf/libftprintf.a  -lreadline -o $(NAME) | echo "$(GREEN)OBJ compiled"
+		@clang $(OBJ) libft/libft.a -lreadline -o $(NAME) | echo "$(GREEN)OBJ compiled"
 
 clean:
 		@rm -f $(OBJ) | echo "$(YELLOW)clean OBJ"
 		@make clean -C libft -s && echo "$(YELLOW)libft cleaned"
-		@make clean -C ft_printf -s && echo "$(YELLOW)ft_printf cleaned"
 
 fclean: clean
 		@rm -f $(NAME) | echo "$(RED)clean All"  
 		@make fclean -C libft -s && echo "$(RED)libft cleaned"
-		@make fclean -C ft_printf -s && echo "$(RED)ft_printf cleaned"
 
 re: fclean all
 

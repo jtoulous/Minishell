@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/01 17:44:55 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:47:17 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,16 @@ static int	built_in_export(t_data *data)
 	int		i;
 	int		j;
 	int 	k;
-	char	*env_sort;
 	char	*variable;
 	char	*new_value;
 
 	if (data->argz[1] == NULL)
 	{
 		i = 0;
-		env_sort = ft_sort_int_tab(data->env);
-		while (env_sort[i])
+		ft_sort_int_tab(data->env->env_copy);
+		while (data->env->env_copy[i])
 		{
-			printf("%s\n", env_sort);
+			printf("%s\n", data->env->env_copy);
 			i++;
 		}
 		return (0);
@@ -94,6 +93,7 @@ static int	built_in_export(t_data *data)
 	{
 		i = 1;
 		j = 0;
+		if (ft_isalpha(data->argz[i])
 		while (data->argz[i][j]) 
 		{
 			while (data->argz[i][j] != '=')
@@ -117,7 +117,20 @@ static int	built_in_export(t_data *data)
 
 void	built_in_unset(t_data *data)
 {
+	int	i;
 
+	i = 0;
+	while (data->argz[1][i])
+	{	
+		if (ft_isalpha(data->argz[1][i]) == 1)
+		{
+			ft_putstr_fd("Not a valid Indentifier\n", 2);
+			break ;
+		}
+		i++;
+		if (ft_strncmp(data->argz[1], data->env->env_copy, ft_strlen(data->argz[1])) == 0)
+			
+	}		
 }
 
 void	built_in_env(t_data *data)
@@ -127,7 +140,7 @@ void	built_in_env(t_data *data)
 	i = 0;
 	while (data->env->entry)
 	{
-		printf("%p\n", data->env->entry);
+		printf("%p\n", data->env->env_copy);
 		i++;
 	}
 }
@@ -151,7 +164,6 @@ int	built_in_exit(t_data *data)
 		{	
 			if (ft_isdigit(data->argz[1][i]) == 1)
 			{
-				n =ft_atoi(data->argz[1]);
 				ft_putstr_fd("exit\n", 2);
 				ft_putstr_fd("numeric argument required\n", 2);
 				exit(2);
