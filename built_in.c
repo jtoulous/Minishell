@@ -6,16 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 15:47:17 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:43:27 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <linux/limits.h>
-#include <stdio.h>
 
 static void	built_in_echo(t_data *data)
 {
@@ -177,7 +172,7 @@ int	built_in_exit(t_data *data)
 	exit (n % 256);
 }	
 
-void built_in (t_data *data)
+int built_in (t_data *data)
 {
 	if (ft_strncmp(data->argz[0], "echo", ft_strlen(data->argz[0])) == 0)
 		built_in_echo(data);
@@ -193,4 +188,6 @@ void built_in (t_data *data)
 		built_in_env(data);
 	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
 		built_in_exit(data);
+	return (-1);
+
 }	

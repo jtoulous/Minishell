@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
+/*   Updated: 2023/02/02 16:44:36 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include <unistd.h>
 
 void	builtinz_multi_first(t_data *data)
 {
@@ -36,7 +47,7 @@ void	builtinz_multi_first(t_data *data)
 
 void	multi_exec(t_data *data, int z)
 {
-	if (built_in(data) == 1)
+	if (built_in(data) >= 0)
 	{
 		if (z == 0)
 			builtinz_multi_first(data);
@@ -46,8 +57,8 @@ void	multi_exec(t_data *data, int z)
 	else
 	{	
 		if (z == 0)
-			regularz_multi_first(data, z);
+			regular_multi_first(data, z);
 		else
-			regularz_multi(data, z);
+			regular_multi(data, z);
 	}
 }

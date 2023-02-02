@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   toolbox_hd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 16:37:39 by agoichon          #+#    #+#             */
+/*   Updated: 2023/02/02 17:08:34 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	check_if_used(char *line, int spot, int end)
@@ -39,10 +51,10 @@ void	unlinkz(char *new)//
 		return ;
 	}
 	tmp = unlinks;
-	while (tmp->next != NULL)
+	while (tmp->nxt != NULL)
 	{
 		unlink(tmp->entry);
-		tmp = tmp->next;
+		tmp = tmp->nxt;
 	}
 	unlink(tmp->entry);
 	free_lst(unlinks);

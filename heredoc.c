@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
+/*   Updated: 2023/02/02 16:56:20 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	get_doc_argz(int fd, char *lim)
@@ -47,7 +59,7 @@ void	prep_hdoc(t_data *data, int z)
 	int	fd;
 		
 	file = ft_strjoin(".heredoc", ft_itoa(z));
-	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777)
+	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777);
 	get_doc_argz(fd, hdoc_limit(data->line, z));
 	replace_hdoc(data->line, file, z);
 	unlinkz(file);
@@ -66,7 +78,7 @@ void	fake_prep_hdoc(char *lim)
 		if (ft_strncmp(mem, lim, ft_strlen(lim)) == 0)
 		{
 			mega_free(mem, lim, NULL, NULL);
-			return ;	
+			return ;
 		}
 	}
 }

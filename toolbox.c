@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   toolbox.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 16:37:05 by agoichon          #+#    #+#             */
+/*   Updated: 2023/02/02 17:07:31 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	skip_out(char *line, int *z)
@@ -13,17 +25,18 @@ void	skip_out(char *line, int *z)
 int	in_or_out(char *line, int index)
 {
 	int	z;
+	t_data	*data;
 	
 	z = 0;
 	while (z < index)
 	{
-		if (line[z] == '"' || line[z] == ''')
+		if (line[z] == 44 || line[z] == 34)
 			skip_out(data->line, &z);
 		z++;
 	}
-	if (z > index && line[z] == '"')
+	if (z > index && line[z] == 34)
 		return (1);
-	else if (z > index && line[z] == ''')
+	else if (z > index && line[z] == 44)
 		return (2);
 	return (0);
 }
