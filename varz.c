@@ -12,12 +12,19 @@
 
 #include "minishell.h"
 
-void	remove_var(char *line, int spot, int end_var)//icicicicici
+void	replace_var(char *line, int spot, int end_var, char *var_val)
 {
+	char	*ante;
+	char	*pre;
 	
+	ante = ft_substr(line, 0, spot);
+	pre = ft_substr(line, end_var, ft_strlen(line) - end);
+	free (line);
+	line = triple_strjoin(ante, var_val, pre);
+	mega_free(ante, pre, NULL, NULL);
 }
 
-void	str_sub(char *line, int spot, int end)
+void	str_cut(char *line, int spot, int end)
 {
 	char	*ante;
 	char	*pre;
@@ -40,9 +47,15 @@ void	sub_var(t_data *data, int spot, int end_var, int end_com)
 	//if (data->line[end_var + 1] == """)
 	//	end_var++;
 	if (!var_val)
-		str_sub(data->line, spot, end_var);
+		str_cut(data->line, spot, end_var);
 	else
-		replace_var(data->line, spot, end_var, var_val);//ICIIIIII
+		replace_var(data->line, spot, end_var, var_val);
+	free (var_val);
+}
+
+void	sub_err_code(t_data *data, int spot)
+{
+	
 }
 
 void	scan_varz(t_data *data, int end, int spot)
@@ -54,6 +67,8 @@ void	scan_varz(t_data *data, int end, int spot)
 		if (data->line[spot] == '$')
 		{
 			in_or_out = in_or_out(data->line, z);
+			if (data->line[spot + 1] == '!' && in_or_out != 2)
+				sub_err_code(data, spot);
 			if (in_or_out != 2)
 			{
 				while (data->line[z] != ' ' 

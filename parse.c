@@ -12,7 +12,7 @@ void	clean_dat_biach(t_data *data, int end)//clean the cmd being treated, replac
 	}
 }
 
-void	prep_exec(t_data *data, int end)
+void	prep_exec(t_data *data, int end)//ICICICICICIIC
 {
 	int	z;
 	int	leftovers;

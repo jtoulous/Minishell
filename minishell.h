@@ -123,6 +123,7 @@ void	builtinz_multi(t_data *data, int z);
 void	check_builtin(char *arg);
 void	execbd(t_data *data);
 void	close_all(t_data *data);
-char	*env_search(t_list *env, char *var);
+char	*env_search(t_list *env, char *var);//look for var in env, rtn NULL if not found	
+void	skip_redir(char *line, int spot);
 
 #endif
