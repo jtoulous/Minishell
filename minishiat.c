@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <unistd.h>
 
 void	simple_exec(t_data *data)
 {
@@ -25,20 +24,22 @@ void	simple_exec(t_data *data)
 		if (data->outfile != -1)
 			dup2(data->outfile, STDOUT_FILENO);
 		close_all(data);	
-		if (built_in(data))
-			execbd(data);//tappe un exit
-		else
+		//if (built_in(data))
+		//	execbd(data);//tappe un exit
+		//else
 			execve(data->argz[0], data->argz, data->env);//env t_list et non char **
 	}
-	wait (0);
+
 }
 
 void	exec(t_data *data, int z)
 {
 	if (data->nb_cmds <= 1)
 		simple_exec(data);
-	else
+	else if (z + 1 < data->nb_args)
 		multiple_exec(data, z);
+	else
+		last_multiple(data, z);
 }
 
 void	treat_command(t_data *data)

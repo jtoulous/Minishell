@@ -67,3 +67,23 @@ int	end_of_cmd(char *line, int spot)
 	return (spot);
 }
 
+char	**convert_env(t_list *env)
+{
+	char	**converted;
+	t_list	*tmp;
+	int	z;
+	
+	tmp = env;
+	z = ft_lstsize(env);
+	converted = ft_calloc(z + 1, sizeof(char *));
+	z = 0;
+	while (tmp->nxt != NULL)
+	{
+		converted[z] = ft_strdup(tmp->entry);
+		tmp = tmp->nxt;
+		z++;
+	}
+	converted[z] = ft_strdup(tmp->entry);
+	return (converted);
+}
+

@@ -30,10 +30,7 @@ void	malloc_dat_shiat(t_data *data, int end)
 	z = 0;
 	while (z < end)
 	{
-		if ((data->line[z] == '<' || data->line[z] == '>')
-			&& in_or_out(data->line, z) != 0)
-			skip_redir(data->line, &z, end);
-		else if (data->line[z] != " ")
+		if (data->line[z] != " ")
 		{
 			skip_arg(data->line, &z, end);
 			m_size++;
@@ -42,4 +39,41 @@ void	malloc_dat_shiat(t_data *data, int end)
 			z++;
 	}
 	data->argz = ft_calloc(m_size + 2 , sizeof(char *));
+}
+
+char	**path_lst(t_data *data)
+{
+	char	*path_list;
+	char	**paths;
+	
+	path_list = env_search(data->env, "PATH");
+	path_list = s_trimage(path_list, 5);
+	paths = ft_split(path_list, ':');
+	return (paths);
+}
+
+void	path_finder(t_data *data, char *cmd)
+{
+	char	**paths;
+	int	z;
+	
+	z = 0;
+	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
+	{
+		data->argz[0] = ft_strdup(cmd);
+		return ;
+	}
+	paths = path_lst(data);
+	while (paths[z])
+	{
+		data->argz[0] = triple_strjoin(paths[z], "/", cmd);
+		if (access(data->argz[0], F_OK) == 0)
+		{
+			free_loop(paths);
+			return ;
+		}
+		free (argz[0]);
+		z++;
+	}
+	free_loop(paths);
 }

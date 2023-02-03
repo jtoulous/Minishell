@@ -38,8 +38,10 @@ void	check(t_data *data)
 	
 	check_closed_quotes(data);
 	if (data->exec_stat == 1)
-		syntax_check(data);
-	nb_docs = nb_hdocs(data->line);
-	if (nb_docs != 0)
-		hdoc_scan(data, nb_docs);
+	//	syntax_check(data);
+	{
+		nb_docs = nb_hdocs(data->line);
+		if (nb_docs != 0)
+			hdoc_scan(data, nb_docs);
+	}
 }

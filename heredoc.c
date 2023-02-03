@@ -41,7 +41,8 @@ void	replace_hdoc(char *line, char *file, int spot)
 	end_hd = spot;
 	while (line[end_hd] == '<' && line[end_hd] == ' ' && line[end_hd])
 		end_hd++;
-	while (line[end_hd] != ' ' && line[end_hd])
+	while ((line[end_hd] != ' ' || in_or_out(line, end_hd) != 0)
+		&& line[end_hd])
 		end_hd++;
 	biach = end_hd;
 	while (line[end_line])
@@ -56,9 +57,12 @@ void	replace_hdoc(char *line, char *file, int spot)
 void	prep_hdoc(t_data *data, int z)
 {
 	char	*file;
+	char	*fileno;
 	int	fd;
-		
-	file = ft_strjoin(".heredoc", ft_itoa(z));
+	
+	fileno = ft_itoa(z);
+	file = ft_strjoin(".heredoc", fileno);
+	free (fileno);
 	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777);
 	get_doc_argz(fd, hdoc_limit(data->line, z));
 	replace_hdoc(data->line, file, z);

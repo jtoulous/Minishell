@@ -56,3 +56,27 @@ void	pipes_prep(int **pipes, int nb_cmdz)
 		z++;
 	}
 }
+
+int	count_leftovers(char *line, int end)
+{
+	int	z;
+	int	leftovers;
+	
+	z = 0;
+	leftovers = 0;
+	while (line[z] == ' ' && z < end)
+			z++;
+	while (z < end)
+	{
+		if (line[z] != ' ')
+		{
+			leftovers++;
+			while ((line[z] != ' ' || in_or_out(line, z) != 0)
+				&& z < end)
+				z++;
+		}
+		else
+			z++;
+	}
+	return (leftovers);
+}

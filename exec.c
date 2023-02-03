@@ -12,7 +12,55 @@
 
 #include "minishell.h"
 
-void	builtinz_multi_first(t_data *data)
+void	last_multiple(t_data *data, int z)
+{
+	int 	pid;
+	char	**envp
+		
+	envp = convert_env(data->env);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (data->prev_outfile != -1)
+			dup2(data, STDIN_FILENO);	
+		else if (data->infile != -1)
+			dup2(data->infile, STDIN_FILENO);
+		else
+			dup2(data->pipe[z][0], STDIN_FILENO);
+		if (data->outfile != -1)
+			dup2(data->outfile, STDOUT_FILENO);
+		close_all(data);
+		execve(data->argz[0], data->argz, envp);
+	}
+	free_loop(envp);
+}
+
+void	multiple_exec(t_data *data, int z)
+{
+	int 	pid;
+	char	**envp
+		
+	envp = convert_env(data->env);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (data->prev_outfile != -1)
+			dup2(data, STDIN_FILENO);	
+		else if (data->infile != -1)
+			dup2(data->infile, STDIN_FILENO);
+		else
+			dup2(data->pipes[z - 1][0], STDIN_FILENO);
+		if (data->outfile != -1)
+			dup2(data->outfile, STDOUT_FILENO);
+		else 
+			dup2(data->pipes[z][1], STDOUT_FILENO)
+		close_all(data);
+		execve(data->argz[0], data->argz, envp);
+	}
+	free_loop(envp);
+}
+
+/*void	builtinz_multi_first(t_data *data)
 {
 	int	pid;
 	
@@ -31,7 +79,7 @@ void	builtinz_multi_first(t_data *data)
 	wait (0);
 }
 
-/*void	builtinz_multi(t_data *data, int z)
+void	builtinz_multi(t_data *data, int z)
 {
 	int	pid;
 	
@@ -45,7 +93,7 @@ void	builtinz_multi_first(t_data *data)
 		execbd(data->argz[0], data->argz, data->env);
 }*/
 
-void	multi_exec(t_data *data, int z)
+/*void	multi_exec(t_data *data, int z)
 {
 	if (built_in(data) >= 0)
 	{
@@ -61,4 +109,4 @@ void	multi_exec(t_data *data, int z)
 		else
 			regular_multi(data, z);
 	}
-}
+}*/

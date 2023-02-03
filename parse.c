@@ -20,22 +20,21 @@ void	prep_exec(t_data *data, int end)//ICICICICICIIC
 	
 	z = 1;
 	malloc_dat_shiat(data, end);//**argz malloked
-	cmd = extract_cmd(data->line);//+ wipe cmd form line
-	if (check_if_built(cmd) != 1)
-		path_finder(data, cmd);//check if the mofo already typed path in com
+	cmd = get_nxt_stuff(data->line);//+ wipe cmd form line
+	path_finder(data, cmd);//check if the mofo already typed path in com
 	if (!data->argz[0])
 		error_path(data->argz, cmd);
+	free (cmd);
 	else
 	{
-		leftovers = count_leftovers(data->line);
+		leftovers = count_leftovers(data->line, end_of_cmd(data->line, 0));
 		while (z <= leftovers)
 		{
-			get_next_opt(data->argz[z], data->line);//and wipe it
+			data->argz[z] =get_nxt_stuff(data->line);//and wipe it
 			z++;
 		}
 		data->argz[z] = NULL;
 	}
-	free (cmd);
 }
 
 void	parse(t_data *data)//efface la cmd qui vient d etre traiter

@@ -53,10 +53,10 @@ void	sub_var(t_data *data, int spot, int end_var, int end_com)
 	free (var_val);
 }
 
-void	sub_err_code(t_data *data, int spot)
+/*void	sub_err_code(t_data *data, int spot)
 {
 	
-}
+}*/
 
 void	scan_varz(t_data *data, int end, int spot)
 {
@@ -68,7 +68,7 @@ void	scan_varz(t_data *data, int end, int spot)
 		{
 			in_or_out = in_or_out(data->line, z);
 			if (data->line[spot + 1] == '!' && in_or_out != 2)
-				sub_err_code(data, spot);
+				//sub_err_code(data, spot);
 			if (in_or_out != 2)
 			{
 				while (data->line[z] != ' ' 

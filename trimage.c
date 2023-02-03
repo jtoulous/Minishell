@@ -19,7 +19,9 @@ void	trim_redir(char *line, int spot)
 	z = spot + 1;
 	while (line[z] == ' ' && line[z])
 		z++;
-	while (line[z] != ' ' && line[z])
+	while ((line[z] != ' ' || in_or_out(line, z) != 0)
+		&& (line[z] != '|' || valid_pipe(line, z) != 0)
+		&& line[z])
 		z++;
 	while (line[z])
 	{
@@ -56,7 +58,9 @@ void	trim_hdoc(char *line, int spot)
 	while ((line[z] == '<' || line[z] == ' ')
 		&& line[z])
 		z++;
-	while (line[z] != ' ' && line[z])
+	while ((line[z] != ' ' || in_or_out(line, z) != 1
+		&& (line[z] != '|' || valid_pipe(line, z) != 1) 
+		&& line[z])
 		z++;
 	while (line[z])
 	{
