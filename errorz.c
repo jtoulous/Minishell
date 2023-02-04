@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:58:47 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/01 17:01:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:52:27 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	check(t_data *data)
 	{
 		nb_docs = nb_hdocs(data->line);
 		if (nb_docs != 0)
-			hdoc_scan(data, nb_docs);
+			hdoc_scan(data);
 	}
 }

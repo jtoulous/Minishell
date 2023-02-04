@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 12:09:52 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:55:11 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	built_in_export(t_data *data)
 		sort_env = ft_sort_char_tab(data->env->env_copy);
 		while (data->env->env_copy[i])
 		{
-			printf("%s\n", data->env->env_copy);
+			printf("%s\n", data->env->sort_env);
 			i++;
 		}
 		return (0);

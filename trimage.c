@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:42 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:37:44 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:01:51 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	trim_hdoc(char *line, int spot)
 	while ((line[z] == '<' || line[z] == ' ')
 		&& line[z])
 		z++;
-	while ((line[z] != ' ' || in_or_out(line, z) != 1
+	while ((line[z] != ' ' || in_or_out(line, z) != 1)
 		&& (line[z] != '|' || valid_pipe(line, z) != 1) 
 		&& line[z])
 		z++;

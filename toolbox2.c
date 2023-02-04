@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:37:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:05:21 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_data(t_data *data, char **envp)
 	export_env(data->env, envp);
 	data->infile = -1;
 	data->outfile = -1;
-	argz = NULL;
+	data->argz = NULL;
 	exec_stat = 1;
 	prev_outfile = -1;	
 }
@@ -39,7 +39,7 @@ void	reset_data(t_data *data)
 	data->infile = -1;
 	data->old_outfile = data->outfile;
 	data->outfile = -1;
-	free_loop(argz);
+	free_loop(data->argz);
 	trim_leftovers(data->line);	
 }
 

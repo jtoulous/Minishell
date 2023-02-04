@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:39 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 17:08:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:03:29 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_if_used(char *line, int spot, int end)
 {
 	while (spot < end)
 	{
-		if (line[spot] == '<' 
+		if (line[spot] == '<'
 			&& (valid_inredir(line, spot) == 1)
 			|| valid_hd(line, spot) == 1)
 			return (0);
@@ -28,7 +28,7 @@ int	nb_hdocs(char *line)
 {
 	int	count;
 	int	z;
-	
+
 	z = 0;
 	count = 0;
 	while (line[z])
@@ -43,26 +43,35 @@ int	nb_hdocs(char *line)
 void	unlinkz(char *new)
 {
 	static t_list	*unlinks;
-	t_list		*tmp;
-	
+	t_list			*tmp;
+
 	if (new)
 	{
 		ft_lstadd_back(&unlinks, ft_lstnew(new));
 		return ;
 	}
 	tmp = unlinks;
-	while (tmp->nxt != NULL)
+	while (tmp->next != NULL)
 	{
-		unlink(tmp->entry);
-		tmp = tmp->nxt;
+		unlink(tmp->content);
+		tmp = tmp->next;
 	}
-	unlink(tmp->entry);
+	unlink(tmp->content);
 	free_lst(unlinks);
 }
 
 char	*hdoc_limit(char *line, int spot)
 {
+	int	end;
+
 	while (spot == '<' || spot == ' ')
 		spot++;
-	
+	if (line[spot] == 34 || line[spot] == 39)
+		return (extract_from_quotes(line, spot));
+	end = spot + 1;
+	while ((line[end] != ' ' || in_or_out(line, end) != 1)
+		&& (line[end] != '|' || valid_pipe(line, end) == 1)
+		&& line[end])
+		end++;
+	return (ft_substr(line, spot, end - spot));
 }

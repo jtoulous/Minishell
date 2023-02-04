@@ -30,7 +30,7 @@ void	malloc_dat_shiat(t_data *data, int end)
 	z = 0;
 	while (z < end)
 	{
-		if (data->line[z] != " ")
+		if (data->line[z] != ' ')
 		{
 			skip_arg(data->line, &z, end);
 			m_size++;

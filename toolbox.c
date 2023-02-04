@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:05 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 17:07:31 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:23:30 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ char	**convert_env(t_list *env)
 	z = ft_lstsize(env);
 	converted = ft_calloc(z + 1, sizeof(char *));
 	z = 0;
-	while (tmp->nxt != NULL)
+	while (tmp->next != NULL)
 	{
-		converted[z] = ft_strdup(tmp->entry);
-		tmp = tmp->nxt;
+		converted[z] = ft_strdup(tmp->content);
+		tmp = tmp->next;
 		z++;
 	}
-	converted[z] = ft_strdup(tmp->entry);
+	converted[z] = ft_strdup(tmp->content);
 	return (converted);
 }
 

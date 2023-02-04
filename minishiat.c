@@ -6,16 +6,19 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 17:04:37 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:22:24 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
 
 void	simple_exec(t_data *data)
 {
 	int	pid;
-	
+	char	**envp;
+		
+	envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{	
@@ -27,9 +30,9 @@ void	simple_exec(t_data *data)
 		//if (built_in(data))
 		//	execbd(data);//tappe un exit
 		//else
-			execve(data->argz[0], data->argz, data->env);//env t_list et non char **
+			execve(data->argz[0], data->argz, envp);//env t_list et non char **
 	}
-
+	free_loop(envp);
 }
 
 void	exec(t_data *data, int z)
@@ -38,7 +41,7 @@ void	exec(t_data *data, int z)
 		simple_exec(data);
 	else if (z == 0)
 		first_multiple(data);
-	else if (z + 1 < data->nb_args)
+	else if (z + 1 < data->nb_cmds)
 		multiple_exec(data, z);
 	else
 		last_multiple(data, z);
@@ -71,13 +74,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
 	
+	(void) argc;
+	(void) argv;
+	data = malloc(sizeof(t_data) * 1);
 	init_data(data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{
 		ft_putstr_fd("ta_mere_en_string_2_guerre >", STDOUT_FILENO);
 		data->line = get_next_line(STDIN_FILENO);
 		data->nb_cmds = nb_cmd(data->line);
-		add_history(data->line);
+		//add_history(data->line);
 		treat_command(data);
 	}
 	free_and_close_all(data, 2);// + env

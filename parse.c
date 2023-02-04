@@ -23,8 +23,10 @@ void	prep_exec(t_data *data, int end)
 	cmd = get_nxt_stuff(data->line);//+ wipe cmd form line
 	path_finder(data, cmd);//check if the mofo already typed path in com
 	if (!data->argz[0])
+	{
 		error_path(data->argz, cmd);
-	free (cmd);
+		free (cmd);
+	}	
 	else
 	{
 		leftovers = count_leftovers(data->line, end_of_cmd(data->line, 0));

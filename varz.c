@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:56 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:37:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 13:01:10 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	replace_var(char *line, int spot, int end_var, char *var_val)
 	char	*pre;
 	
 	ante = ft_substr(line, 0, spot);
-	pre = ft_substr(line, end_var, ft_strlen(line) - end);
+	pre = ft_substr(line, end_var, ft_strlen(line) - end_var);
 	free (line);
 	line = triple_strjoin(ante, var_val, pre);
 	mega_free(ante, pre, NULL, NULL);
@@ -29,7 +29,7 @@ void	sub_var(t_data *data, int spot, int end_var, int end_com)
 	char	*var_val;
 	char	*var;
 	
-	var = ft_substr(data->line, spot + 1, end_var - (spot + 1);
+	var = ft_substr(data->line, spot + 1, end_var - (spot + 1));
 	var_val = env_search(data->env, var);
 	//if (data->line[end_var + 1] == """)
 	//	end_var++;
@@ -47,16 +47,16 @@ void	sub_var(t_data *data, int spot, int end_var, int end_com)
 
 void	scan_varz(t_data *data, int end, int spot)
 {
-		int	in_or_out;
+		int	inorout;
 		int	z;
 		
 		z = spot + 1;
 		if (data->line[spot] == '$')
 		{
-			in_or_out = in_or_out(data->line, z);
+			inorout = in_or_out(data->line, z);
 			//if (data->line[spot + 1] == '!' && in_or_out != 2)
 				//sub_err_code(data, spot);
-			if (in_or_out != 2)
+			if (inorout != 2)
 			{
 				while (data->line[z] != ' ' 
 					&& data->line[z] != '"'

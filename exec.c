@@ -28,9 +28,7 @@ void	first_multiple(t_data *data)
 		else
 			dup2(data->pipes[0][1], STDOUT_FILENO);
 		close_all(data);
-		//if (check_if_builtin(data->argz[0]) == 1)
-		//	execbd(data);
-		//else	
+		//if (built_in(data->argz[0]) < 0)
 			execve(data->argz[0], data->argz, envp);	
 	}
 	free_loop(envp);
@@ -54,9 +52,7 @@ void	last_multiple(t_data *data, int z)
 		if (data->outfile != -1)
 			dup2(data->outfile, STDOUT_FILENO);
 		close_all(data);
-		//if (check_if_builtin(data->argz[0]) == 1)
-		//	execbd(data);
-		//else	
+		//if (built_in(data->argz[0]) < 0)	
 			execve(data->argz[0], data->argz, envp);
 	}
 	free_loop(envp);
@@ -82,9 +78,7 @@ void	multiple_exec(t_data *data, int z)
 		else 
 			dup2(data->pipes[z][1], STDOUT_FILENO);
 		close_all(data);
-		//if (check_if_builtin(data->argz[0]) == 1)
-		//	execbd(data);
-		//else	
+		//if (built_in(data->argz[0]) < 0)
 			execve(data->argz[0], data->argz, envp);
 	}
 	free_loop(envp);

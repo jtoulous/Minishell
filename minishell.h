@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 12:03:43 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:51:39 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*extract_redir(char *line, int spot);
 char	*extract_wipe_quotes(char *line, int z);
 char	*extract_wipe(char *line, int z);
 char	*get_nxt_stuff(char *line);
-void	hdoc_scan(t_data *data, int nb_docs);
+void	hdoc_scan(t_data *data);
 void	fake_prep_hdoc(char *lim);
 void	prep_hdoc(t_data *data, int z);
 void	replace_hdoc(char *line, char *file, int spot);
@@ -100,4 +100,6 @@ int		valid_hd(char *line, int spot);
 void	replace_var(char *line, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var, int end_com);
 void	scan_varz(t_data *data, int end, int spot);
+char	*hdoc_limit(char *line, int spot);
+
 #endif
