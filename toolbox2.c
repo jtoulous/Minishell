@@ -12,21 +12,21 @@
 
 #include "minishell.h"
 
-void	export_env(t_list *env, char **envp)
+void	export_env(t_list **env, char **envp)
 {
 	int	z;
 	
 	z = 0;
 	while (envp[z])
 	{
-		ft_lstadd_back(&env, ft_lstnew(envp[z]));
+		ft_lstadd_back(env, ft_lstnew(envp[z]));
 		z++;
 	}
 }
 
 void	init_data(t_data *data, char **envp)
 {
-	export_env(data->env, envp);
+	export_env(&data->env, envp);
 	data->infile = -1;
 	data->outfile = -1;
 	data->argz = NULL;

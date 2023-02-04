@@ -83,7 +83,7 @@ int		in_or_out(char *line, int index);
 int		nb_cmd(char *line);
 int		end_of_cmd(char *line, int spot);
 char	**convert_env(t_list *env);
-void	export_env(t_list *env, char **envp);
+void	export_env(t_list **env, char **envp);
 void	init_data(t_data *data, char **envp);
 void	reset_data(t_data *data);
 void	pipes_prep(int **pipes, int nb_cmdz);

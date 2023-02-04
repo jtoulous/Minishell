@@ -84,6 +84,11 @@ char	*extract_wipe(char *line, int z)
 		z++;
 		end++;
 	}
+	while (line[z])
+	{
+		line[z] = '\0';
+		z++;
+	}
 	return (extracted);
 }
 
@@ -93,9 +98,7 @@ char	*get_nxt_stuff(char *line)//return the first word u meet
 	char	*extracted;
 
 	z = 0;
-	while ((line[z] == ' ' || in_or_out(line, z) == 0)
-		&& (line[z] != '|' || valid_pipe(line, z) != 1)
-		&& line[z])
+	while (line[z] == ' ' && line[z])
 		z++;
 	if (line[z] == '\'' || line[z] == '\"')
 		extracted = extract_wipe_quotes(line, z);

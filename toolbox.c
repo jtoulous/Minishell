@@ -53,6 +53,7 @@ int	nb_cmd(char *line)
 	{
 		if (line[z] == '|' && valid_pipe(line, z) == 1)
 			count++;
+		z++;
 	}
 	return (count + 1);
 }

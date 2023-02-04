@@ -58,12 +58,13 @@ char	*env_search(t_list *env, char *var)
 	tmp = env;
 	while (tmp)
 	{
-		if (ft_strncmp(var, tmp->content, ft_strlen(var)) == 0)
+		if (ft_strncmp(var, tmp->env_copy, ft_strlen(var)) == 0)
 		{
-			value = ft_substr(tmp->content, ft_strlen(var) + 1, 
-					ft_strlen(tmp->content) - ft_strlen(var));
+			value = ft_substr(tmp->env_copy, ft_strlen(var) + 1, 
+					ft_strlen(tmp->env_copy) - ft_strlen(var));
 			return (value);
 		}
+		tmp = tmp->next;
 	}
 	return (NULL);
 }
