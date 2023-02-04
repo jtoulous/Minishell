@@ -6,13 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:43:27 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:09:52 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	built_in_echo(t_data *data)
+void	built_in_echo(t_data *data)
 {
 	int	i;
 	int	j;
@@ -43,7 +43,7 @@ static void	built_in_echo(t_data *data)
 	}
 }
 
-static void	built_in_cd(t_data *data)
+void	built_in_cd(t_data *data)
 {
 	if (access(data->argz[1], F_OK) == 0 && data->argz[2] == NULL)
 		chdir(data->argz[1]);
@@ -65,18 +65,19 @@ void	built_in_pwd(t_data *data)
 		ft_putstr_fd(cwd, 0);
 }	
 
-static int	built_in_export(t_data *data)
+int	built_in_export(t_data *data)
 {
 	int		i;
 	int		j;
 	int 	k;
 	char	*variable;
 	char	*new_value;
+	char	*sort_env;
 
 	if (data->argz[1] == NULL)
 	{
 		i = 0;
-		ft_sort_int_tab(data->env->env_copy);
+		sort_env = ft_sort_char_tab(data->env->env_copy);
 		while (data->env->env_copy[i])
 		{
 			printf("%s\n", data->env->env_copy);
@@ -88,8 +89,7 @@ static int	built_in_export(t_data *data)
 	{
 		i = 1;
 		j = 0;
-		if (ft_isalpha(data->argz[i])
-		while (data->argz[i][j]) 
+		while (data->argz[i][j])
 		{
 			while (data->argz[i][j] != '=')
 			{
@@ -105,9 +105,9 @@ static int	built_in_export(t_data *data)
 				i++;
 				k++;
 			}
-			ft_lstadd_back(data->env->entry, data->env->nxt);
-		}	
-	}	
+			ft_lstadd_back(data->env->content, data->env->next);
+		}
+		return (0);
 }	
 
 void	built_in_unset(t_data *data)
@@ -123,8 +123,6 @@ void	built_in_unset(t_data *data)
 			break ;
 		}
 		i++;
-		if (ft_strncmp(data->argz[1], data->env->env_copy, ft_strlen(data->argz[1])) == 0)
-			
 	}		
 }
 
@@ -133,7 +131,7 @@ void	built_in_env(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->env->entry)
+	while (data->env->content)
 	{
 		printf("%p\n", data->env->env_copy);
 		i++;
@@ -168,26 +166,40 @@ int	built_in_exit(t_data *data)
 		n = ft_atoi(data->argz[1]);
 	}
 	ft_putstr_fd("exit", 1);
-	free_and_close_all(&data, 2);
+	free_and_close_all(data, 2);
 	exit (n % 256);
 }	
 
 int built_in (t_data *data)
 {
 	if (ft_strncmp(data->argz[0], "echo", ft_strlen(data->argz[0])) == 0)
+	{
 		built_in_echo(data);
+		return(0);
+	}
 	if (ft_strncmp(data->argz[0], "cd", 2) == 0)
+	{
 		built_in_cd(data);
+		return(0);
+	}
 	if (ft_strncmp(data->argz[0], "pwd", ft_strlen(data->argz[0])) == 0)
+	{
 		built_in_pwd(data);
+		return(0);
+	}
 	if (ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0)
 		built_in_export(data);
 	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
+	{
 		built_in_unset(data);
+		return (0);
+	}
 	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)
+	{
 		built_in_env(data);
+		return (0);
+	}
 	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
 		built_in_exit(data);
 	return (-1);
-
 }	

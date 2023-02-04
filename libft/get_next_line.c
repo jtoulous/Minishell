@@ -3,84 +3,122 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 18:11:28 by jtoulous          #+#    #+#             */
-/*   Updated: 2022/11/03 18:11:30 by jtoulous         ###   ########.fr       */
+/*   Created: 2022/10/16 08:27:12 by agoichon          #+#    #+#             */
+/*   Updated: 2023/01/18 11:47:15 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../libft.h"
+#include <stdlib.h>
 
-#include "libft.h"
-
-char	*copy_2(char buf, char *line, char *new_line, size_t z)
+static char	*ft_joinf(char *buf, char *str)
 {
-	if (buf == '\n')
-		new_line[z] = '\n';
-	if (line)
-		free(line);
-	return (new_line);
-}
+	char	*tmp;
 
-char	*copy(char *buf, char *line, size_t z, size_t y)
-{
-	char	*new_line;
-
-	new_line = ft_calloc(ft_strlen(line) + ft_strlen(buf) + 1,
-		 sizeof(char));
-	if (!new_line)
-	{	
-		free (line);
+	if (!buf || !str)
 		return (NULL);
-	}
-	if (line)
-	{
-		while (line[z])
-		{
-			new_line[z] = line[z];
-			z++;
-		}
-	}
-	while (buf[y] && buf[y] != '\n')
-	{
-		new_line[z] = buf[y];
-		z++;
-		y++;
-	}
-	copy_2(buf[y], line, new_line, z);
-	return (new_line);
+	tmp = ft_strjoin(buf, str);
+	free(buf);
+	return (tmp);
 }
 
-int	newline_check(char *buf)
+static char	*dnextl(char *buf)
 {
-	size_t	z;
+	int		i;
+	int		j;
+	char	*rtn;
 
-	z = 0;
-	while (buf[z])
+	i = 0;
+	j = 0;
+	if (!buf)
+		return (NULL);
+	while (buf[i] != '\n' && buf[i])
+		i++;
+	if (!buf[i])
 	{
-		if (buf[z] == '\n')
-			return (1);
-		z++;
+		free(buf);
+		return (NULL);
+	}	
+	rtn = ft_calloc(sizeof(char), (ft_strlen(buf) - i + 1));
+	if (!rtn)
+		return (0);
+	i++;
+	while (buf[i])
+		rtn[j++] = buf[i++];
+	free(buf);
+	return (rtn);
+}	
+
+static char	*rdfile(int fd, char *s)
+{
+	char	*buf;
+	int		i;
+
+	if (!s)
+		s = ft_calloc(1, 1);
+	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	i = 1;
+	while (i > 0)
+	{
+		i = read(fd, buf, BUFFER_SIZE);
+		if (i == -1)
+		{	
+			free(buf);
+			free(s);
+			return (NULL);
+		}
+		buf[i] = 0;
+		s = ft_joinf(s, buf);
+		if (ft_strchr(buf, '\n'))
+			break ;
 	}
-	return (0);
+	free(buf);
+	return (s);
+}
+
+static char	*fline(char *buf)
+{
+	char	*rtn;
+	int		i;
+
+	i = 0;
+	if (!buf[i])
+		return (NULL);
+	while (buf[i] && buf[i] != '\n')
+		i++;
+	rtn = ft_calloc(sizeof(char), i + 2);
+	i = 0;
+	while (buf[i] != '\n' && buf[i])
+	{	
+		rtn[i] = buf[i];
+		i++;
+	}
+	if (buf[i] && buf[i] == '\n')
+	{	
+		rtn[i] = '\n';
+		i++;
+	}	
+	return (rtn);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buf[BUFFER_SIZE + 1];
+	static char	*buf[1024];
 	char		*line;
 
-	line = NULL;
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = copy(buf, line, 0, 0);
-	if (newline_check(buf) == 1)
-	{
-		clean(buf, 0, 0);
-		return (line);
-	}
-	line = read_the_fkin_file(fd, buf, line);
-	if (!line)
+	buf[fd] = ft_strdup("");
+	buf[fd] = rdfile(fd, buf[fd]);
+	if (!buf[fd])
 		return (NULL);
-	clean(buf, 0, 0);
+	line = fline(buf[fd]);
+	buf[fd] = dnextl(buf[fd]);
+	while (fd < 1024)
+	{	
+		free(buf[fd]);
+		fd++;
+	}		
 	return (line);
 }

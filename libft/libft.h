@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2022/10/18 13:17:08 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:05:43 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 typedef struct s_list
 {
 	void			*content;
+	char			*env_copy;
 	struct s_list	*next;
 }			t_list;
 
@@ -85,8 +86,8 @@ char		*triple_strjoin(char *s1, char *s2, char *s3);
 char		*read_the_fkin_file(int fd, char *buf, char *line);
 char		*clean(char *buf, size_t z, size_t y);
 char		*copy(char *buf, char *line, size_t	z, size_t y);
-int		newline_check(char *buf);
+int			newline_check(char *buf);
 char		*get_next_line(int fd);
 char		*copy_2(char buf, char *line, char *new_line, size_t z);
-
+char		*ft_sort_char_tab(char *str);
 #endif

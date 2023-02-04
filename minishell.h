@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 17:05:28 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:03:43 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 
 typedef struct pipex_data
 {
-	t_list		*env;
-	char		*line;
-	char		**argz;
+	t_list	*env;
+	char	*line;
+	char	**argz;
 	int		**pipes;
 	int		infile;
 	int		outfile;
@@ -39,7 +39,7 @@ typedef struct pipex_data
 	int		nb_cmds;
 }		t_data;
 
-int	error_inredir(char *failed_redir);
+int		error_inredir(char *failed_redir);
 void	error_quotes(t_data *data);
 void	error_path(char **argz, char *cmd);
 void	check_closed_quotes(t_data *data);
@@ -59,9 +59,9 @@ void	fake_prep_hdoc(char *lim);
 void	prep_hdoc(t_data *data, int z);
 void	replace_hdoc(char *line, char *file, int spot);
 void	get_doc_argz(int fd, char *lim);
-int	the_last_inredir(char *line, int spot);
-int	set_up_inredir(char *file, t_data *data, int spot);
-int	check_inredir(t_data *data, int end);
+int		the_last_inredir(char *line, int spot);
+int		set_up_inredir(char *file, t_data *data, int spot);
+int		check_inredir(t_data *data, int end);
 void	treat_command(t_data *data);
 void	set_up_outredir(t_data *data, int spot);
 void	check_outredir(t_data *data, int end);
@@ -79,26 +79,25 @@ void	close_pipes(int *pipes, int nb);
 void	close_all(t_data *data);
 void	free_and_close_all(t_data *data, int opt);
 void	skip_out(char *line, int *z);
-int	in_or_out(char *line, int index);
-int	nb_cmd(char *line);
-int	end_of_cmd(char *line, int spot);
+int		in_or_out(char *line, int index);
+int		nb_cmd(char *line);
+int		end_of_cmd(char *line, int spot);
 char	**convert_env(t_list *env);
 void	export_env(t_list *env, char **envp);
 void	init_data(t_data *data, char **envp);
 void	reset_data(t_data *data);
 void	pipes_prep(int **pipes, int nb_cmdz);
-int	count_leftovers(char *line, int end);
-int	check_if_used(char *line, int spot, int end);
-int	nb_hdocs(char *line);
+int		count_leftovers(char *line, int end);
+int		check_if_used(char *line, int spot, int end);
+int		nb_hdocs(char *line);
 void	unlinkz(char *new);
 void	trim_redir(char *line, int spot);
 void	trim_leftovers(char *line);
 void	trim_hdoc(char *line, int spot);
-int	valid_inredir(char *line, int spot);
-int	valid_pipe(char *line, int spot);
-int	valid_hd(char *line, int spot);
+int		valid_inredir(char *line, int spot);
+int		valid_pipe(char *line, int spot);
+int		valid_hd(char *line, int spot);
 void	replace_var(char *line, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var, int end_com);
 void	scan_varz(t_data *data, int end, int spot);
-
 #endif
