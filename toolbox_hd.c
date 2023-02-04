@@ -17,8 +17,8 @@ int	check_if_used(char *line, int spot, int end)
 	while (spot < end)
 	{
 		if (line[spot] == '<'
-			&& (valid_inredir(line, spot) == 1)
-			|| valid_hd(line, spot) == 1)
+			&& ((valid_inredir(line, spot) == 1)
+			|| valid_hd(line, spot) == 1))
 			return (0);
 	}
 	return (1);

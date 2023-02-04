@@ -9,7 +9,7 @@
 /*   Updated: 2023/01/18 11:47:15 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../libft.h"
+#include "libft.h"
 #include <stdlib.h>
 
 static char	*ft_joinf(char *buf, char *str)

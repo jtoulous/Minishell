@@ -23,7 +23,7 @@ void	close_all(t_data *data)
 		close (data->prev_outfile);
 }
 
-void	close_pipes(int *pipes, int nb)
+void	close_pipes(int **pipes, int nb)
 {
 	int	z;
 	

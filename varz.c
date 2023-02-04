@@ -24,7 +24,7 @@ void	replace_var(char *line, int spot, int end_var, char *var_val)
 	mega_free(ante, pre, NULL, NULL);
 }
 
-void	sub_var(t_data *data, int spot, int end_var, int end_com)
+void	sub_var(t_data *data, int spot, int end_var)
 {
 	char	*var_val;
 	char	*var;
@@ -62,7 +62,7 @@ void	scan_varz(t_data *data, int end, int spot)
 					&& data->line[z] != '"'
 					&& z < end - 1)
 					z++;
-				sub_var(data, spot, z, end);
+				sub_var(data, spot, z);
 			}
 		}
 }

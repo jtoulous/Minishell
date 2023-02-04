@@ -17,21 +17,20 @@ void	skip_out(char *line, int *z)
 	char	q_type;
 	
 	q_type = line[*z];
-	*z++;
+	*z += 1;
 	while (line[*z] != q_type && line[*z])
-		*z++;
+		*z += 1;
 }
 
 int	in_or_out(char *line, int index)
 {
 	int	z;
-	t_data	*data;
 	
 	z = 0;
 	while (z < index)
 	{
 		if (line[z] == 44 || line[z] == 34)
-			skip_out(data->line, &z);
+			skip_out(line, &z);
 		z++;
 	}
 	if (z > index && line[z] == 34)

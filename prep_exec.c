@@ -2,12 +2,12 @@
 
 void	skip_redir(char *line, int *z, int end)
 {
-	*z++;
+	*z += 1;
 	while (line[*z] == ' ' && *z < end)
-		*z++;
+		*z += 1;
 	while ((line[*z] != ' ' || in_or_out(line, *z) != 0)
 		&& *z < end)
-		*z++;
+		*z += 1;
 }
 
 void	skip_arg(char *line, int *z, int end)
@@ -17,7 +17,7 @@ void	skip_arg(char *line, int *z, int end)
 		if (line[*z] == ' ' && in_or_out(line, *z) == 0)
 			return;
 		else
-			*z++;	
+			*z += 1;	
 	}
 }
 
@@ -47,7 +47,7 @@ char	**path_lst(t_data *data)
 	char	**paths;
 	
 	path_list = env_search(data->env, "PATH");
-	path_list = s_trimage(path_list, 5);
+	s_trimage(path_list, 5);
 	paths = ft_split(path_list, ':');
 	return (paths);
 }
@@ -58,11 +58,11 @@ void	path_finder(t_data *data, char *cmd)
 	int	z;
 	
 	z = 0;
-	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
+	/*if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
 	{
 		data->argz[0] = ft_strdup(cmd);
 		return ;
-	}
+	}*/
 	paths = path_lst(data);
 	while (paths[z])
 	{
@@ -72,7 +72,7 @@ void	path_finder(t_data *data, char *cmd)
 			free_loop(paths);
 			return ;
 		}
-		free (argz[0]);
+		free (data->argz[0]);
 		z++;
 	}
 	free_loop(paths);

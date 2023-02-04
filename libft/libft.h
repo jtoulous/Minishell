@@ -90,4 +90,5 @@ int			newline_check(char *buf);
 char		*get_next_line(int fd);
 char		*copy_2(char buf, char *line, char *new_line, size_t z);
 char		*ft_sort_char_tab(char *str);
+void		m_trime(char *str, int start, int end);
 #endif

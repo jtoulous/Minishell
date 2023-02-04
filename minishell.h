@@ -75,7 +75,7 @@ void	skip_arg(char *line, int *z, int end);
 void	skip_redir(char *line, int *z, int end);
 char	*env_search(t_list *env, char *var);
 void	free_lst(t_list *lst);
-void	close_pipes(int *pipes, int nb);
+void	close_pipes(int **pipes, int nb);
 void	close_all(t_data *data);
 void	free_and_close_all(t_data *data, int opt);
 void	skip_out(char *line, int *z);
@@ -98,7 +98,7 @@ int		valid_inredir(char *line, int spot);
 int		valid_pipe(char *line, int spot);
 int		valid_hd(char *line, int spot);
 void	replace_var(char *line, int spot, int end_var, char *var_val);
-void	sub_var(t_data *data, int spot, int end_var, int end_com);
+void	sub_var(t_data *data, int spot, int end_var);
 void	scan_varz(t_data *data, int end, int spot);
 char	*hdoc_limit(char *line, int spot);
 
