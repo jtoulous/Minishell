@@ -62,7 +62,17 @@ void	unlinkz(char *new)
 
 char	*hdoc_limit(char *line, int spot)
 {
+	int	end;
+	
 	while (spot == '<' || spot == ' ')
 		spot++;
-	
+	if (line[spot] == '"' || line[spot] == ''')
+		return (extract_from_quotes(line, spot));
+	end = spot + 1;
+	while ((line[end] != ' ' || in_or_out(line, end) != 1)
+		&& (line[end] != '|' || valid_pipe(line, end) == 1)
+		&& line[end])
+		end++;
+	return (ft_substr(line, spot, end - spot));
 }
+

@@ -100,5 +100,6 @@ int	valid_hd(char *line, int spot);
 void	replace_var(char *line, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var, int end_com);
 void	scan_varz(t_data *data, int end, int spot);
+char	*hdoc_limit(char *line, int spot);
 
 #endif
