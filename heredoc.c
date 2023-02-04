@@ -71,22 +71,21 @@ void	prep_hdoc(t_data *data, int z)
 
 void	fake_prep_hdoc(char *lim)
 {
-	char	buf[BUFFER_SIZE + 1];
-	char	*mem;
+	char	*buf;
 
 	while (1)
 	{
 		ft_putstr_fd(">", 1);
-		mem = get_next_line(1);
-		if (ft_strncmp(mem, lim, ft_strlen(lim)) == 0)
+		buf = get_next_line(1);
+		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0)
 		{
-			mega_free(mem, lim, NULL, NULL);
+			mega_free(buf, lim, NULL, NULL);
 			return ;
 		}
 	}
 }
 
-void	hdoc_scan(t_data *data, int nb_docs)
+void	hdoc_scan(t_data *data)
 {
 	int	z;
 	
@@ -94,7 +93,7 @@ void	hdoc_scan(t_data *data, int nb_docs)
 	while (data->line[z])
 	{
 		if (data->line[z] == '<' 
-			&& valid_hd(line, z) == 1)
+			&& valid_hd(data->line, z) == 1)
 		{
 			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)//check si ta pas une autre redir dans la meme cmd  
 				prep_hdoc(data, z);

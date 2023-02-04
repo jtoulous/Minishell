@@ -15,7 +15,9 @@
 void	simple_exec(t_data *data)
 {
 	int	pid;
-	
+	char	**envp;
+		
+	envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{	
@@ -27,9 +29,9 @@ void	simple_exec(t_data *data)
 		//if (built_in(data))
 		//	execbd(data);//tappe un exit
 		//else
-			execve(data->argz[0], data->argz, data->env);//env t_list et non char **
+			execve(data->argz[0], data->argz, envp);//env t_list et non char **
 	}
-
+	free_loop(envp);
 }
 
 void	exec(t_data *data, int z)
@@ -38,7 +40,7 @@ void	exec(t_data *data, int z)
 		simple_exec(data);
 	else if (z == 0)
 		first_multiple(data);
-	else if (z + 1 < data->nb_args)
+	else if (z + 1 < data->nb_cmds)
 		multiple_exec(data, z);
 	else
 		last_multiple(data, z);
@@ -71,6 +73,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
 	
+	void (argc);
+	void (argv);
 	init_data(data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{

@@ -54,7 +54,7 @@ char	*extract_redir(char *line, int spot);
 char	*extract_wipe_quotes(char *line, int z);
 char	*extract_wipe(char *line, int z);
 char	*get_nxt_stuff(char *line);
-void	hdoc_scan(t_data *data, int nb_docs);
+void	hdoc_scan(t_data *data);
 void	fake_prep_hdoc(char *lim);
 void	prep_hdoc(t_data *data, int z);
 void	replace_hdoc(char *line, char *file, int spot);
