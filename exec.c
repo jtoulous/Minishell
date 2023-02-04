@@ -12,25 +12,52 @@
 
 #include "minishell.h"
 
+void	first_multiple(t_data *data)
+{
+	int 	pid;
+	char	**envp;
+		
+	envp = convert_env(data->env);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (data->infile != -1)
+			dup2(data->infile, STDIN_FILENO);
+		if (data->outfile != -1)
+			dup2(data->outfile, STDOUT_FILENO);
+		else
+			dup2(data->pipes[0][1], STDOUT_FILENO);
+		close_all(data);
+		//if (check_if_builtin(data->argz[0]) == 1)
+		//	execbd(data);
+		//else	
+			execve(data->argz[0], data->argz, envp);	
+	}
+	free_loop(envp);
+}
+
 void	last_multiple(t_data *data, int z)
 {
 	int 	pid;
-	char	**envp
+	char	**envp;
 		
 	envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{
 		if (data->prev_outfile != -1)
-			dup2(data, STDIN_FILENO);	
+			dup2(data->prev_outfile, STDIN_FILENO);	
 		else if (data->infile != -1)
 			dup2(data->infile, STDIN_FILENO);
 		else
-			dup2(data->pipe[z][0], STDIN_FILENO);
+			dup2(data->pipes[z - 1][0], STDIN_FILENO);
 		if (data->outfile != -1)
 			dup2(data->outfile, STDOUT_FILENO);
 		close_all(data);
-		execve(data->argz[0], data->argz, envp);
+		//if (check_if_builtin(data->argz[0]) == 1)
+		//	execbd(data);
+		//else	
+			execve(data->argz[0], data->argz, envp);
 	}
 	free_loop(envp);
 }
@@ -38,14 +65,14 @@ void	last_multiple(t_data *data, int z)
 void	multiple_exec(t_data *data, int z)
 {
 	int 	pid;
-	char	**envp
+	char	**envp;
 		
 	envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{
 		if (data->prev_outfile != -1)
-			dup2(data, STDIN_FILENO);	
+			dup2(data->prev_outfile, STDIN_FILENO);	
 		else if (data->infile != -1)
 			dup2(data->infile, STDIN_FILENO);
 		else
@@ -53,9 +80,12 @@ void	multiple_exec(t_data *data, int z)
 		if (data->outfile != -1)
 			dup2(data->outfile, STDOUT_FILENO);
 		else 
-			dup2(data->pipes[z][1], STDOUT_FILENO)
+			dup2(data->pipes[z][1], STDOUT_FILENO);
 		close_all(data);
-		execve(data->argz[0], data->argz, envp);
+		//if (check_if_builtin(data->argz[0]) == 1)
+		//	execbd(data);
+		//else	
+			execve(data->argz[0], data->argz, envp);
 	}
 	free_loop(envp);
 }

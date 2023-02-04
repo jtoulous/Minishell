@@ -12,7 +12,15 @@ SRC = error_management.c\
 	  toolbox.c\
 	  toolbox2.c\
 	  trimage.c\
-	  built_in.c\
+	  #built_in.c\
+	  error_management.c\
+	  heredoc.c\
+	  parse.c\
+	  prep_exec.c\
+	  toolbox3.c\
+	  toolbox_hd.c\
+	  valid_check.c\
+	  varz.c\
 
 CFLAGS = -Wall -Wextra -Werror -g
 

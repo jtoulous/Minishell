@@ -49,3 +49,21 @@ void	free_lst(t_list *lst)
 	}
 	free (lst);
 }
+
+char	*env_search(t_list *env, char *var)
+{
+	t_list	*tmp;
+	char	*value;
+	
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strncmp(var, tmp->entry, ft_strlen(var)) == 0)
+		{
+			value = ft_substr(tmp->entry, ft_strlen(var) + 1, 
+					ft_strlen(tmp->entry) - ft_strlen(var));
+			return (value);
+		}
+	}
+	return (NULL);
+}

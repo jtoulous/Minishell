@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+char	*extract_from_quotes(char *line, int spot)
+{
+	char	*extracted;
+	int	end;
+	
+	end = spot + 1;
+	while (line[end] != line[spot])
+		end++;
+	extracted = ft_substr(line, spot + 1, end - (spot + 1));
+	return (extracted);
+}
+
 char	*extract_redir(char *line, int spot)
 {
 	char	*to_test;

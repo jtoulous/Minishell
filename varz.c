@@ -24,33 +24,20 @@ void	replace_var(char *line, int spot, int end_var, char *var_val)
 	mega_free(ante, pre, NULL, NULL);
 }
 
-void	str_cut(char *line, int spot, int end)
-{
-	char	*ante;
-	char	*pre;
-	
-	if (!line)
-		return;
-	ante = ft_substr(line, 0, spot);
-	pre = ft_substr(line, end, ft_strlen(line) - end);
-	free (line);
-	line = ft_strjoin(ante, pre);
-	mega_free(ante, pre, NULL, NULL);
-}
-
 void	sub_var(t_data *data, int spot, int end_var, int end_com)
 {
 	char	*var_val;
+	char	*var;
 	
-	var_val = env_search(data->env, 
-	ft_substr(data->line, spot + 1, end_var - (spot + 1));
+	var = ft_substr(data->line, spot + 1, end_var - (spot + 1);
+	var_val = env_search(data->env, var);
 	//if (data->line[end_var + 1] == """)
 	//	end_var++;
 	if (!var_val)
-		str_cut(data->line, spot, end_var);
+		m_trime(data->line, spot, end_var);
 	else
 		replace_var(data->line, spot, end_var, var_val);
-	free (var_val);
+	mega_free(var_val, var, NULL, NULL);
 }
 
 /*void	sub_err_code(t_data *data, int spot)
@@ -67,7 +54,7 @@ void	scan_varz(t_data *data, int end, int spot)
 		if (data->line[spot] == '$')
 		{
 			in_or_out = in_or_out(data->line, z);
-			if (data->line[spot + 1] == '!' && in_or_out != 2)
+			//if (data->line[spot + 1] == '!' && in_or_out != 2)
 				//sub_err_code(data, spot);
 			if (in_or_out != 2)
 			{

@@ -14,20 +14,19 @@
 
 void	get_doc_argz(int fd, char *lim)
 {
-	char	buf[BUFFER_SIZE + 1];
-	char	*mem;
+	char	*buf;
 
 	while (1)
 	{
 		ft_putstr_fd(">", 1);
-		mem = get_next_line(1);
-		if (ft_strncmp(mem, lim, ft_strlen(lim)) == 0)
+		buf = get_next_line(1);
+		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0)
 		{
-			mega_free(mem, lim, NULL, NULL);
+			mega_free(buf, lim, NULL, NULL);
 			return ;
 		}		
-		write (fd, mem, ft_strlen(mem));
-		free (mem);
+		write (fd, buf, ft_strlen(buf));
+		free (buf);
 	}
 }
 
@@ -44,7 +43,7 @@ void	replace_hdoc(char *line, char *file, int spot)
 	while ((line[end_hd] != ' ' || in_or_out(line, end_hd) != 0)
 		&& line[end_hd])
 		end_hd++;
-	biach = end_hd;
+	end_line = end_hd;
 	while (line[end_line])
 		end_line++;
 	ante = ft_substr(line, 0, spot + 1);

@@ -21,7 +21,7 @@ int	the_last_inredir(char *line, int spot)
 	{
 		if (line[spot] == '<' && valid_inredir(line, spot) == 0)
 			return (0);
-		z++;
+		spot++;
 	}
 	return (1);
 }
@@ -47,8 +47,8 @@ int	check_inredir(t_data *data, int end)
 		if (data->line[z] == '<' && valid_inredir(data->line, z) == 1)
 		{
 			file = extract_redir(data->line, z);
-			if (the_last_inredir(line, z + 1) == 1)
-				return (set_up_inredir(file, data->line, z) == 1)//open, store in data->infile
+			if (the_last_inredir(data->line, z + 1) == 1)
+				return (set_up_inredir(file, data, z));//open, store in data->infile
 			else
 			{			
 				if (access(file, F_OK) != 0)

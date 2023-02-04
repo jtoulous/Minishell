@@ -40,7 +40,7 @@ int	nb_hdocs(char *line)
 	return (count);
 }
 
-void	unlinkz(char *new)//
+void	unlinkz(char *new)
 {
 	static t_list	*unlinks;
 	t_list		*tmp;
@@ -58,4 +58,11 @@ void	unlinkz(char *new)//
 	}
 	unlink(tmp->entry);
 	free_lst(unlinks);
+}
+
+char	*hdoc_limit(char *line, int spot)
+{
+	while (spot == '<' || spot == ' ')
+		spot++;
+	
 }

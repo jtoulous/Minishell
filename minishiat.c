@@ -36,6 +36,8 @@ void	exec(t_data *data, int z)
 {
 	if (data->nb_cmds <= 1)
 		simple_exec(data);
+	else if (z == 0)
+		first_multiple(data);
 	else if (z + 1 < data->nb_args)
 		multiple_exec(data, z);
 	else
