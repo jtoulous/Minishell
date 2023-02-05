@@ -29,13 +29,13 @@ int	in_or_out(char *line, int index)
 	z = 0;
 	while (z < index)
 	{
-		if (line[z] == 44 || line[z] == 34)
+		if (line[z] == 39 || line[z] == 34)
 			skip_out(line, &z);
 		z++;
 	}
 	if (z > index && line[z] == 34)
 		return (1);
-	else if (z > index && line[z] == 44)
+	else if (z > index && line[z] == 39)
 		return (2);
 	return (0);
 }
@@ -79,11 +79,11 @@ char	**convert_env(t_list *env)
 	z = 0;
 	while (tmp->next != NULL)
 	{
-		converted[z] = ft_strdup(tmp->content);
+		converted[z] = ft_strdup(tmp->env_copy);
 		tmp = tmp->next;
 		z++;
 	}
-	converted[z] = ft_strdup(tmp->content);
+	converted[z] = ft_strdup(tmp->env_copy);
 	return (converted);
 }
 

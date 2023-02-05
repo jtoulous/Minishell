@@ -58,11 +58,11 @@ void	path_finder(t_data *data, char *cmd)
 	int	z;
 	
 	z = 0;
-	/*if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
+	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
 	{
 		data->argz[0] = ft_strdup(cmd);
 		return ;
-	}*/
+	}
 	paths = path_lst(data);
 	while (paths[z])
 	{
