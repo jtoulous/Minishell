@@ -17,7 +17,7 @@ SRC = error_management.c\
 	  toolbox_hd.c\
 	  valid_check.c\
 	  varz.c\
-	  #built_in\
+	  built_in.c\
 
 CFLAGS = -Wall -Wextra -Werror -g
 

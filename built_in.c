@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 12:55:11 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 09:52:20 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	built_in_cd(t_data *data)
 void	built_in_pwd(t_data *data)
 {
 	char	cwd[PATH_MAX];
+	(void)	data;
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
@@ -69,18 +70,15 @@ int	built_in_export(t_data *data)
 {
 	int		i;
 	int		j;
-	int 	k;
-	char	*variable;
-	char	*new_value;
-	char	*sort_env;
+	int		k;
 
 	if (data->argz[1] == NULL)
 	{
 		i = 0;
-		sort_env = ft_sort_char_tab(data->env->env_copy);
-		while (data->env->env_copy[i])
+		data->exp->sort_env = ft_sort_char_tab(data->env->env_copy);
+		while (data->exp->sort_env[i])
 		{
-			printf("%s\n", data->env->sort_env);
+			printf("%s\n", data->exp->sort_env);
 			i++;
 		}
 		return (0);
@@ -93,7 +91,7 @@ int	built_in_export(t_data *data)
 		{
 			while (data->argz[i][j] != '=')
 			{
-				variable[j] = data->argz[i][j];
+				data->exp->var[j] = data->argz[i][j];
 				j++;
 			}	
 			if (data->argz[i][j] == '=')
@@ -101,14 +99,15 @@ int	built_in_export(t_data *data)
 			k = 0;
 			while (data->argz[i][j])
 			{
-				new_value[k] = data->argz[i][j];
+				data->exp->new_value[k] = data->argz[i][j];
 				i++;
 				k++;
 			}
 			ft_lstadd_back(data->env->content, data->env->next);
 		}
 		return (0);
-}	
+	}
+}
 
 void	built_in_unset(t_data *data)
 {

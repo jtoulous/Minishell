@@ -6,9 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:05:30 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 12:01:30 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 09:53:34 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_sort_char_tab(char *str)
 {

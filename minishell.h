@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 12:51:39 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 09:48:59 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,17 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
+typedef	struct s_exp
+{
+	char	*sort_env;
+	char	*var;
+	char	*new_value;
+}	t_exp;
+
 typedef struct pipex_data
 {
 	t_list	*env;
+	t_exp	*exp;
 	char	*line;
 	char	**argz;
 	int		**pipes;
@@ -101,5 +109,12 @@ void	replace_var(char *line, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var);
 void	scan_varz(t_data *data, int end, int spot);
 char	*hdoc_limit(char *line, int spot);
-
+int		built_in(t_data *data);
+void	buil_in_echo(t_data *data);
+void	buil_in_cd(t_data *data);
+void	buil_in_pwd(t_data *data);
+int		buil_in_export(t_data *data);
+void	built_in_unset(t_data *data);
+void	built_in_env(t_data *data);
+int		built_in_exit(t_data *data);
 #endif

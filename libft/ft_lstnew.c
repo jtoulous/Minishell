@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:41:24 by jtoulous          #+#    #+#             */
-/*   Updated: 2022/10/18 12:59:45 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/02/05 09:25:05 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstnew(char *content)
 {
-	unsigned char	*tmp;
+	//unsigned char	*tmp;
 	t_list			*fnl;
 
 	//tmp = (unsigned char *)content;
