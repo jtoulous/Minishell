@@ -1,3 +1,4 @@
+#include "libft/libft.h"
 #include "minishell.h"
 
 void	free_and_close_all(t_data *data, int opt)
@@ -73,8 +74,12 @@ void	add_history(char *line)
 {
 	int	i;
 	int	c;
+	char	history[100][1024];
 
 	i = 0;
 	c = 0;
+	ft_strcpy(history[i % 100], line);
+	i++;
+	c = i;
 	
 }	

@@ -6,12 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 11:10:05 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:49:34 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
+#include <cstdio>
 
 void	built_in_echo(t_data *data)
 {
@@ -96,6 +97,12 @@ int	built_in_export(t_data *data)
 		{
 			while (data->argz[i][j] != '=')
 			{
+				if (ft_isalpha(data->argz[i][j]) == 1)
+				{
+					ft_putstr_fd(&data->argz[i], 2);
+					ft_putstr_fd(" : not a valid identifier\n", 2);
+					return (0);
+				}	
 				data->exp->var[j] = data->argz[i][j];
 				j++;
 			}	
@@ -109,14 +116,17 @@ int	built_in_export(t_data *data)
 				k++;
 			}
 			ft_lstadd_back(data->env->content, data->env->next);
+			i++;
+			j = 0;
 		}
 		return (0);
 	}
 }
 
-void del()
+void	del(void)
 {
 	t_data *data = NULL;
+
 	free(data->env->content);
 }
 

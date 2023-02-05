@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 10:35:20 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:36:01 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
 #include <stdlib.h>
 
 void	simple_exec(t_data *data)
@@ -73,7 +74,7 @@ void	treat_command(t_data *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
-	
+
 	(void) argc;
 	(void) argv;
 	data = malloc(sizeof(t_data) * 1);

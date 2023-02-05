@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 11:16:46 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 12:36:22 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <signal.h>
 
-typedef	struct s_exp
+typedef	struct	s_exp
 {
 	char	**sort_env;
 	char	*var;
@@ -118,4 +119,7 @@ int		buil_in_export(t_data *data);
 void	built_in_unset(t_data *data);
 void	built_in_env(t_data *data);
 int		built_in_exit(t_data *data);
+int		handle_sigint(int sig, siginfo_t *info, void *context);
+int		handle_sigquit(int sig, siginfo_t *info, void *context );
+void	handle_eof(int sig, siginfo_t *info, void *context);
 #endif
