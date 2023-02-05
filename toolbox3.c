@@ -68,3 +68,13 @@ char	*env_search(t_list *env, char *var)
 	}
 	return (NULL);
 }
+
+void	add_history(char *line)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	
+}	

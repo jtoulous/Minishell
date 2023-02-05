@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/04 12:05:43 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:33:03 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 41
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stddef.h>
@@ -91,4 +91,5 @@ char		*get_next_line(int fd);
 char		*copy_2(char buf, char *line, char *new_line, size_t z);
 char		*ft_sort_char_tab(char *str);
 void		m_trime(char *str, int start, int end);
+char	*ft_strcpy(char *dest, char *src);
 #endif

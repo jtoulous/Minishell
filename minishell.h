@@ -6,14 +6,14 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 09:48:59 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:16:46 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define BUFFER_SIZE 1 
+//# define BUFFER_SIZE 1 
 
 # include "libft/libft.h"
 # include <stdlib.h>
@@ -28,9 +28,10 @@
 
 typedef	struct s_exp
 {
-	char	*sort_env;
+	char	**sort_env;
 	char	*var;
 	char	*new_value;
+	char	**envp;
 }	t_exp;
 
 typedef struct pipex_data

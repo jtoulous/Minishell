@@ -6,11 +6,10 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:27:12 by agoichon          #+#    #+#             */
-/*   Updated: 2023/01/18 11:47:15 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:03:38 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stdlib.h>
 
 static char	*ft_joinf(char *buf, char *str)
 {

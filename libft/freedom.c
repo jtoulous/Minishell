@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:44:28 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/01/14 16:44:34 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:02:48 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	mega_free(char *s1, char *s2, char *s3, char *s4)
 	if (s3)
 		free (s1);
 	if (s4)
-		free (s1);			
+		free (s1);
 }

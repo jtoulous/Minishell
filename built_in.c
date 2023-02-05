@@ -6,10 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 09:52:20 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 11:10:05 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "minishell.h"
 
 void	built_in_echo(t_data *data)
@@ -56,8 +57,8 @@ void	built_in_cd(t_data *data)
 void	built_in_pwd(t_data *data)
 {
 	char	cwd[PATH_MAX];
-	(void)	data;
 
+	(void) data;
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{
 		ft_putstr_fd("Error getting current working directory\n", 1);
@@ -75,10 +76,14 @@ int	built_in_export(t_data *data)
 	if (data->argz[1] == NULL)
 	{
 		i = 0;
-		data->exp->sort_env = ft_sort_char_tab(data->env->env_copy);
+		while (data->exp->envp)
+		{	
+			data->exp->sort_env[i] = ft_sort_char_tab(data->exp->envp[i]);
+			i++;
+		}
 		while (data->exp->sort_env[i])
 		{
-			printf("%s\n", data->exp->sort_env);
+			printf("%s\n", data->exp->sort_env[i]);
 			i++;
 		}
 		return (0);
@@ -109,6 +114,12 @@ int	built_in_export(t_data *data)
 	}
 }
 
+void del()
+{
+	t_data *data = NULL;
+	free(data->env->content);
+}
+
 void	built_in_unset(t_data *data)
 {
 	int	i;
@@ -116,6 +127,8 @@ void	built_in_unset(t_data *data)
 	i = 0;
 	while (data->argz[1][i])
 	{	
+		if (ft_strncmp(data->argz[1], data->env->content, ft_strlen(data->argz[1])) == 0)
+			ft_lstdelone(data->env, del);
 		if (ft_isalpha(data->argz[1][i]) == 1)
 		{
 			ft_putstr_fd("Not a valid Indentifier\n", 2);
@@ -130,9 +143,9 @@ void	built_in_env(t_data *data)
 	int	i;
 
 	i = 0;
-	while (data->env->content)
+	while (data->exp->envp)
 	{
-		printf("%p\n", data->env->env_copy);
+		printf("%s\n", data->exp->envp[i]);
 		i++;
 	}
 }

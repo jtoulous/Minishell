@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 09:33:18 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 10:31:08 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 void	first_multiple(t_data *data)
 {
 	int 	pid;
-	char	**envp;
 		
-	envp = convert_env(data->env);
+	data->exp->envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -29,17 +28,16 @@ void	first_multiple(t_data *data)
 			dup2(data->pipes[0][1], STDOUT_FILENO);
 		close_all(data);
 		if (built_in(data))
-			execve(data->argz[0], data->argz, envp);	
+			execve(data->argz[0], data->argz, data->exp->envp);	
 	}
-	free_loop(envp);
+	free_loop(data->exp->envp);
 }
 
 void	last_multiple(t_data *data, int z)
 {
 	int 	pid;
-	char	**envp;
 		
-	envp = convert_env(data->env);
+	data->exp->envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -53,17 +51,16 @@ void	last_multiple(t_data *data, int z)
 			dup2(data->outfile, STDOUT_FILENO);
 		close_all(data);
 		if (built_in(data))	
-			execve(data->argz[0], data->argz, envp);
+			execve(data->argz[0], data->argz, data->exp->envp);
 	}
-	free_loop(envp);
+	free_loop(data->exp->envp);
 }
 
 void	multiple_exec(t_data *data, int z)
 {
 	int 	pid;
-	char	**envp;
 		
-	envp = convert_env(data->env);
+	data->exp->envp = convert_env(data->env);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -79,9 +76,9 @@ void	multiple_exec(t_data *data, int z)
 			dup2(data->pipes[z][1], STDOUT_FILENO);
 		close_all(data);
 		if (built_in(data))
-			execve(data->argz[0], data->argz, envp);
+			execve(data->argz[0], data->argz, data->exp->envp);
 	}
-	free_loop(envp);
+	free_loop(data->exp->envp);
 }
 
 /*void	builtinz_multi_first(t_data *data)

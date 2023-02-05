@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 13:41:24 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/05 10:02:22 by agoichon         ###   ########.fr       */
+/*   Created: 2023/02/05 11:30:42 by agoichon          #+#    #+#             */
+/*   Updated: 2023/02/05 11:32:46 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(char *content)
+char	*ft_strcpy(char *dest, char *src)
 {
-	t_list			*fnl;
+	int	i;
 
-	fnl = malloc(sizeof(t_list));
-	if (!fnl)
-		return (0);
-	fnl->env_copy = content;
-	fnl->next = NULL;
-	return (fnl);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
