@@ -47,16 +47,16 @@ void	sub_var(t_data *data, int spot, int end_var)
 
 void	scan_varz(t_data *data, int end, int spot)
 {
-		int	inorout;
+		int	in_out;
 		int	z;
 		
 		z = spot + 1;
 		if (data->line[spot] == '$')
 		{
-			inorout = in_or_out(data->line, z);
+			in_out = in_or_out(data->line, z);
 			//if (data->line[spot + 1] == '!' && in_or_out != 2)
 				//sub_err_code(data, spot);
-			if (inorout != 2)
+			if (in_out != 2)
 			{
 				while (data->line[z] != ' ' 
 					&& data->line[z] != '"'

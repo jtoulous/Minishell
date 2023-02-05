@@ -31,12 +31,12 @@ int	in_or_out(char *line, int index)
 	{
 		if (line[z] == 39 || line[z] == 34)
 			skip_out(line, &z);
+		if (z > index && line[z] == 34)
+			return (1);
+		else if (z > index && line[z] == 39)
+			return (2);
 		z++;
 	}
-	if (z > index && line[z] == 34)
-		return (1);
-	else if (z > index && line[z] == 39)
-		return (2);
 	return (0);
 }
 

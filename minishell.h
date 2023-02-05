@@ -122,4 +122,5 @@ int		built_in_exit(t_data *data);
 void	handle_sigint(int sig, siginfo_t *info, void *context);
 void	handle_sigquit(int sig, siginfo_t *info, void *context );
 void	handle_eof(int sig, siginfo_t *info, void *context);
+
 #endif

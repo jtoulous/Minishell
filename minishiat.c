@@ -72,7 +72,7 @@ void	treat_command(t_data *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
-	struct	sigaction sa_int;
+	/*struct	sigaction sa_int;
 	struct	sigaction sa_tstp;
 	struct	sigaction sa_quit;
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 	sa_quit.sa_sigaction = handle_sigquit;
 	sigemptyset(&sa_quit.sa_mask);
 	sigaction(SIGINT, &sa_quit, NULL);
-	data = malloc(sizeof(t_data) * 1);
+	data = malloc(sizeof(t_data) * 1);*/
 	init_data(data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{
