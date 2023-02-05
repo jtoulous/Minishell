@@ -6,26 +6,35 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:09:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 12:38:43 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:22:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <bits/types/siginfo_t.h>
+#include <stdlib.h>
 
-int	handle_sigint(int sig, siginfo_t *info, void *context)
+void handle_sigint(int sig, siginfo_t *info, void *context)
 {
-	printf("^C\n");
-	return (130);
+	(void)sig;
+	(void) info;
+	(void) context;
+	printf("^C");
 }
 
 void	handle_eof(int sig, siginfo_t *info, void *context)
 {
+	(void)sig;
+	(void) info;
+	(void) context;
 	printf("exit\n");
 	exit (0);
 }
 
-int	handle_sigquit(int sig, siginfo_t *info, void *context)
+void	handle_sigquit(int sig, siginfo_t *info, void *context)
 {
-	return (0);
+	(void)sig;
+	(void)info;
+	(void)context;
+	exit(0);
+
 }	

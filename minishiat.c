@@ -6,13 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 12:36:01 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:19:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <signal.h>
-#include <stdlib.h>
 
 void	simple_exec(t_data *data)
 {
@@ -74,9 +72,24 @@ void	treat_command(t_data *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
+	struct	sigaction sa_int;
+	struct	sigaction sa_tstp;
+	struct	sigaction sa_quit;
 
 	(void) argc;
 	(void) argv;
+	sa_int.sa_flags = SA_SIGINFO;
+	sa_int.sa_sigaction = handle_sigint;
+	sigemptyset(&sa_int.sa_mask);
+	sigaction(SIGINT, &sa_int, NULL);
+	sa_tstp.sa_flags = SA_SIGINFO;
+	sa_tstp.sa_sigaction = handle_eof;
+	sigemptyset(&sa_tstp.sa_mask);
+	sigaction(SIGINT, &sa_tstp, NULL);
+	sa_quit.sa_flags = SA_SIGINFO;
+	sa_quit.sa_sigaction = handle_sigquit;
+	sigemptyset(&sa_quit.sa_mask);
+	sigaction(SIGINT, &sa_quit, NULL);
 	data = malloc(sizeof(t_data) * 1);
 	init_data(data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)

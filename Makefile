@@ -18,6 +18,7 @@ SRC = error_management.c\
 	  valid_check.c\
 	  varz.c\
 	  built_in.c\
+	  signal.c
 
 CFLAGS = -Wall -Wextra -Werror -g
 

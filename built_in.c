@@ -6,13 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 11:49:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/05 13:17:57 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
-#include <cstdio>
 
 void	built_in_echo(t_data *data)
 {
@@ -99,7 +97,7 @@ int	built_in_export(t_data *data)
 			{
 				if (ft_isalpha(data->argz[i][j]) == 1)
 				{
-					ft_putstr_fd(&data->argz[i], 2);
+					ft_putstr_fd(&data->argz[i][j], 2);
 					ft_putstr_fd(" : not a valid identifier\n", 2);
 					return (0);
 				}	
@@ -123,7 +121,7 @@ int	built_in_export(t_data *data)
 	}
 }
 
-void	del(void)
+/*static void	*del(void *)
 {
 	t_data *data = NULL;
 
@@ -146,7 +144,7 @@ void	built_in_unset(t_data *data)
 		}
 		i++;
 	}		
-}
+}*/
 
 void	built_in_env(t_data *data)
 {
@@ -211,11 +209,11 @@ int built_in (t_data *data)
 	}
 	if (ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0)
 		built_in_export(data);
-	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
+/*	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in_unset(data);
 		return (0);
-	}
+	}*/
 	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in_env(data);
