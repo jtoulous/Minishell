@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/06 10:47:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:07:43 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,7 @@ int	main(int argc, char **argv, char **envp)
 		data->line =readline ("\e[0;36mprompt >\e[0;m");
 		if (data->line == NULL)
 			break;
-		while (data->line != NULL)
-		{
-			add_history(data->line);
-			free(data->line);
-			data->line = readline("\e[0;36mprompt >\e[0;m");
-		}	
+		add_history(data->line);
 		data->nb_cmds = nb_cmd(data->line);
 		treat_command(data);
 	}
