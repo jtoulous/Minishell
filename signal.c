@@ -6,35 +6,19 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:09:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 13:22:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:37:54 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "minishell.h"
-#include <stdlib.h>
+#include <readline/readline.h>
 
-void handle_sigint(int sig, siginfo_t *info, void *context)
+void	handle_sigint(int sig)
 {
-	(void)sig;
-	(void) info;
-	(void) context;
-	printf("^C");
+	sig = 0;
+	ft_putstr_fd("\n", 1);
+	rl_replace_line("", 0);
+	rl_redisplay();
+	rl_on_new_line();
 }
-
-void	handle_eof(int sig, siginfo_t *info, void *context)
-{
-	(void)sig;
-	(void) info;
-	(void) context;
-	printf("exit\n");
-	exit (0);
-}
-
-void	handle_sigquit(int sig, siginfo_t *info, void *context)
-{
-	(void)sig;
-	(void)info;
-	(void)context;
-	exit(0);
-
-}	

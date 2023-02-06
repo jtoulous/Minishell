@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 13:15:13 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:11:37 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,42 @@
 
 //# define BUFFER_SIZE 1 
 
+/*Colors*/
+/*---------------------------------------------------------------------*/
+# define BLACK "\e[0;30m"
+# define GREY "\e[1;30m"
+# define DARKRED "\e[0;31m"
+# define PINK "\e[1;31m"
+# define DARKGREEN "\e[0;32m"
+# define LIGHTGREEN "\e[1;32m"
+# define ORANGE "\e[0;33m"
+# define YELLOW "\e[1;33m" 
+# define DARKBLUE "\e[0;34m"
+# define LIGHTBLUE "\e[1;34m"
+# define DARKPURPLE "\e[0;35m"
+# define LIGHTPURPLE "\e[1;35m"
+# define DARKCYAN "\e[0;36m"
+# define LIGHTCYAN "\e[1;36"
+# define LIGHTGREY "\e[0;37m"
+# define WHITE "\e[1;37m"
+# define NEUTRAL "\e[0;m"
+/*--------------------------------------------------------------------*/
+
 # include "libft/libft.h"
+# include <linux/limits.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <linux/limits.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/wait.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <signal.h>
+/*readline*/
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-typedef	struct	s_exp
+typedef	struct s_exp
 {
 	char	**sort_env;
 	char	*var;
@@ -119,8 +142,6 @@ int		buil_in_export(t_data *data);
 void	built_in_unset(t_data *data);
 void	built_in_env(t_data *data);
 int		built_in_exit(t_data *data);
-void	handle_sigint(int sig, siginfo_t *info, void *context);
-void	handle_sigquit(int sig, siginfo_t *info, void *context );
-void	handle_eof(int sig, siginfo_t *info, void *context);
-
+void	handle_sigint(int sig);
+void	handle_sigquit(int sig);
 #endif

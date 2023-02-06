@@ -70,7 +70,7 @@ char	*env_search(t_list *env, char *var)
 	return (NULL);
 }
 
-void	add_history(char *line)
+/*void	add_history(char *line)
 {
 	int	i;
 	int	c;
@@ -82,7 +82,7 @@ void	add_history(char *line)
 	i++;
 	c = i;
 	
-}
+}*/
 
 int	check_if_builtin(char *cmd)
 {

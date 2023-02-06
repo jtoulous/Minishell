@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:56:20 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:28:59 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <readline/readline.h>
 
 void	get_doc_argz(int fd, char *lim)
 {
