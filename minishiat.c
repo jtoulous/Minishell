@@ -30,11 +30,11 @@ void	simple_exec(t_data *data)
 		if (data->outfile != -1)
 			dup2(data->outfile, STDOUT_FILENO);
 		close_all(data);	
-		//if (built_in(data))
-		//	execbd(data);//tappe un exit
-		//else
+		if (built_in(data) == -1)
 			execve(data->argz[0], data->argz, envp);//env t_list et non char **
+		return ;
 	}
+	wait (0);
 	free_loop(envp);
 }
 
