@@ -6,9 +6,15 @@ void	free_and_close_all(t_data *data, int opt)
 	if (opt == 2)
 		free_lst(data->env);
 	if (data->line)
+	{	
 		free (data->line);
+		data->line = NULL;
+	}
 	if (data->argz)
+	{	
 		free_loop(data->argz);
+		data->argz = NULL;
+	}
 	close_all(data);
 }
 
@@ -17,11 +23,20 @@ void	close_all(t_data *data)
 	if (data->nb_cmds > 1)
 		close_pipes(data->pipes, data->nb_cmds);
 	if (data->infile != -1)
+	{	
 		close (data->infile);
+		data->infile = -1;
+	}
 	if (data->outfile != -1)
+	{	
 		close (data->outfile);
+		data->outfile = -1;
+	}
 	if (data->prev_outfile != -1)
+	{	
 		close (data->prev_outfile);
+		data->prev_outfile = -1;
+	}
 }
 
 void	close_pipes(int **pipes, int nb)
