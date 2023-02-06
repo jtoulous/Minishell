@@ -98,7 +98,7 @@ int		check_inredir(t_data *data, int end);
 void	treat_command(t_data *data);
 void	set_up_outredir(t_data *data, int spot);
 void	check_outredir(t_data *data, int end);
-void	clean_dat_biach(t_data *data, int end);
+void	clean_dat_biach(t_data *data);
 void	prep_exec(t_data *data, int end);
 void	parse(t_data *data);
 void	path_finder(t_data *data, char *cmd);
@@ -144,4 +144,5 @@ void	built_in_env(t_data *data);
 int		built_in_exit(t_data *data);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
+
 #endif

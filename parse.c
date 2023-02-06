@@ -1,16 +1,20 @@
 #include "minishell.h"
 
-void	clean_dat_biach(t_data *data, int end)//clean the cmd being treated, replace varz($a, ...), check '\', check for $?, ...
+void	clean_dat_biach(t_data *data)//clean the cmd being treated, replace varz($a, ...), check '\', check for $?, ...
 {
 	int	z;
+	int	end;
 	
 	z = 0;
+	end = end_of_cmd(data->line, 0);
 	while (z < end)
 	{
 		scan_varz(data, end, z);
+		end = end_of_cmd(data->line, 0);
 		z++;
 	}
 }
+
 
 void	prep_exec(t_data *data, int end)
 {
@@ -44,7 +48,7 @@ void	parse(t_data *data)
 	int	end;
 	
 	end = end_of_cmd(data->line, 0);
-	clean_dat_biach(data, end);
+	clean_dat_biach(data);
 	if (check_inredir(data, end) != 1)//open in data->infile + trim
 		return ;
 	check_outredir(data, end);//if multi out_redir create all(but close useless ones) save last one in data->outfile and trim them all away,

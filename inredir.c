@@ -12,14 +12,15 @@
 
 #include "minishell.h"
 
-int	the_last_inredir(char *line, int spot)
+int	the_last_inredir(char *line, int spot)//GOOD
 {
 	int	end;
 	
+	spot++;
 	end = end_of_cmd(line, spot);
 	while (spot < end)
 	{
-		if (line[spot] == '<' && valid_inredir(line, spot) == 0)
+		if (line[spot] == '<' && valid_inredir(line, spot) == 1)
 			return (0);
 		spot++;
 	}
@@ -44,15 +45,17 @@ int	check_inredir(t_data *data, int end)
 	z = 0;
 	while (z < end)
 	{
+		end = end_of_cmd(data->line, z);
 		if (data->line[z] == '<' && valid_inredir(data->line, z) == 1)
 		{
 			file = extract_redir(data->line, z);
-			if (the_last_inredir(data->line, z + 1) == 1)
+			if (the_last_inredir(data->line, z) == 1)
 				return (set_up_inredir(file, data, z));//open, store in data->infile
 			else
 			{			
 				if (access(file, F_OK) != 0)
 					return (error_inredir(file));
+				trim_redir(data->line, z);
 				free (file);
 			}
 		}

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	valid_inredir(char *line, int spot)
+int	valid_inredir(char *line, int spot)//GOOD
 {
 	int	end;
 	

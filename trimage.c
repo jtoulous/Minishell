@@ -29,6 +29,11 @@ void	trim_redir(char *line, int spot)
 		spot++;
 		z++;
 	}
+	while (line[spot])
+	{
+		line[spot] = '\0';
+		spot++;
+	}
 }
 
 void	trim_leftovers(char *line)
@@ -46,6 +51,11 @@ void	trim_leftovers(char *line)
 	{
 		line[y] = line[z];
 		z++;
+		y++;
+	}
+	while (line[y])
+	{
+		line[y] = '\0';
 		y++;
 	}
 }
