@@ -119,7 +119,7 @@ char	**convert_env(t_list *env);
 void	export_env(t_list **env, char **envp);
 void	init_data(t_data *data, char **envp);
 void	reset_data(t_data *data);
-void	pipes_prep(int **pipes, int nb_cmdz);
+void	pipes_prep(t_data *data, int nb_cmdz);
 int		count_leftovers(char *line, int end);
 int		check_if_used(char *line, int spot, int end);
 int		nb_hdocs(char *line);

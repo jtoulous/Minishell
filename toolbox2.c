@@ -44,16 +44,16 @@ void	reset_data(t_data *data)
 	trim_leftovers(data->line);	
 }
 
-void	pipes_prep(int **pipes, int nb_cmdz)
+void	pipes_prep(t_data *data, int nb_cmdz)
 {
 	int	z;
 	
 	z = 0;
-	pipes = ft_calloc(nb_cmdz, sizeof(int *));
+	data->pipes = ft_calloc(nb_cmdz, sizeof(int *));
 	while (z < nb_cmdz)
 	{
-		pipes[z] = ft_calloc(2, sizeof(int));
-		pipe(pipes[z]);
+		data->pipes[z] = ft_calloc(2, sizeof(int));
+		pipe(data->pipes[z]);
 		z++;
 	}
 }

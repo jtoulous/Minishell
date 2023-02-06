@@ -15,9 +15,11 @@
 void	first_multiple(t_data *data)
 {
 	int 	pid;
-		
-	data->exp->envp = convert_env(data->env);
-	pid = fork();
+	char	**env_cpy;
+	
+	env_cpy = convert_env(data->env);
+	//if (check_if_fork(data) != 1)
+		pid = fork();
 	if (pid == 0)
 	{
 		if (data->infile != -1)
@@ -28,17 +30,20 @@ void	first_multiple(t_data *data)
 			dup2(data->pipes[0][1], STDOUT_FILENO);
 		close_all(data);
 		if (built_in(data))
-			execve(data->argz[0], data->argz, data->exp->envp);	
+			execve(data->argz[0], data->argz, env_cpy);	
 	}
-	free_loop(data->exp->envp);
+	wait(0);
+	free_loop(env_cpy);
 }
 
 void	last_multiple(t_data *data, int z)
 {
 	int 	pid;
-		
-	data->exp->envp = convert_env(data->env);
-	pid = fork();
+	char	**env_cpy;
+	
+	env_cpy = convert_env(data->env);
+	//if (check_if_fork(data) != 1)
+		pid = fork();
 	if (pid == 0)
 	{
 		if (data->prev_outfile != -1)
@@ -51,17 +56,20 @@ void	last_multiple(t_data *data, int z)
 			dup2(data->outfile, STDOUT_FILENO);
 		close_all(data);
 		if (built_in(data))	
-			execve(data->argz[0], data->argz, data->exp->envp);
+			execve(data->argz[0], data->argz, env_cpy);
 	}
-	free_loop(data->exp->envp);
+	wait(0);
+	free_loop(env_cpy);
 }
 
 void	multiple_exec(t_data *data, int z)
 {
 	int 	pid;
-		
-	data->exp->envp = convert_env(data->env);
-	pid = fork();
+	char	**env_cpy;
+	
+	env_cpy = convert_env(data->env);
+	//if (check_if_fork(data) != 1)	
+		pid = fork();
 	if (pid == 0)
 	{
 		if (data->prev_outfile != -1)
@@ -76,9 +84,10 @@ void	multiple_exec(t_data *data, int z)
 			dup2(data->pipes[z][1], STDOUT_FILENO);
 		close_all(data);
 		if (built_in(data))
-			execve(data->argz[0], data->argz, data->exp->envp);
+			execve(data->argz[0], data->argz, env_cpy);
 	}
-	free_loop(data->exp->envp);
+	wait(0);
+	free_loop(env_cpy);
 }
 
 /*void	builtinz_multi_first(t_data *data)

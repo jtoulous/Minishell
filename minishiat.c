@@ -59,7 +59,7 @@ void	treat_command(t_data *data)
 	if (data->exec_stat == 1)
 	{
 		if (data->nb_cmds > 1)
-			pipes_prep(data->pipes, data->nb_cmds);
+			pipes_prep(data, data->nb_cmds);
 		while (z < data->nb_cmds)
 		{
 			parse(data);
