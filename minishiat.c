@@ -16,40 +16,6 @@
 #include <readline/readline.h>
 #include <signal.h>
 
-void	simple_exec(t_data *data)
-{
-	int	pid;
-	char	**envp;
-		
-	envp = convert_env(data->env);
-	pid = fork();
-	if (pid == 0)
-	{	
-		if (data->infile != -1)
-			dup2(data->infile, STDIN_FILENO);
-		if (data->outfile != -1)
-			dup2(data->outfile, STDOUT_FILENO);
-		close_all(data);	
-		if (built_in(data) == -1)
-			execve(data->argz[0], data->argz, envp);//env t_list et non char **
-		return ;
-	}
-	wait (0);
-	free_loop(envp);
-}
-
-void	exec(t_data *data, int z)
-{
-	if (data->nb_cmds <= 1)
-		simple_exec(data);
-	else if (z == 0)
-		first_multiple(data);
-	else if (z + 1 < data->nb_cmds)
-		multiple_exec(data, z);
-	else
-		last_multiple(data, z);
-}
-
 void	treat_command(t_data *data)
 {
 	int	z;
@@ -75,24 +41,23 @@ void	treat_command(t_data *data)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	*data;
+	t_data	data;
 
 	(void) argc;
 	(void) argv;
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	data = malloc(sizeof(t_data) * 1);
-	init_data(data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
+	init_data(&data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{
-		data->line =readline ("\e[0;36mprompt >\e[0;m");
-		if (data->line == NULL)
+		data.line =readline ("\e[0;36mprompt >\e[0;m");
+		if (data.line == NULL)
 			break;
-		add_history(data->line);
-		data->nb_cmds = nb_cmd(data->line);
-		treat_command(data);
+		add_history(data.line);
+		data.nb_cmds = nb_cmd(data.line);
+		treat_command(&data);
 	}
 	ft_putstr_fd("exit", 1);
-	free_and_close_all(data, 2);// + env
+	free_and_close_all(&data, 2);// + env
 	return (69);
 }

@@ -39,3 +39,17 @@ void	mega_free(char *s1, char *s2, char *s3, char *s4)
 	if (s4)
 		free (s1);
 }
+
+/*void	free_lst(t_list *lst)
+{
+	t_list	*tmp;
+	
+	if ()
+	tmp = lst->next;
+	while (lst)
+	{
+		if (lst->content)
+			free (lst->content);
+			
+	}
+}*/

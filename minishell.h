@@ -74,7 +74,7 @@ typedef struct pipex_data
 
 int		error_inredir(char *failed_redir);
 void	error_quotes(t_data *data);
-void	error_path(char **argz, char *cmd);
+void	error_path(char *cmd);
 void	check_closed_quotes(t_data *data);
 void	check(t_data *data);
 void	exec(t_data *data, int z);
@@ -144,5 +144,7 @@ void	built_in_env(t_data *data);
 int		built_in_exit(t_data *data);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
-int		check_if_fork(char *cmd);
+int		check_if_fork(t_data *data);
+int	check_if_builtin(char *cmd);
+
 #endif

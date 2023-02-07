@@ -26,10 +26,8 @@ void	error_quotes(t_data *data)
 	ft_putstr_fd("va niquer ta race a pas fermer tes putains de quotes", STDOUT_FILENO);
 }
 
-void	error_path(char **argz, char *cmd)
+void	error_path(char *cmd)
 {
-	free (argz);
-	argz = NULL;
 	ft_putstr_fd(cmd, 1);
 	ft_putstr_fd(": command not found", 1);
 	free (cmd);

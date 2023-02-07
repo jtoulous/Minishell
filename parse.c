@@ -26,11 +26,8 @@ void	prep_exec(t_data *data, int end)
 	malloc_dat_shiat(data, end);//**argz malloked
 	cmd = get_nxt_stuff(data->line);//+ wipe cmd form line
 	path_finder(data, cmd);//check if the mofo already typed path in com
-	if (!data->argz[0])
-	{
-		error_path(data->argz, cmd);
-		free (cmd);
-	}	
+	if (data->argz == NULL)
+		error_path(cmd);
 	else
 	{
 		leftovers = count_leftovers(data->line, end_of_cmd(data->line, 0));

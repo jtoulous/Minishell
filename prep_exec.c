@@ -58,7 +58,7 @@ void	path_finder(t_data *data, char *cmd)
 	int	z;
 	
 	z = 0;
-	if (cmd[0] == '/' /*|| check_if_builtin(cmd) == 1*/)
+	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
 	{
 		data->argz[0] = ft_strdup(cmd);
 		return ;
@@ -75,5 +75,6 @@ void	path_finder(t_data *data, char *cmd)
 		free (data->argz[0]);
 		z++;
 	}
+	data->argz = NULL;
 	free_loop(paths);
 }
