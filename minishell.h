@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/06 10:11:37 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/07 09:50:36 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,5 @@ void	built_in_env(t_data *data);
 int		built_in_exit(t_data *data);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
-
+int		check_if_fork(char *cmd);
 #endif

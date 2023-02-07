@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 10:31:08 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/07 09:57:07 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,26 @@ void	first_multiple(t_data *data)
 	char	**env_cpy;
 	
 	env_cpy = convert_env(data->env);
-	//if (check_if_fork(data) != 1)
-		pid = fork();
-	if (pid == 0)
-	{
-		if (data->infile != -1)
-			dup2(data->infile, STDIN_FILENO);
-		if (data->outfile != -1)
-			dup2(data->outfile, STDOUT_FILENO);
-		else
-			dup2(data->pipes[0][1], STDOUT_FILENO);
-		close_all(data);
-		if (built_in(data))
-			execve(data->argz[0], data->argz, env_cpy);	
+	if (check_if_fork(data->argz[0]) != 1)
+	{	pid = fork();
+		if (pid == 0)
+		{
+			if (data->infile != -1)
+				dup2(data->infile, STDIN_FILENO);
+			if (data->outfile != -1)
+				dup2(data->outfile, STDOUT_FILENO);
+			else
+				dup2(data->pipes[0][1], STDOUT_FILENO);
+			close_all(data);
+			if (built_in(data))
+				execve(data->argz[0], data->argz, env_cpy);	
+		}
 	}
 	wait(0);
 	free_loop(env_cpy);
+//else sans fork	
 }
+
 
 void	last_multiple(t_data *data, int z)
 {
@@ -42,52 +45,57 @@ void	last_multiple(t_data *data, int z)
 	char	**env_cpy;
 	
 	env_cpy = convert_env(data->env);
-	//if (check_if_fork(data) != 1)
-		pid = fork();
-	if (pid == 0)
+	if (check_if_fork(data->argz[0]) != 1)
 	{
-		if (data->prev_outfile != -1)
-			dup2(data->prev_outfile, STDIN_FILENO);	
-		else if (data->infile != -1)
-			dup2(data->infile, STDIN_FILENO);
-		else
-			dup2(data->pipes[z - 1][0], STDIN_FILENO);
-		if (data->outfile != -1)
-			dup2(data->outfile, STDOUT_FILENO);
-		close_all(data);
-		if (built_in(data))	
-			execve(data->argz[0], data->argz, env_cpy);
+		pid = fork();
+		if (pid == 0)
+		{
+			if (data->prev_outfile != -1)
+				dup2(data->prev_outfile, STDIN_FILENO);	
+			else if (data->infile != -1)
+				dup2(data->infile, STDIN_FILENO);
+			else
+				dup2(data->pipes[z - 1][0], STDIN_FILENO);
+			if (data->outfile != -1)
+				dup2(data->outfile, STDOUT_FILENO);
+			close_all(data);
+			if (built_in(data))	
+				execve(data->argz[0], data->argz, env_cpy);
+		}
 	}
 	wait(0);
 	free_loop(env_cpy);
+	//else sans fork
 }
-
 void	multiple_exec(t_data *data, int z)
 {
 	int 	pid;
 	char	**env_cpy;
 	
 	env_cpy = convert_env(data->env);
-	//if (check_if_fork(data) != 1)	
-		pid = fork();
-	if (pid == 0)
+	if (check_if_fork(data->argz[0]) != 1)	
 	{
-		if (data->prev_outfile != -1)
-			dup2(data->prev_outfile, STDIN_FILENO);	
-		else if (data->infile != -1)
-			dup2(data->infile, STDIN_FILENO);
-		else
-			dup2(data->pipes[z - 1][0], STDIN_FILENO);
-		if (data->outfile != -1)
-			dup2(data->outfile, STDOUT_FILENO);
-		else 
-			dup2(data->pipes[z][1], STDOUT_FILENO);
-		close_all(data);
-		if (built_in(data))
-			execve(data->argz[0], data->argz, env_cpy);
+		pid = fork();
+		if (pid == 0)
+		{
+			if (data->prev_outfile != -1)
+				dup2(data->prev_outfile, STDIN_FILENO);	
+			else if (data->infile != -1)
+				dup2(data->infile, STDIN_FILENO);
+			else
+				dup2(data->pipes[z - 1][0], STDIN_FILENO);
+			if (data->outfile != -1)
+				dup2(data->outfile, STDOUT_FILENO);
+			else 
+				dup2(data->pipes[z][1], STDOUT_FILENO);
+			close_all(data);
+			if (built_in(data))
+				execve(data->argz[0], data->argz, env_cpy);
+		}
 	}
 	wait(0);
 	free_loop(env_cpy);
+	//else sans fork
 }
 
 /*void	builtinz_multi_first(t_data *data)

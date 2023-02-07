@@ -6,10 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/05 13:17:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/07 09:44:21 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "minishell.h"
 
 void	built_in_echo(t_data *data)
@@ -71,21 +72,17 @@ int	built_in_export(t_data *data)
 	int		i;
 	int		j;
 	int		k;
+	char	**envp;
 
 	if (data->argz[1] == NULL)
 	{
 		i = 0;
-		while (data->exp->envp)
-		{	
-			data->exp->sort_env[i] = ft_sort_char_tab(data->exp->envp[i]);
-			i++;
-		}
-		while (data->exp->sort_env[i])
+		envp = convert_env(data->env);
+		while (envp[i])
 		{
-			printf("%s\n", data->exp->sort_env[i]);
+			printf("%s\n", envp[i]);
 			i++;
-		}
-		return (0);
+		}	
 	}	
 	else
 	{
@@ -113,19 +110,22 @@ int	built_in_export(t_data *data)
 				i++;
 				k++;
 			}
+			j = 0;
 			ft_lstadd_back(data->env->content, data->env->next);
 			i++;
-			j = 0;
 		}
 		return (0);
 	}
+	return (0);
 }
 
-/*static void	*del(void *)
+/*static void	del(void *ptr)
 {
 	t_data *data = NULL;
-
-	free(data->env->content);
+	(void) ptr;
+	{
+		data->env->content = NULL;
+	}	
 }
 
 void	built_in_unset(t_data *data)
@@ -136,7 +136,7 @@ void	built_in_unset(t_data *data)
 	while (data->argz[1][i])
 	{	
 		if (ft_strncmp(data->argz[1], data->env->content, ft_strlen(data->argz[1])) == 0)
-			ft_lstdelone(data->env, del);
+			ft_lstdelone(data->env, &del);
 		if (ft_isalpha(data->argz[1][i]) == 1)
 		{
 			ft_putstr_fd("Not a valid Indentifier\n", 2);
@@ -181,14 +181,14 @@ int	built_in_exit(t_data *data)
 				ft_putstr_fd("numeric argument required\n", 2);
 				exit(2);
 			}					
-			i++;	
+			i++;
 		}
 		n = ft_atoi(data->argz[1]);
 	}
 	ft_putstr_fd("exit", 1);
 	free_and_close_all(data, 2);
 	exit (n % 256);
-}	
+}
 
 int built_in (t_data *data)
 {
