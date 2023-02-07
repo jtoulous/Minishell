@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/07 09:44:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:29:49 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,33 @@ void	built_in_pwd(t_data *data)
 	}
 	else
 		ft_putstr_fd(cwd, 0);
+}
+
+
+static void	ft_sort_ascii(t_list **list)
+{
+	t_list	*tmpi;
+	t_list	*tmpj;
+	char	*tmp_value;
+	char	*tmp_name;
+
+	tmpi = *list;
+	while(tmpi)
+	{
+		tmpj = tmpi->next;
+		while (ft_strncmp(tmpi->name, tmpj->name, ft_strlen(tmpj->name)) > 0)
+		{
+			tmp_value = tmpi->value;
+			tmpi->value = tmpj->value;
+			tmpj->value = tmp_value;
+			tmp_name = tmpi->name;
+			tmpi->name = tmpj->name;
+			tmpj->name = tmp_name;
+		}
+		tmpj = tmpj->next;
+	}	
+	tmpi = tmpi->next;
+
 }	
 
 int	built_in_export(t_data *data)
@@ -72,16 +99,13 @@ int	built_in_export(t_data *data)
 	int		i;
 	int		j;
 	int		k;
-	char	**envp;
 
 	if (data->argz[1] == NULL)
 	{
-		i = 0;
-		envp = convert_env(data->env);
-		while (envp[i])
+		ft_sort_ascii(&data->env);
+		while (data->env)
 		{
-			printf("%s\n", envp[i]);
-			i++;
+			printf("%p\n", data->env->name);
 		}	
 	}	
 	else
@@ -148,12 +172,14 @@ void	built_in_unset(t_data *data)
 
 void	built_in_env(t_data *data)
 {
-	int	i;
+	int		i;
+	char	**envp;
 
+	envp = convert_env(data->env);
 	i = 0;
-	while (data->exp->envp)
+	while (envp[i])
 	{
-		printf("%s\n", data->exp->envp[i]);
+		printf("%s\n", envp[i]);
 		i++;
 	}
 }
@@ -208,8 +234,10 @@ int built_in (t_data *data)
 		return(0);
 	}
 	if (ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0)
+	{
 		built_in_export(data);
-/*	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
+		return (0);
+	}/*	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in_unset(data);
 		return (0);

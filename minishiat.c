@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/06 11:07:43 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:48:57 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int	main(int argc, char **argv, char **envp)
 	init_data(&data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{
-		data.line =readline ("\e[0;36mprompt >\e[0;m");
-		if (data.line == NULL)
+	data.line =readline ("\e[0;36mprompt >\e[0;m");
+	//  data.line = ft_strdup(argv[1]);
+	if (data.line == NULL)
 			break;
 		add_history(data.line);
 		data.nb_cmds = nb_cmd(data.line);

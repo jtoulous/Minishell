@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/05 11:33:03 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:27:46 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_list
 {
 	void			*content;
 	char			*env_copy;
+	char			*name;
+	char			*value;
 	struct s_list	*next;
 }			t_list;
 
@@ -89,7 +91,7 @@ char		*copy(char *buf, char *line, size_t	z, size_t y);
 int			newline_check(char *buf);
 char		*get_next_line(int fd);
 char		*copy_2(char buf, char *line, char *new_line, size_t z);
-char		*ft_sort_char_tab(char *str);
 void		m_trime(char *str, int start, int end);
-char	*ft_strcpy(char *dest, char *src);
+char		*ft_strcpy(char *dest, char *src);
+int			ft_strcmp(char *s1, char *s2);
 #endif

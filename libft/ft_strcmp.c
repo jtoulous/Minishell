@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_char_tab.c                                 :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 15:05:30 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/06 09:09:09 by agoichon         ###   ########.fr       */
+/*   Created: 2022/06/14 10:59:09 by agoichon          #+#    #+#             */
+/*   Updated: 2022/06/14 11:16:01 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
-
-char	*ft_sort_char_tab(char *str)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int	index;
-	int	tmp;
+	int	x;
 
-	index = 0;
-	while (str[index])
+	x = 0;
+	while (s1[x] != '\0' && s2[x] != '\0')
 	{
-		if (str[index] > str[index + 1])
-		{
-			tmp = str[index];
-			str[index] = str[index + 1];
-			str[index + 1] = tmp;
-			index = 0;
-		}
-		else
-			index++;
+		if (s1[x] != s2[x])
+			return (s1[x] - s2[x]);
+		x++;
 	}
-	return (str);
+	return (s1[x] - s2[x]);
 }
