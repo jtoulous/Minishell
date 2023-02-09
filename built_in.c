@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/09 10:52:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/09 17:11:50 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
@@ -15,28 +15,52 @@
 #include <unistd.h>
 
 /*-------------------export*/
-/*static void	ft_sort_ascii(t_list **list)
+static void	ft_swap(char **s1, char **s2)
 {
-}*/	
+	char *tmp;
+
+	tmp = ft_strdup(*s1);
+	*s1 = ft_strdup(*s2);
+	*s2 = ft_strdup(tmp);
+	free (tmp);
+}	
+static void	ft_sort_ascii(char **str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i + 1])
+	{	
+		if (ft_strcmp(str[i], str[i + 1]) > 0)
+		{
+			ft_swap(&str[i], &str[i + 1]);
+			i = 0;
+		}
+		else
+			i++;
+	}	
+}
 
 int	built_in_export(t_data *data)
 {
 	int		i;
-//	int		j;
-//	int		k;
+	int		j;
+	int		k;
 	char	**envp;
 
+	if (data->argz[1] == NULL)
+	{
 		i = 0;
 		envp = convert_env(data->env);
-		envp[i] = ft_sort
+		ft_sort_ascii(envp);
 		while (envp[i])
 		{
-			printf("%s\n", envp[i]);
+			printf("%sdeclare - x%s %s\n", LIGHTPURPLE, NEUTRAL, envp[i]);
 			i++;
 		}
-	return (0);
-}	
-	/*else
+		return (0);
+	}
+	else
 	{
 		i = 1;
 		j = 0;
@@ -44,7 +68,7 @@ int	built_in_export(t_data *data)
 		{
 			while (data->argz[i][j] != '=')
 			{
-				if (ft_isalpha(data->argz[i][j]) == 1)
+				if (ft_isalpha(data->argz[i][j]) == 0)
 				{
 					ft_putstr_fd(&data->argz[i][j], 2);
 					ft_putstr_fd(" : not a valid identifier\n", 2);
@@ -68,7 +92,8 @@ int	built_in_export(t_data *data)
 		}
 		return (0);
 	}
-	return (0);*/
+	return (0);
+}
 
 
 
