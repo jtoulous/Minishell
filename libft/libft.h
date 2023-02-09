@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/07 15:27:46 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/09 09:35:13 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ typedef struct s_list
 {
 	void			*content;
 	char			*env_copy;
-	char			*name;
-	char			*value;
 	struct s_list	*next;
 }			t_list;
 

@@ -6,57 +6,37 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/08 09:19:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:52:34 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft/libft.h"
 #include "minishell.h"
 #include <stdlib.h>
 #include <unistd.h>
 
-
-static void	ft_sort_ascii(t_list **list)
+/*-------------------export*/
+/*static void	ft_sort_ascii(t_list **list)
 {
-	t_list	*tmpi;
-	t_list	*tmpj;
-	char	*tmp_value;
-	char	*tmp_name;
-
-	tmpi = *list;
-	while(tmpi)
-	{
-		tmpj = tmpi->next;
-		while (ft_strncmp(tmpi->name, tmpj->name, ft_strlen(tmpj->name)) > 0)
-		{
-			tmp_value = tmpi->value;
-			tmpi->value = tmpj->value;
-			tmpj->value = tmp_value;
-			tmp_name = tmpi->name;
-			tmpi->name = tmpj->name;
-			tmpj->name = tmp_name;
-		}
-		tmpj = tmpj->next;
-	}	
-	tmpi = tmpi->next;
-
-}	
+}*/	
 
 int	built_in_export(t_data *data)
 {
 	int		i;
-	int		j;
-	int		k;
+//	int		j;
+//	int		k;
+	char	**envp;
 
-	if (data->argz[1] == NULL)
-	{
-		ft_sort_ascii(&data->env);
-		while (data->env)
+		i = 0;
+		envp = convert_env(data->env);
+		envp[i] = ft_sort
+		while (envp[i])
 		{
-			printf("%p\n", data->env->name);
-		}	
-	}	
-	else
+			printf("%s\n", envp[i]);
+			i++;
+		}
+	return (0);
+}	
+	/*else
 	{
 		i = 1;
 		j = 0;
@@ -88,39 +68,31 @@ int	built_in_export(t_data *data)
 		}
 		return (0);
 	}
-	return (0);
-}
+	return (0);*/
 
-/*static void	del(void *ptr)
+
+
+/*---------------------unset---------------------------------------------*/
+void built_in_unset(t_data *data)
 {
-	t_data *data = NULL;
-	(void) ptr;
-	{
-		data->env->content = NULL;
-	}	
-}
+	t_list *tmp;
+	t_list *p_tmp;
+	int		i;
 
-void	built_in_unset(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->argz[1][i])
+	if (data->argz[1] == NULL)
+		return ;
+	i = 1;
+	while (data->argz[i])
 	{	
-		if (ft_strncmp(data->argz[1], data->env->content, ft_strlen(data->argz[1])) == 0)
-			ft_lstdelone(data->env, &del);
-		if (ft_isalpha(data->argz[1][i]) == 1)
-		{
-			ft_putstr_fd("Not a valid Indentifier\n", 2);
-			break ;
-		}
+		tmp = data->env;
+		while (ft_strncmp(tmp->next->env_copy, data->argz[i], ft_strlen(data->argz[i])) != 0)
+			tmp = tmp->next;
+		p_tmp = tmp->next;
+		tmp->next = p_tmp->next;
 		i++;
-	}		
-}*/
-
-
-
-
+	}	
+	free(p_tmp);
+}	
 
 int built_in (t_data *data)
 {
@@ -143,11 +115,12 @@ int built_in (t_data *data)
 	{
 		built_in_export(data);
 		return (0);
-	}/*	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
+	}
+		if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in_unset(data);
 		return (0);
-	}*/
+	}
 	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in_env(data);

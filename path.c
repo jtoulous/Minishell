@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/08 09:35:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:18:48 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	built_in_env(t_data *data)
 	int		i;
 	char	**envp;
 
-	envp = convert_env(data->env);
 	i = 0;
+	envp = convert_env(data->env);
 	while (envp[i])
 	{
 		printf("%s\n", envp[i]);
