@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/09 17:11:50 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:28:01 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
@@ -40,62 +40,54 @@ static void	ft_sort_ascii(char **str)
 			i++;
 	}	
 }
+void	ft_strcp(char *dest, char *src)
+{
+	int	i;
 
-int	built_in_export(t_data *data)
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+}
+
+void	built_in_export(t_data *data)
 {
 	int		i;
-	int		j;
-	int		k;
+	t_list *val;
 	char	**envp;
 
-	if (data->argz[1] == NULL)
+	if (data->argz[1] != NULL)
 	{
+		i = 1;
+		while (data->argz[i])
+		{
+				if (ft_isalpha(data->argz[i][0]) == 0)
+				{
+					ft_putstr_fd(data->argz[i], 2);
+					ft_putstr_fd(" : not a valid identifier\n", 2);
+					break ;
+				}	
+				export_env(data->env, data->argz[i])
+	}
+	else 
+	{	
 		i = 0;
 		envp = convert_env(data->env);
+
 		ft_sort_ascii(envp);
 		while (envp[i])
 		{
+			if (*envp[i] == '_')
+				break;
 			printf("%sdeclare - x%s %s\n", LIGHTPURPLE, NEUTRAL, envp[i]);
 			i++;
 		}
-		return (0);
 	}
-	else
-	{
-		i = 1;
-		j = 0;
-		while (data->argz[i][j])
-		{
-			while (data->argz[i][j] != '=')
-			{
-				if (ft_isalpha(data->argz[i][j]) == 0)
-				{
-					ft_putstr_fd(&data->argz[i][j], 2);
-					ft_putstr_fd(" : not a valid identifier\n", 2);
-					return (0);
-				}	
-				data->exp->var[j] = data->argz[i][j];
-				j++;
-			}	
-			if (data->argz[i][j] == '=')
-				j++;
-			k = 0;
-			while (data->argz[i][j])
-			{
-				data->exp->new_value[k] = data->argz[i][j];
-				i++;
-				k++;
-			}
-			j = 0;
-			ft_lstadd_back(data->env->content, data->env->next);
-			i++;
-		}
-		return (0);
-	}
-	return (0);
+
 }
-
-
 
 /*---------------------unset---------------------------------------------*/
 void built_in_unset(t_data *data)

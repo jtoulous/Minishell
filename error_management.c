@@ -6,11 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:08 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:33:10 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:20:09 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "minishell.h"
+#include <readline/readline.h>
 
 int	error_inredir(char *failed_redir)
 {
