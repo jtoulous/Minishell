@@ -68,7 +68,7 @@ void	trim_hdoc(char *line, int spot)
 	while ((line[z] == '<' || line[z] == ' ')
 		&& line[z])
 		z++;
-	while ((line[z] != ' ' || in_or_out(line, z) != 1)
+	while ((line[z] != ' ' || in_or_out(line, z) != 0)
 		&& (line[z] != '|' || valid_pipe(line, z) != 1) 
 		&& line[z])
 		z++;
@@ -77,5 +77,10 @@ void	trim_hdoc(char *line, int spot)
 		line[spot] = line[z];
 		spot++;
 		z++; 
+	}
+	while (line[spot])
+	{
+		line[spot] = '\0';
+		spot++; 
 	}
 }

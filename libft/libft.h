@@ -92,4 +92,6 @@ char		*copy_2(char buf, char *line, char *new_line, size_t z);
 void		m_trime(char *str, int start, int end);
 char		*ft_strcpy(char *dest, char *src);
 int			ft_strcmp(char *s1, char *s2);
+char		*strjoin_n_free(char *s1, char *s2);
+
 #endif

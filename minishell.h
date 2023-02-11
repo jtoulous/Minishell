@@ -137,5 +137,7 @@ void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 int		check_if_fork(t_data *data);
 int		check_if_builtin(char *cmd);
+int	lim_size(char *line, int spot);
+void	skip_n_copy_quote(char *line, char *fnl, int *spot, int *z);
 
 #endif

@@ -55,3 +55,26 @@ char	*triple_strjoin(char *s1, char *s2, char *s3)
 	stamp(fnl, s3);
 	return (fnl);
 }
+
+char	*strjoin_n_free(char *s1, char *s2)
+{
+	int	z;
+	int	y;
+	char	*fnl;
+	
+	z = 0;
+	y = 0;
+	fnl = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 
+		sizeof(char));
+	if (s1)
+	{	
+		stamp(fnl, s1);
+		free (s1);
+	}
+	if (s2)
+	{
+		stamp(fnl, s2);
+		free (s2);
+	}
+	return (fnl);
+}

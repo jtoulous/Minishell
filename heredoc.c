@@ -20,7 +20,7 @@ void	get_doc_argz(int fd, char *lim)
 	while (1)
 	{
 		ft_putstr_fd(">", 1);
-		buf = get_next_line(1);
+		buf = get_next_line(0);
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0)
 		{
 			mega_free(buf, lim, NULL, NULL);
@@ -39,7 +39,8 @@ void	replace_hdoc(char *line, char *file, int spot)
 	int	end_line;
 	
 	end_hd = spot;
-	while (line[end_hd] == '<' && line[end_hd] == ' ' && line[end_hd])
+	while ((line[end_hd] == '<' || line[end_hd] == ' ') 
+		&& line[end_hd])
 		end_hd++;
 	while ((line[end_hd] != ' ' || in_or_out(line, end_hd) != 0)
 		&& line[end_hd])
@@ -77,12 +78,13 @@ void	fake_prep_hdoc(char *lim)
 	while (1)
 	{
 		ft_putstr_fd(">", 1);
-		buf = get_next_line(1);
+		buf = get_next_line(0);
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0)
 		{
 			mega_free(buf, lim, NULL, NULL);
 			return ;
 		}
+		free (buf);
 	}
 }
 
@@ -96,7 +98,7 @@ void	hdoc_scan(t_data *data)
 		if (data->line[z] == '<' 
 			&& valid_hd(data->line, z) == 1)
 		{
-			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)//check si ta pas une autre redir dans la meme cmd  
+			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)//check si ta pas une autre inredir dans la meme cmd  
 				prep_hdoc(data, z);
 			else
 			{

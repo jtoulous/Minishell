@@ -14,12 +14,14 @@
 
 int	check_if_used(char *line, int spot, int end)
 {
+	spot++;
 	while (spot < end)
 	{
 		if (line[spot] == '<'
-			&& ((valid_inredir(line, spot) == 1)
-			|| valid_hd(line, spot) == 1))
+			&& (valid_hd(line, spot) == 1
+			|| valid_inredir(line, spot) == 1))
 			return (0);
+		spot++;
 	}
 	return (1);
 }
@@ -42,7 +44,7 @@ int	nb_hdocs(char *line)
 
 void	unlinkz(char *new)
 {
-	static t_list	*unlinks;
+	static t_list	*unlinks = NULL;
 	t_list			*tmp;
 
 	if (new)
@@ -50,28 +52,66 @@ void	unlinkz(char *new)
 		ft_lstadd_back(&unlinks, ft_lstnew(new));
 		return ;
 	}
-	tmp = unlinks;
-	while (tmp->next != NULL)
+	if (unlinks != NULL)
 	{
-		unlink(tmp->content);
-		tmp = tmp->next;
+		tmp = unlinks;
+		while (tmp->next != NULL)
+		{
+			unlink(tmp->env_copy);
+			tmp = tmp->next;
+		}
+		unlink(tmp->env_copy);
+		//free_lst(unlinks);
 	}
-	unlink(tmp->content);
-	free_lst(unlinks);
+}
+
+int	lim_size(char *line, int spot)
+{
+	int	z;
+	
+	z = spot;
+	while (line[z] != ' ')
+		z++;
+	return (z - spot + 1);
 }
 
 char	*hdoc_limit(char *line, int spot)
 {
-	int	end;
-
-	while (spot == '<' || spot == ' ')
+	char	*fnl;
+	int	z;
+	
+	z = 0;
+	while ((line[spot] == '<' 
+		|| line[spot] == ' ')
+		&& line[spot])
 		spot++;
-	if (line[spot] == 34 || line[spot] == 39)
-		return (extract_from_quotes(line, spot));
-	end = spot + 1;
-	while ((line[end] != ' ' || in_or_out(line, end) != 1)
-		&& (line[end] != '|' || valid_pipe(line, end) == 1)
-		&& line[end])
-		end++;
-	return (ft_substr(line, spot, end - spot));
+	fnl = ft_calloc(lim_size(line, spot),
+			sizeof(char));	
+	while (line[spot] != ' ')
+	{
+		if (line[spot] == 34 || line[spot] == 39)
+			skip_n_copy_quote(line, fnl, &spot, &z);
+		else
+		{	
+			fnl[z] = line[spot];
+			z++;
+			spot++;
+		}	
+	}	
+	return (fnl);
+}
+
+void	skip_n_copy_quote(char *line, char *fnl, int *spot, int *z)
+{
+	char	q_type;
+	
+	q_type = line[*spot];
+	*spot += 1;
+	while (line[*spot] != q_type && line[*spot])
+	{
+		fnl[*z] = line[*spot];
+		*z += 1;
+		*spot += 1;
+	}
+	*spot += 1;
 }
