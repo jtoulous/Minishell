@@ -56,7 +56,7 @@ void	ft_strcp(char *dest, char *src)
 void	built_in_export(t_data *data)
 {
 	int		i;
-	t_list *val;
+	//t_list *val;
 	char	**envp;
 
 	if (data->argz[1] != NULL)
@@ -70,7 +70,8 @@ void	built_in_export(t_data *data)
 					ft_putstr_fd(" : not a valid identifier\n", 2);
 					break ;
 				}	
-				export_env(data->env, data->argz[i])
+				export_env(&data->env, &data->argz[i]);
+		}
 	}
 	else 
 	{	

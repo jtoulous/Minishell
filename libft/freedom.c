@@ -33,11 +33,11 @@ void	mega_free(char *s1, char *s2, char *s3, char *s4)
 	if (s1)
 		free (s1);
 	if (s2)
-		free (s1);
+		free (s2);
 	if (s3)
-		free (s1);
+		free (s3);
 	if (s4)
-		free (s1);
+		free (s4);
 }
 
 /*void	free_lst(t_list *lst)
