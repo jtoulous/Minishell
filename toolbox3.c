@@ -16,6 +16,7 @@ void	free_and_close_all(t_data *data, int opt)
 		data->argz = NULL;
 	}
 	close_all(data);
+	unlinkz(NULL);
 }
 
 void	close_all(t_data *data)

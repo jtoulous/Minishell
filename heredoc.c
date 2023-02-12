@@ -21,7 +21,8 @@ void	get_doc_argz(int fd, char *lim)
 	{
 		ft_putstr_fd(">", 1);
 		buf = get_next_line(0);
-		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0)
+		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
+			&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
 			mega_free(buf, lim, NULL, NULL);
 			return ;
@@ -79,7 +80,8 @@ void	fake_prep_hdoc(char *lim)
 	{
 		ft_putstr_fd(">", 1);
 		buf = get_next_line(0);
-		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0)
+		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
+			&& ft_strlen(buf) == ft_strlen(lim))
 		{
 			mega_free(buf, lim, NULL, NULL);
 			return ;
