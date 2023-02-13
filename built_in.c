@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/10 15:28:01 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/13 08:33:17 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
@@ -56,12 +56,15 @@ void	ft_strcp(char *dest, char *src)
 void	built_in_export(t_data *data)
 {
 	int		i;
-	//t_list *val;
+	t_list *val;
+	//t_list	*p_val;
 	char	**envp;
 
 	if (data->argz[1] != NULL)
 	{
 		i = 1;
+		val = ft_lstnew(data->argz[i]);
+		val->env_copy = ft_strdup(data->argz[i]);
 		while (data->argz[i])
 		{
 				if (ft_isalpha(data->argz[i][0]) == 0)
@@ -69,10 +72,12 @@ void	built_in_export(t_data *data)
 					ft_putstr_fd(data->argz[i], 2);
 					ft_putstr_fd(" : not a valid identifier\n", 2);
 					break ;
-				}	
-				export_env(&data->env, &data->argz[i]);
+				}
+				ft_strcp(data->env->env_copy, val->env_copy);
+				free (val);
+				i++;
 		}
-	}
+	}	
 	else 
 	{	
 		i = 0;
@@ -87,7 +92,6 @@ void	built_in_export(t_data *data)
 			i++;
 		}
 	}
-
 }
 
 /*---------------------unset---------------------------------------------*/
