@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/09 10:18:48 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:14:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,26 @@ void	built_in_env(t_data *data)
 		printf("%s\n", envp[i]);
 		i++;
 	}
+}
+
+void	built_in_unset(t_data *data)
+{
+	t_list	*tmp;
+	t_list	*p_tmp;
+	int		i;
+
+	if (data->argz[1] == NULL)
+		return ;
+	i = 1;
+	while (data->argz[i])
+	{	
+		tmp = data->env;
+		while (ft_strncmp(tmp->next->env_copy,
+				data->argz[i], ft_strlen(data->argz[i])) != 0)
+			tmp = tmp->next;
+		p_tmp = tmp->next;
+		tmp->next = p_tmp->next;
+		i++;
+	}	
+	free(p_tmp);
 }

@@ -19,6 +19,7 @@ SRC = error_management.c\
 	  varz.c\
 	  built_in.c\
 	  echo.c\
+	  export.c\
 	  path.c\
 	  exit.c\
 	  signal.c\
