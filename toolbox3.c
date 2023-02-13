@@ -71,7 +71,7 @@ char	*env_search(t_list *env, char *var)
 {
 	t_list	*tmp;
 	char	*value;
-	
+
 	tmp = env;
 	while (tmp)
 	{

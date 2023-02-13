@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:47:27 by jtoulous          #+#    #+#             */
-/*   Updated: 2022/09/27 14:47:29 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:06:37 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (str)	
+	if (str)
 	{	
 		while (str[i])
 			i++;

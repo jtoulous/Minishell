@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 10:57:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:54:55 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,6 @@ void	built_in_unset(t_data *data)
 	while (data->argz[i])
 	{	
 		tmp = data->env;
-		if (ft_strncmp(tmp->env_copy, data->argz[i], 13) == 0)
-		{
-			tmp = tmp->next;
-			tmp = p_tmp->next;
-			i++;
-		}
-		free (p_tmp);
 		while (ft_strncmp(tmp->next->env_copy,
 				data->argz[i], ft_strlen(data->argz[i])) != 0)
 			tmp = tmp->next;

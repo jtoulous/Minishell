@@ -6,10 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 09:31:27 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:12:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "minishell.h"
 
 static void	ft_swap(char **s1, char **s2)
@@ -72,27 +73,53 @@ static void	built_in_export_utils(t_data *data)
 	}
 }	
 
+static char	*export_tools(char **str, int i)
+{
+	int		j;
+	char	*rtn;
+
+	j = 0;
+	rtn = ft_calloc(sizeof(char), ft_strlen(str[i]));
+	while (str[i][j] != '=')
+	{
+		rtn[j] = str[i][j];
+		j++;
+	}
+	return (rtn);
+}	
+
 void	built_in_export(t_data *data)
 {
 	int		i;
-	t_list	*val;
+	int		j;
+	t_list	*p_val;
+	char	*c_val;
 
 	if (data->argz[1] != NULL)
 	{
 		i = 1;
-		val = ft_lstnew(data->argz[i]);
-		val->env_copy = ft_strdup (data->argz[i]);
+		j = 0;
+		c_val = export_tools(data->argz, i);
+		p_val = data->env;
 		while (data->argz[i])
 		{
+			while (p_val)
+			{	
+				if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(c_val)) == 0)
+				{
+					free(p_val->env_copy);
+					p_val->env_copy = ft_strdup(data->argz[i]);
+					return ;
+				}	
+				p_val = p_val->next;
+			}
 			if (ft_isalpha(data->argz[i][0]) == 0)
 			{
 				ft_putstr_fd(data->argz[i], 2);
 				ft_putstr_fd(" : not a valid identifier\n", 2);
 				break ;
 			}
-			val = ft_lstnew(data->argz[i]);
-			val->env_copy = ft_strdup (data->argz[i]);
-			ft_lstadd_back(&data->env, val);
+			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
 			i++;
 		}
 	}	
