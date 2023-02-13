@@ -59,7 +59,7 @@ void	scan_varz(t_data *data, int end, int spot)
 			if (in_out != 2)
 			{
 				while (data->line[z] != ' ' 
-					&& data->line[z] != '"'
+					&& data->line[z] != 34
 					&& z < end)
 					z++;
 				sub_var(data, spot, z);

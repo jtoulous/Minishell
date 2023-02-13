@@ -26,7 +26,7 @@ int	error_inredir(char *failed_redir)
 void	error_quotes(t_data *data)
 {
 	data->exec_stat = 0;
-	ft_putstr_fd("va niquer ta race a pas fermer tes putains de quotesi\n", STDOUT_FILENO);
+	ft_putstr_fd("Don't forget to close those quotes tight, Or you'll face an error with all its might!\n", STDOUT_FILENO);
 }
 
 void	error_path(char *cmd)
@@ -35,4 +35,24 @@ void	error_path(char *cmd)
 	ft_putstr_fd(": command not found\n", 1);
 	free (cmd);
 	//err_code = 127;
+}
+
+void	error_syntax(t_data *data, int z)
+{
+	char	err_char;
+	
+	err_char = data->line[z];
+	data->exec_stat = 0;
+	ft_putstr_fd("syntax error near unexpected token `", 1);
+	if (err_char == '\0')
+		ft_putstr_fd("newline", 1);
+	else
+	{	
+		while (data->line[z] == err_char)
+		{
+			ft_putchar_fd(err_char, 1);
+			z++;
+		}
+	}
+	ft_putchar_fd(39, 1);
 }
