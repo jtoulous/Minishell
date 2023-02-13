@@ -1,7 +1,7 @@
 NAME =  minishell
 
 SRC = error_management.c\
-	  errorz.c\
+	  checks.c\
 	  exec.c\
 	  extract.c\
 	  inredir.c\
@@ -21,7 +21,7 @@ SRC = error_management.c\
 	  echo.c\
 	  path.c\
 	  exit.c\
-	  signal.c
+	  signal.c\
 
 CFLAGS = -Wall -Wextra -Werror -g
 

@@ -32,7 +32,8 @@ void	init_data(t_data *data, char **envp)
 	data->outfile = -1;
 	data->argz = NULL;
 	data->exec_stat = 1;
-	data->prev_outfile = -1;	
+	data->prev_outfile = -1;
+	//err_code = 0;
 }
 
 void	reset_data(t_data *data)

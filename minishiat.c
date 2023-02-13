@@ -50,9 +50,9 @@ int	main(int argc, char **argv, char **envp)
 	init_data(&data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
 	while (1)
 	{
-	data.line =readline("\e[0;31mküçük_kabuk🦃>\e[0;m ") ;
+		data.line =readline("\e[0;31mküçük_kabuk🦃>\e[0;m ") ;
 	//  data.line = ft_strdup(argv[1]);
-	if (data.line == NULL)
+		if (data.line == NULL)
 			break;
 		add_history(data.line);
 		data.nb_cmds = nb_cmd(data.line);
