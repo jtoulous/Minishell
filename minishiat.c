@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/08 14:48:06 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:49:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	ft_putstr_fd("exit", 1);
 	free_and_close_all(&data, 2);// + env
-	return (69);
+	return (0);
 }
