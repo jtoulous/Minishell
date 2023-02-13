@@ -26,11 +26,7 @@ int	error_inredir(char *failed_redir)
 void	error_quotes(t_data *data)
 {
 	data->exec_stat = 0;
-<<<<<<< HEAD
-	ft_putstr_fd("cordialement, baise ta race, et ferme tes quotes\n", STDOUT_FILENO);
-=======
 	ft_putstr_fd("va niquer ta race a pas fermer tes putains de quotesi\n", STDOUT_FILENO);
->>>>>>> c401f35998b311a1befee0dc2e5145c59350e061
 }
 
 void	error_path(char *cmd)

@@ -163,7 +163,7 @@ int		valid_pipe(char *line, int spot);
 int		valid_hd(char *line, int spot);
 
 //varz.c
-void	replace_var(char *line, int spot, int end_var, char *var_val);
+void	replace_var(t_data *data, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var);
 void	scan_varz(t_data *data, int end, int spot);
 

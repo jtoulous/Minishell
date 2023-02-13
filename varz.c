@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-void	replace_var(char *line, int spot, int end_var, char *var_val)
+void	replace_var(t_data *data, int spot, int end_var, char *var_val)
 {
 	char	*ante;
 	char	*pre;
 	
-	ante = ft_substr(line, 0, spot);
-	pre = ft_substr(line, end_var, ft_strlen(line) - end_var);
-	free (line);
-	line = triple_strjoin(ante, var_val, pre);
+	ante = ft_substr(data->line, 0, spot);
+	pre = ft_substr(data->line, end_var, ft_strlen(data->line) - end_var);
+	free (data->line);
+	data->line = triple_strjoin(ante, var_val, pre);
 	mega_free(ante, pre, NULL, NULL);
 }
 
@@ -36,7 +36,7 @@ void	sub_var(t_data *data, int spot, int end_var)
 	if (!var_val)
 		m_trime(data->line, spot, end_var);
 	else
-		replace_var(data->line, spot, end_var, var_val);
+		replace_var(data, spot, end_var, var_val);
 	mega_free(var_val, var, NULL, NULL);
 }
 
