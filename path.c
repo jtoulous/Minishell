@@ -6,12 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 13:54:55 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:08:21 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
+#include <stdlib.h>
 
 void	built_in_cd(t_data *data)
 {
@@ -46,15 +47,10 @@ void	built_in_pwd(t_data *data)
 
 void	built_in_env(t_data *data)
 {
-	int		i;
-	char	**envp;
-
-	i = 0;
-	envp = convert_env(data->env);
-	while (envp[i])
+	while (data->env != NULL)
 	{
-		printf("%s\n", envp[i]);
-		i++;
+		printf("%s\n", data->env->env_copy);
+		data->env = data->env->next;
 	}
 }
 
@@ -67,15 +63,26 @@ void	built_in_unset(t_data *data)
 	if (data->argz[1] == NULL)
 		return ;
 	i = 1;
+	tmp = data->env;
 	while (data->argz[i])
-	{	
-		tmp = data->env;
-		while (ft_strncmp(tmp->next->env_copy,
-				data->argz[i], ft_strlen(data->argz[i])) != 0)
-			tmp = tmp->next;
-		p_tmp = tmp->next;
-		tmp->next = p_tmp->next;
+	{
+		if (ft_strcmp(tmp->env_copy, data->argz[i]) == 0)
+		{
+			p_tmp = tmp->next;
+			tmp = NULL;
+			free(tmp->env_copy);
+			free (p_tmp);
+			free(tmp);
+			tmp = p_tmp;
+		}
+		else
+		{
+			while (ft_strncmp(tmp->next->env_copy, data->argz[i], ft_strlen(data->argz[i])) != 0)
+				tmp = tmp->next;
+			p_tmp = tmp->next;
+			tmp->next = p_tmp->next;
+			free(p_tmp);
+		}	
 		i++;
-	}	
-	free(p_tmp);
+	}
 }
