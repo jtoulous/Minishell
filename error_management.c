@@ -56,4 +56,5 @@ void	error_syntax(t_data *data, int z)
 	}
 	ft_putchar_fd(39, 1);
 	ft_putchar_fd('\n', 1);
+	err_code = 2;
 }
