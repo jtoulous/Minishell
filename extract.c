@@ -64,6 +64,11 @@ char	*extract_wipe_quotes(char *line, int z)
 		z++;
 		end++;
 	}
+	while (line[z])
+	{
+		line[z] = '\0';
+		z++;
+	}
 	return (extracted);
 }
 

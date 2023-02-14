@@ -17,7 +17,7 @@
 int	error_inredir(char *failed_redir)
 {
 	ft_putstr_fd(failed_redir, STDOUT_FILENO);
-	ft_putstr_fd(": No such file or directory\n", STDOUT_FILENO);
+	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	free (failed_redir);
 	err_code = 1;
 	return (0);
@@ -32,7 +32,7 @@ void	error_quotes(t_data *data)
 void	error_path(char *cmd)
 {
 	ft_putstr_fd(cmd, 1);
-	ft_putstr_fd(": command not found\n", 1);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	free (cmd);
 	err_code = 127;
 }
