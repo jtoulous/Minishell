@@ -50,7 +50,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-//extern int	err_code;
+extern int	err_code;
 
 typedef struct pipex_data
 {

@@ -34,7 +34,6 @@ void	init_data(t_data *data, char **envp)
 	data->exec_stat = 1;
 	data->prev_outfile = -1;
 	data->nb_forks = 0;
-	//err_code = 0;
 }
 
 void	reset_data(t_data *data)

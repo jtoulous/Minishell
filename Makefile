@@ -23,6 +23,7 @@ SRC = error_management.c\
 	  path.c\
 	  exit.c\
 	  signal.c\
+	  global.c\
 
 CFLAGS = -Wall -Wextra -Werror -g
 
