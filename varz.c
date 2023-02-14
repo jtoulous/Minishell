@@ -40,10 +40,23 @@ void	sub_var(t_data *data, int spot, int end_var)
 	mega_free(var_val, var, NULL, NULL);
 }
 
-/*void	sub_err_code(t_data *data, int spot)
+void	sub_err_code(t_data *data, int spot)
 {
+	int	z;
+	char	*ante;
+	char	*pre;
+	char	*error;
 	
-}*/
+	z = spot + 2;
+	while (data->line[z])
+		z++;
+	error = ft_itoa(err_code);
+	ante = ft_substr(data->line, 0, spot);
+	pre = ft_substr(data->line, spot + 2, z - (spot + 2));
+	free (data->line);
+	data->line = triple_strjoin(ante, error, pre);
+	mega_free(ante, pre, error, NULL);
+}
 
 void	scan_varz(t_data *data, int end, int spot)
 {
@@ -54,9 +67,9 @@ void	scan_varz(t_data *data, int end, int spot)
 		if (data->line[spot] == '$')
 		{
 			in_out = in_or_out(data->line, z);
-			//if (data->line[spot + 1] == '!' && in_or_out != 2)
-				//sub_err_code(data, spot);
-			if (in_out != 2)
+			if (data->line[spot + 1] == '?' && in_out != 2)
+				sub_err_code(data, spot);
+			else if (in_out != 2)
 			{
 				while (data->line[z] != ' ' 
 					&& data->line[z] != 34
