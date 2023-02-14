@@ -44,7 +44,6 @@ void	simple_exec(t_data *data)
 				execve(data->argz[0], data->argz, envp);//env t_list et non char **
 			exit (0);
 		}
-		wait (0);
 	}
 	free_loop(envp);
 }
@@ -71,10 +70,8 @@ void	first_multiple(t_data *data)
 				execve(data->argz[0], data->argz, env_cpy);
 			exit (0);		
 		}
-		wait(0);
 	}
-	free_loop(env_cpy);
-//else sans fork	
+	free_loop(env_cpy);	
 }
 
 void	last_multiple(t_data *data, int z)
@@ -101,10 +98,8 @@ void	last_multiple(t_data *data, int z)
 				execve(data->argz[0], data->argz, env_cpy);
 			exit (0);	
 		}
-		wait(0);
 	}
 	free_loop(env_cpy);
-	//else sans fork
 }
 void	multiple_exec(t_data *data, int z)
 {
@@ -132,8 +127,6 @@ void	multiple_exec(t_data *data, int z)
 				execve(data->argz[0], data->argz, env_cpy);
 			exit (0);	
 		}
-		wait(0);
 	}
 	free_loop(env_cpy);
-	//else sans fork
 }

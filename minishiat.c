@@ -39,6 +39,18 @@ void	treat_command(t_data *data)
 	free_and_close_all(data, 1);// - env
 }
 
+void	wait_loop(int nb_cmds)
+{
+	int	z;
+	
+	z = 0;
+	while (z < nb_cmds)
+	{
+		waitpid(-1, NULL, 0);
+		z++;
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
@@ -51,13 +63,13 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		data.line =readline("\e[0;31mküçük_kabuk🦃>\e[0;m ") ;
-	  //data.line = ft_strdup(argv[1]);
 		if (data.line == NULL)
 			break;
 		add_history(data.line);
 		data.nb_cmds = nb_cmd(data.line);
 		treat_command(&data);
-		}
+		wait_loop(data.nb_cmds);
+	}
 	ft_putstr_fd("exit", 1);
 	free_and_close_all(&data, 2);// + env
 	return (0);
