@@ -66,14 +66,10 @@ void	built_in_unset(t_data *data)
 	tmp = data->env;
 	while (data->argz[i])
 	{
-		if (ft_strcmp(tmp->env_copy, data->argz[i]) == 0)
+		if (ft_strncmp(tmp->env_copy, data->argz[i], ft_strlen(data->argz[i])) == 0)
 		{
-			p_tmp = tmp->next;
-			tmp = NULL;
-			free(tmp->env_copy);
-			free (p_tmp);
+			data->env = data->env->next;
 			free(tmp);
-			tmp = p_tmp;
 		}
 		else
 		{
