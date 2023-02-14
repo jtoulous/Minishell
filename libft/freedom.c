@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:44:28 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/05 10:02:48 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:49:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	free_loop(char **str)
 
 void	mega_free(char *s1, char *s2, char *s3, char *s4)
 {
-	if (s1)
+	if (s1 != NULL)
 		free (s1);
-	if (s2)
+	if (s2 != NULL)
 		free (s2);
-	if (s3)
+	if (s3 != NULL)
 		free (s3);
-	if (s4)
+	if (s4 != NULL)
 		free (s4);
 }
 

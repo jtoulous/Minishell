@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/10 15:08:20 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:31:29 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void		m_trime(char *str, int start, int end);
 char		*ft_strcpy(char *dest, char *src);
 int			ft_strcmp(char *s1, char *s2);
 char		*strjoin_n_free(char *s1, char *s2);
+char		*ft_strchr_reverse(const char *s, int c);
 
 #endif

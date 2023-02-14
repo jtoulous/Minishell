@@ -6,12 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 15:12:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:52:59 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
+#include <stdlib.h>
 
 static void	ft_swap(char **s1, char **s2)
 {
@@ -56,21 +57,26 @@ void	ft_strcp(char *dest, char *src)
 static void	built_in_export_utils(t_data *data)
 {
 	int		i;
+	int		len;
 	char	**envp;
+	char	*result;
+	char	*name;
 
 	i = 0;
 	envp = convert_env(data->env);
 	ft_sort_ascii(envp);
 	while (envp[i])
-	{
-		if (*envp[i] == '_')
-			i++;
-		else
-		{	
-			printf("%sdeclare - x%s %s\n", LIGHTPURPLE, NEUTRAL, envp[i]);
-			i++;
-		}	
+	{	
+		len = 0;
+		while (envp[i][len] != '=' && envp[i][len])
+			len++;	
+		result = ft_strchr(envp[i], '=') + 1;
+		name = ft_substr(envp[i], 0, len);
+		printf("declare -x %s=\"%s\"\n", name, result);
+		free(name);
+		i++;
 	}
+	free(envp);
 }	
 
 static char	*export_tools(char **str, int i)
