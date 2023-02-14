@@ -63,12 +63,12 @@ typedef struct pipex_data
 	int		prev_outfile;
 	int		exec_stat;
 	int		nb_cmds;
-	int		nb_fork;
+	int		nb_forks;
 }		t_data;
 
 //minishiat.c
 void	treat_command(t_data *data);
-void	wait_loop(int nb_cmds);
+void	wait_loop(t_data *data);
 
 //parse.c
 void	clean_dat_biach(t_data *data);

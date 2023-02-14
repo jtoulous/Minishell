@@ -39,16 +39,17 @@ void	treat_command(t_data *data)
 	free_and_close_all(data, 1);// - env
 }
 
-void	wait_loop(int nb_cmds)
+void	wait_loop(t_data *data)
 {
 	int	z;
 	
 	z = 0;
-	while (z < nb_cmds)
+	while (z < data->nb_forks)
 	{
 		waitpid(-1, NULL, 0);
 		z++;
 	}
+	data->nb_forks = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -68,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(data.line);
 		data.nb_cmds = nb_cmd(data.line);
 		treat_command(&data);
-		wait_loop(data.nb_cmds);
+		wait_loop(&data);
 	}
 	ft_putstr_fd("exit", 1);
 	free_and_close_all(&data, 2);// + env
