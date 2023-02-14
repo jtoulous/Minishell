@@ -84,10 +84,10 @@ void	error_syntax(t_data *data, int z);
 //checks.c
 void	check_closed_quotes(t_data *data);
 void	check(t_data *data);
-void	syntax_check(t_data *data, char to_check);
+void	check_syntax(t_data *data, char to_check);
 int		check_if_fork(t_data *data);
 int		check_if_builtin(char *cmd);
-void		syntax_check_pipes(t_data *data);
+void		check_syntax_pipes(t_data *data);
 
 //exec.c
 void	exec(t_data *data, int z);

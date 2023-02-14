@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-void	syntax_check(t_data *data, char to_check)
+void	check_syntax(t_data *data, char to_check)
 {
 	int	z;
 	
 	z = 0;
 	if (to_check == '|')
-		syntax_check_pipes(data);
+		check_syntax_pipes(data);
 	while (data->line[z] && data->exec_stat == 1)
 	{
 		if (data->line[z] == to_check && in_or_out(data->line, z) == 0)
@@ -37,7 +37,7 @@ void	syntax_check(t_data *data, char to_check)
 	}
 }
 
-void	syntax_check_pipes(t_data *data)
+void	check_syntax_pipes(t_data *data)
 {
 	int	z;
 	
@@ -76,14 +76,14 @@ void	check(t_data *data)
 {	
 	check_closed_quotes(data);
 	if (data->exec_stat == 1)
-		//check_syntax(data, '<');
+		check_syntax(data, '<');
 	if (data->exec_stat == 1)
 	{
 		if (nb_hdocs(data->line) != 0)
 			hdoc_scan(data);
-		//check_syntax(data, '>');
-		//if (data->exec_stat == 1)	
-		//	check_syntax(data, '|');
+		check_syntax(data, '>');
+		if (data->exec_stat == 1)	
+			check_syntax(data, '|');
 	}
 }
 
@@ -114,19 +114,26 @@ int	check_if_fork(t_data *data)
 
 int	check_if_builtin(char *cmd)
 {
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("echo"))
 		return (1);
-	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("cd"))
 		return (1);
-	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("pwd"))
 		return (1);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("export"))
 		return (1);
-	if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("unset"))
 		return (1);
-	if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("env"))
 		return (1);
-	if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("exit"))
 		return (1);
 	return (0);						
 }

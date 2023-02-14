@@ -16,12 +16,13 @@ void	free_and_close_all(t_data *data, int opt)
 		data->argz = NULL;
 	}
 	close_all(data);
+	data->exec_stat = 1;
 	unlinkz(NULL);
 }
 
 void	close_all(t_data *data)
 {
-	if (data->nb_cmds > 1)
+	if (data->nb_cmds > 1 && data->exec_stat == 1)
 		close_pipes(data->pipes, data->nb_cmds);
 	if (data->infile != -1)
 	{	
