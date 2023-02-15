@@ -107,9 +107,16 @@ void	built_in_export(t_data *data)
 	int		j;
 	t_list	*p_val;
 	char	*c_val;
-
+	
 	if (data->argz[1] != NULL)
 	{
+		if (data->argz[1][0] == '=')
+		{
+			err_code = 1;
+			ft_putstr_fd(data->argz[1], 2);
+			ft_putstr_fd(" : not a valid identifier\n", 2);
+			return;
+		}
 		i = 1;
 		j = 0;
 		if (data->nb_cmds > 1)
