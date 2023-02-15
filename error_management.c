@@ -14,12 +14,12 @@
 #include "minishell.h"
 #include <readline/readline.h>
 
-int	error_inredir(char *failed_redir)
+int	error_inredir(char *failed_redir, int error)
 {
 	ft_putstr_fd(failed_redir, STDOUT_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	free (failed_redir);
-	err_code = 1;
+	err_code = error;
 	return (0);
 }
 
@@ -29,12 +29,33 @@ void	error_quotes(t_data *data)
 	ft_putstr_fd("Don't forget to close those quotes tight, Or you'll face an error with all its might!\n", STDOUT_FILENO);
 }
 
+
 void	error_path(char *cmd)
 {
 	ft_putstr_fd(cmd, 1);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	if((cmd[0] == '.' && cmd[1] == '/')
+		|| cmd[0] == '/')
+	{	
+		err_code = 126;
+		if (access(cmd, F_OK) == 0
+			&& cmd[0] != '/')
+			ft_putstr_fd(": Is a directory", STDERR_FILENO);
+		else
+		{	
+			ft_putstr_fd(": No such file or directory", STDERR_FILENO);
+			err_code += 1;
+		}
+	}
+	else if (cmd[0] == '/')
+	{
+		
+	}
+	else
+	{	
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		err_code = 127;
+	}
 	free (cmd);
-	err_code = 127;
 }
 
 void	error_syntax(t_data *data, int z)

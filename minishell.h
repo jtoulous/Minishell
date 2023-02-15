@@ -76,7 +76,7 @@ void	prep_exec(t_data *data, int end);
 void	parse(t_data *data);
 
 //error_management.c
-int		error_inredir(char *failed_redir);
+int		error_inredir(char *failed_redir, int error);
 void	error_quotes(t_data *data);
 void	error_path(char *cmd);
 void	error_syntax(t_data *data, int z);

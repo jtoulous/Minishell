@@ -31,7 +31,7 @@ int	set_up_inredir(char *file, t_data *data, int spot)
 {
 	data->infile = open(file, O_RDONLY);
 	if (data->infile == -1)
-		return (error_inredir(file));
+		return (error_inredir(file, 1));
 	trim_redir(data->line, spot);
 	free (file);
 	return (1);
@@ -54,7 +54,7 @@ int	check_inredir(t_data *data, int end)
 			else
 			{			
 				if (access(file, F_OK) != 0)
-					return (error_inredir(file));
+					return (error_inredir(file, 1));
 				trim_redir(data->line, z);
 				free (file);
 			}

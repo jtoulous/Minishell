@@ -23,11 +23,13 @@ void	prep_exec(t_data *data, int end)
 	char	*cmd;
 	
 	z = 1;
-	malloc_dat_shiat(data, end);//**argz malloked
-	cmd = get_nxt_stuff(data->line);//+ wipe cmd form line
-	path_finder(data, cmd);//check if the mofo already typed path in com
-	if (data->argz == NULL)
+	malloc_dat_shiat(data, end);
+	cmd = get_nxt_stuff(data->line);
+	path_finder(data, cmd);
+	if (data->argz == NULL && cmd[0] != '/')
 		error_path(cmd);
+	else if (data->argz == NULL)
+		error_inredir(cmd, 127);
 	else
 	{
 		leftovers = count_leftovers(data->line, end_of_cmd(data->line, 0));

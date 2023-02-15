@@ -60,7 +60,10 @@ void	path_finder(t_data *data, char *cmd)
 	z = 0;
 	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
 	{
-		data->argz[0] = ft_strdup(cmd);
+		if (access(cmd, F_OK) == 0 || check_if_builtin(cmd) == 1)
+			data->argz[0] = ft_strdup(cmd);
+		else
+			data->argz = NULL;
 		return ;
 	}
 	paths = path_lst(data);
