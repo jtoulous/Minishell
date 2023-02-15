@@ -32,12 +32,14 @@ void	error_quotes(t_data *data)
 
 void	error_path(char *cmd)
 {
-	ft_putstr_fd(cmd, 1);
+	ft_putstr_fd(cmd, STDERR_FILENO);
 	if((cmd[0] == '.' && cmd[1] == '/')
 		|| cmd[0] == '/')
 	{	
 		err_code = 126;
-		if (access(cmd, F_OK) == 0
+		if (access(cmd, X_OK) == -1 && access(cmd, F_OK) == 0)
+			ft_putstr_fd(": Permission denied", STDERR_FILENO);
+		else if (access(cmd, F_OK) == 0
 			&& cmd[0] != '/')
 			ft_putstr_fd(": Is a directory", STDERR_FILENO);
 		else

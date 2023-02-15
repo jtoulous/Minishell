@@ -36,7 +36,7 @@ void	treat_command(t_data *data)
 			z++;
 		}
 	}
-	free_and_close_all(data, 1);// - env
+	free_and_close_all(data, 1);
 }
 
 void	wait_loop(t_data *data)
@@ -60,10 +60,11 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
-	init_data(&data, envp);//initialise env, exec_stat a 1, outfile = -1, infile = -1, ..., argz = NULL
+	init_data(&data, envp);
 	while (1)
 	{
 		data.line =readline("\e[0;31mküçük_kabuk🦃>\e[0;m ") ;
+		//data.line = ft_strdup(argv[1]);
 		if (data.line == NULL)
 			break;
 		add_history(data.line);
@@ -72,6 +73,6 @@ int	main(int argc, char **argv, char **envp)
 		wait_loop(&data);
 	}
 	ft_putstr_fd("exit", 1);
-	free_and_close_all(&data, 2);// + env
+	free_and_close_all(&data, 2);
 	return (0);
 }
