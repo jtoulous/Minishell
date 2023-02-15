@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/14 13:08:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:41:45 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,18 @@ void	built_in_cd(t_data *data)
 		if (access(data->argz[1], F_OK) == 0 && data->argz[2] == NULL)
 			chdir(data->argz[1]);
 		else if (data->argz[2] != NULL)
+		{	
 			ft_putstr_fd(" too many arguments\n", 2);
-		else	
+			err_code = 1;
+			return ;
+		}
+		else
+		{
 			ft_putstr_fd(" No such file or directory\n", 2);
-		err_code = 1;	
+			err_code = 1;
+			return ;
+		}
+		err_code = 0;
 	}
 }
 
@@ -78,6 +86,7 @@ void	built_in_unset(t_data *data)
 				tmp = tmp->next;
 			p_tmp = tmp->next;
 			tmp->next = p_tmp->next;
+			err_code = 0;
 			free(p_tmp);
 		}	
 		i++;

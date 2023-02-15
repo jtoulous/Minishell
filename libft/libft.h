@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/14 16:31:29 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:14:54 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef struct s_list
 	struct s_list	*next;
 }			t_list;
 
-int			ft_atoi(const char *str);
-void		ft_bzero(void *s, size_t n);
-int			ft_isalnum(int z);
-int			ft_isalpha(int z);
-int			ft_isascii(int z);
-int			ft_isdigit(int z);
+int				ft_atoi(const char *str);
+void			ft_bzero(void *s, size_t n);
+int				ft_isalnum(int z);
+int				ft_isalpha(int z);
+int				ft_isascii(int z);
+int				ft_isdigit(int z);
 int			ft_isprint(int z);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
@@ -88,11 +88,12 @@ char		*clean(char *buf, size_t z, size_t y);
 char		*copy(char *buf, char *line, size_t	z, size_t y);
 int			newline_check(char *buf);
 char		*get_next_line(int fd);
-char		*copy_2(char buf, char *line, char *new_line, size_t z);
-void		m_trim(char *str, int start, int end);
-char		*ft_strcpy(char *dest, char *src);
-int			ft_strcmp(char *s1, char *s2);
-char		*strjoin_n_free(char *s1, char *s2);
-char		*ft_strchr_reverse(const char *s, int c);
-
+char			*copy_2(char buf, char *line, char *new_line, size_t z);
+void			m_trim(char *str, int start, int end);
+char			*ft_strcpy(char *dest, char *src);
+int				ft_strcmp(char *s1, char *s2);
+char			*strjoin_n_free(char *s1, char *s2);
+char			*ft_strchr_reverse(const char *s, int c);
+long long		ft_atol(const char *nptr);
+long long		ft_atol_check(const char *nptr);
 #endif

@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 14:42:12 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/15 15:48:13 by agoichon         ###   ########.fr       */
+/*   Created: 2022/06/22 17:32:45 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/22 17:32:50 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int z)
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+
+int	main(int argc, char const *argv[])
 {
-	if ((z >= '0' && z <= '9') || z == '-' || z == '+')
-		return (1);
+	int	pid;
+
+	pid = fork();
+	open("infile", O_RDONLY);
+	while (1)
+	{
+		printf("Helloo miniHELL %i\n", pid);
+		sleep(1);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/14 16:52:59 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:10:24 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,20 @@ static void	built_in_export_utils(t_data *data)
 	{	
 		len = 0;
 		while (envp[i][len] != '=' && envp[i][len])
-			len++;	
+			len++;
 		result = ft_strchr(envp[i], '=') + 1;
 		name = ft_substr(envp[i], 0, len);
-		printf("declare -x %s=\"%s\"\n", name, result);
-		free(name);
-		i++;
+		
+		if (ft_strchr(envp[i], '=') == 0)
+			i++;
+		else
+		{	
+			printf("declare -x %s=\"%s\"\n", name, result);
+			free(name);
+			i++;
+		}	
 	}
+	err_code = 1;
 	free(envp);
 }	
 
@@ -105,7 +112,7 @@ void	built_in_export(t_data *data)
 	{
 		i = 1;
 		j = 0;
-		if (data->nb_cmds != 1)
+		if (data->nb_cmds > 1)
 			return ;
 		c_val = export_tools(data->argz, i);
 		p_val = data->env;
@@ -125,7 +132,32 @@ void	built_in_export(t_data *data)
 			{
 				ft_putstr_fd(data->argz[i], 2);
 				ft_putstr_fd(" : not a valid identifier\n", 2);
-				break ;
+				err_code = 1;
+				return;
+			}
+			while (data->argz[i][j] != '=' && data->argz[i][j])
+			{
+				if (data->argz[i][j] == '\0')
+				{
+					j = 0;
+					while (data->argz[i][j])
+					{	
+						if (ft_isalnum(data->argz[i][j]) == 0)
+						{
+							err_code = 1;
+							ft_putstr_fd(" not a valid identifier\n", 2);
+							return ;
+						}
+						j++;
+					}		
+				}	
+				j++;
+			}
+			if (data->argz[i][j - 1] == '-')
+			{
+				ft_putstr_fd(" not a valid identifier\n", 2);
+				err_code = 1;
+				return ;
 			}
 			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
 			i++;
