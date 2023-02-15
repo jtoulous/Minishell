@@ -14,14 +14,14 @@
 
 char	*extract_from_quotes(char *line, int spot)
 {
-	char	*extracted;
+	char	*extract;
 	int	end;
 	
 	end = spot + 1;
 	while (line[end] != line[spot])
 		end++;
-	extracted = ft_substr(line, spot + 1, end - (spot + 1));
-	return (extracted);
+	extract = ft_substr(line, spot + 1, end - (spot + 1));
+	return (extract);
 }
 
 char	*extract_redir(char *line, int spot)//GOOD
@@ -46,9 +46,9 @@ char	*extract_redir(char *line, int spot)//GOOD
 	return (to_test);
 }
 
-char	*extract_wipe_quotes(char *line, int z)
+/*char	*extract_wipe_quotes(char *line, int z)
 {
-	char	*extracted;
+	char	*extract;
 	int 	end;
 	
 	end = z + 1;
@@ -56,7 +56,7 @@ char	*extract_wipe_quotes(char *line, int z)
 		&& (line[end] != '\'' || in_or_out(line, end) != 0)		
 		&& line[end])
 		end++;
-	extracted = ft_substr(line, z + 1, end - (z + 1));
+	extract = ft_substr(line, z + 1, end - (z + 1));
 	end++;
 	while (line[end])
 	{
@@ -69,20 +69,21 @@ char	*extract_wipe_quotes(char *line, int z)
 		line[z] = '\0';
 		z++;
 	}
-	return (extracted);
-}
+	return (extract);
+}*/
 
 char	*extract_wipe(char *line, int z)
 {
-	char	*extracted;
+	char	*extract;
 	int 	end;
 	
 	end = z + 1;
 	while ((line[end] != ' ' || in_or_out(line, end) != 0)
-		&& (line[end] != '|' || valid_pipe(line, end) != 1)		
+		&& valid_pipe(line, end) != 1		
 		&& line[end])
 		end++;
-	extracted = ft_substr(line, z, end - z);
+	extract = ft_substr(line, z, end - z);
+	clean_quotes(extract);
 	while (line[end])
 	{
 		line[z] = line[end];
@@ -94,7 +95,28 @@ char	*extract_wipe(char *line, int z)
 		line[z] = '\0';
 		z++;
 	}
-	return (extracted);
+	return (extract);
+}
+
+void	clean_quotes(char *extract)
+{
+	int	z;
+	char	q_type;
+	
+	z = 0;
+	while (extract[z])
+	{
+		if (extract[z] == 34 || extract[z] == 39)
+		{
+			q_type = extract[z];
+			m_trim(extract, z, z);
+			while (extract[z] != q_type && extract[z])
+				z++;
+			m_trim(extract, z, z);	
+		}
+		else
+			z++;
+	}
 }
 
 char	*get_nxt_stuff(char *line)//return the first word u meet
@@ -105,9 +127,9 @@ char	*get_nxt_stuff(char *line)//return the first word u meet
 	z = 0;
 	while (line[z] == ' ' && line[z])
 		z++;
-	if (line[z] == '\'' || line[z] == '\"')
-		extracted = extract_wipe_quotes(line, z);
-	else
-		extracted = extract_wipe(line, z);
+	//if (line[z] == 39 || line[z] == 34)
+	//	extracted = extract_wipe_quotes(line, z);
+	//else
+	extracted = extract_wipe(line, z);
 	return (extracted);
 }

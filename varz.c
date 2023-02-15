@@ -34,7 +34,7 @@ void	sub_var(t_data *data, int spot, int end_var)
 	//if (data->line[end_var + 1] == """)
 	//	end_var++;
 	if (!var_val)
-		m_trime(data->line, spot, end_var);
+		m_trim(data->line, spot, end_var - 1);
 	else
 		replace_var(data, spot, end_var, var_val);
 	mega_free(var_val, var, NULL, NULL);
@@ -58,27 +58,29 @@ void	sub_err_code(t_data *data, int spot)
 	mega_free(ante, pre, error, NULL);
 }
 
-void	scan_varz(t_data *data, int end, int spot)
+int	scan_varz(t_data *data, int end, int spot)
 {
-		int	in_out;
 		int	z;
 		
 		z = spot + 1;
-		if (data->line[spot] == '$')
+		if (data->line[spot] == '$' && in_or_out(data->line, z) != 2)
 		{
-			in_out = in_or_out(data->line, z);
-			if (in_out != 2 && data->line[z] == ' ')
-				return ; 
-			if (data->line[spot + 1] == '?' && in_out != 2)
+			
+			if (data->line[z] == ' ')
+				return (0); 
+			if (data->line[z] == '?')
 				sub_err_code(data, spot);
-			else if (in_out != 2)
+			else
 			{
 				while (data->line[z] != ' ' 
 					&& data->line[z] != 34
+					&& data->line[z] != 39
 					&& (data->line[z] != '$') 
 					&& z < end)
 					z++;
 				sub_var(data, spot, z);
 			}
+			return (1);
 		}
+		return (0);
 }

@@ -53,7 +53,7 @@ void	s_trimage(char *str, int trim_size)
 	}
 }
 
-void	m_trime(char *str, int start, int end)
+void	m_trim(char *str, int start, int end)
 {
 	end++;
 	if (!str && str[0] == '\0')
@@ -63,6 +63,11 @@ void	m_trime(char *str, int start, int end)
 		str[start] = str[end];
 		start++;
 		end++;
+	}
+	while (str[start])
+	{
+		str[start] = '\0';
+		start++;
 	}
 }
 

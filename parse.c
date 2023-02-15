@@ -9,9 +9,9 @@ void	clean_dat_biach(t_data *data)//clean the cmd being treated, replace varz($a
 	end = end_of_cmd(data->line, 0);
 	while (z < end)
 	{
-		scan_varz(data, end, z);
+		if (scan_varz(data, end, z) != 1)
+			z++;
 		end = end_of_cmd(data->line, 0);
-		z++;
 	}
 }
 

@@ -89,7 +89,7 @@ char		*copy(char *buf, char *line, size_t	z, size_t y);
 int			newline_check(char *buf);
 char		*get_next_line(int fd);
 char		*copy_2(char buf, char *line, char *new_line, size_t z);
-void		m_trime(char *str, int start, int end);
+void		m_trim(char *str, int start, int end);
 char		*ft_strcpy(char *dest, char *src);
 int			ft_strcmp(char *s1, char *s2);
 char		*strjoin_n_free(char *s1, char *s2);
