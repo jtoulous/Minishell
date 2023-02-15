@@ -105,6 +105,8 @@ void	built_in_export(t_data *data)
 	{
 		i = 1;
 		j = 0;
+		if (data->nb_cmds != 1)
+			return ;
 		c_val = export_tools(data->argz, i);
 		p_val = data->env;
 		while (data->argz[i])
