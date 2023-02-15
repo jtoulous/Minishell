@@ -66,7 +66,11 @@ int	scan_varz(t_data *data, int end, int spot)
 		if (data->line[spot] == '$' && in_or_out(data->line, z) != 2)
 		{
 			
-			if (data->line[z] == ' ')
+			if (data->line[z] == ' '
+				|| data->line[z] == 34
+				|| data->line[z] == 39
+				|| data->line[z] == '\0'
+				|| valid_pipe(data->line, z) == 1)
 				return (0); 
 			if (data->line[z] == '?')
 				sub_err_code(data, spot);

@@ -28,9 +28,10 @@ void	built_in_cd(t_data *data)
 		if (access(data->argz[1], F_OK) == 0 && data->argz[2] == NULL)
 			chdir(data->argz[1]);
 		else if (data->argz[2] != NULL)
-			ft_putstr_fd("too many arguments\n", 2);
-		else if (access(data->argz[1], F_OK) != 0)
-			ft_putstr_fd("No such file or Directory\n", 2);
+			ft_putstr_fd(" too many arguments\n", 2);
+		else	
+			ft_putstr_fd(" No such file or directory\n", 2);
+		err_code = 1;	
 	}
 }
 

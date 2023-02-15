@@ -86,7 +86,7 @@ static char	*export_tools(char **str, int i)
 
 	j = 0;
 	rtn = ft_calloc(sizeof(char), ft_strlen(str[i]));
-	while (str[i][j] != '=')
+	while (str[i][j] != '=' && str[i][j])
 	{
 		rtn[j] = str[i][j];
 		j++;
