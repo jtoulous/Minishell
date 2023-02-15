@@ -67,6 +67,8 @@ void	scan_varz(t_data *data, int end, int spot)
 		if (data->line[spot] == '$')
 		{
 			in_out = in_or_out(data->line, z);
+			if (in_out != 2 && data->line[z] == ' ')
+				return ; 
 			if (data->line[spot + 1] == '?' && in_out != 2)
 				sub_err_code(data, spot);
 			else if (in_out != 2)
