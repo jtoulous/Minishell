@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/15 16:10:24 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:12:35 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,21 @@ static void	built_in_export_utils(t_data *data)
 			len++;
 		result = ft_strchr(envp[i], '=') + 1;
 		name = ft_substr(envp[i], 0, len);
-		
 		if (ft_strchr(envp[i], '=') == 0)
 			i++;
 		else
-		{	
-			printf("declare -x %s=\"%s\"\n", name, result);
-			free(name);
-			i++;
+		{
+			if (*envp[i] == '_')
+				i++;
+			else
+			{	
+				printf("declare -x %s=\"%s\"\n", name, result);
+				free(name);
+				i++;
+			}
 		}	
 	}
-	err_code = 1;
+	err_code = 0;
 	free(envp);
 }	
 

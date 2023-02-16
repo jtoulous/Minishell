@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:24:11 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 15:18:36 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:22:52 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	built_in_echo(t_data *data)
 	}	
 	else
 		built_in_echo_utils(data);
+	free_and_close_all(data, 2);
 }

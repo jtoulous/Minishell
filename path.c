@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/15 15:41:45 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:44:47 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	built_in_env(t_data *data)
 	while (data->env != NULL)
 	{
 		printf("%s\n", data->env->env_copy);
+		if (data->env != NULL)
+			free(data->env);
 		data->env = data->env->next;
 	}
 }
@@ -83,12 +85,21 @@ void	built_in_unset(t_data *data)
 		else
 		{
 			while (ft_strncmp(tmp->next->env_copy, data->argz[i], ft_strlen(data->argz[i])) != 0)
+			{
 				tmp = tmp->next;
+				if (tmp->next == NULL)
+				{
+					tmp = NULL;
+					err_code = 0;
+					free(tmp);
+					return ;
+				}	
+			}						
 			p_tmp = tmp->next;
 			tmp->next = p_tmp->next;
 			err_code = 0;
 			free(p_tmp);
-		}	
+		}
 		i++;
 	}
 }
