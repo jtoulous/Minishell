@@ -30,9 +30,12 @@ void	treat_command(t_data *data)
 		{
 			parse(data);
 			if (data->argz != NULL)
-				exec(data, z);//execbd pour built_in ou execve, check prev_outfile if != -1
+			{	
+				err_code = 0;
+				exec(data, z);
+			}	
 			if (z < data->nb_cmds - 1)
-				reset_data(data);//set infile a -1 after close, save outfile in old outfile if != -1 + trim_leftovers
+				reset_data(data);
 			z++;
 		}
 	}
