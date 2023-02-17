@@ -50,6 +50,7 @@ void	parse(t_data *data)
 	clean_dat_biach(data);
 	if (check_inredir(data, end) != 1)//open in data->infile + trim
 		return ;
-	check_outredir(data, end);//if multi out_redir create all(but close useless ones) save last one in data->outfile and trim them all away,
+	if (check_outredir(data, end) != 1)
+		return ;
 	prep_exec(data, end);
 }

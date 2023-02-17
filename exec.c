@@ -70,7 +70,7 @@ void	first_multiple(t_data *data)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (0);		
+			exit (1);	
 		}
 	}
 	free_loop(env_cpy);	
@@ -99,7 +99,7 @@ void	last_multiple(t_data *data, int z)
 			close_all(data);
 			if (built_in(data) == -1)	
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (0);	
+			exit (1);	
 		}
 	}
 	free_loop(env_cpy);
@@ -129,7 +129,7 @@ void	multiple_exec(t_data *data, int z)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (0);	
+			exit (1);	
 		}
 	}
 	free_loop(env_cpy);

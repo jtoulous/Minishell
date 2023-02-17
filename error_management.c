@@ -14,9 +14,15 @@
 #include "minishell.h"
 #include <readline/readline.h>
 
+void	error_permission(void)
+{
+	ft_putstr_fd(" Permission denied", STDERR_FILENO);
+	err_code = 1;
+}
+
 int	error_inredir(char *failed_redir, int error)
 {
-	ft_putstr_fd(failed_redir, STDOUT_FILENO);
+	ft_putstr_fd(failed_redir, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	free (failed_redir);
 	err_code = error;

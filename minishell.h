@@ -80,6 +80,7 @@ int		error_inredir(char *failed_redir, int error);
 void	error_quotes(t_data *data);
 void	error_path(char *cmd);
 void	error_syntax(t_data *data, int z);
+void	error_permission(void);
 
 //checks.c
 void	check_closed_quotes(t_data *data);
@@ -118,8 +119,8 @@ int		check_inredir(t_data *data, int end);
 void	treat_command(t_data *data);
 
 //outredir.c
-void	set_up_outredir(t_data *data, int spot);
-void	check_outredir(t_data *data, int end);
+int	set_up_outredir(t_data *data, int spot);
+int	check_outredir(t_data *data, int end);
 
 //prep_exec.c
 void	path_finder(t_data *data, char *cmd);
