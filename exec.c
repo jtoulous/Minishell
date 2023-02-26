@@ -42,7 +42,7 @@ void	simple_exec(t_data *data)
 				dup2(data->outfile, STDOUT_FILENO);
 			close_all(data);	
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, envp);//env t_list et non char **
+				execve(data->argz[0], data->argz, envp);
 			exit (0);
 		}
 	}
@@ -99,7 +99,7 @@ void	last_multiple(t_data *data, int z)
 			close_all(data);
 			if (built_in(data) == -1)	
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (1);	
+			exit (1);
 		}
 	}
 	free_loop(env_cpy);
@@ -129,7 +129,7 @@ void	multiple_exec(t_data *data, int z)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (1);	
+			exit (1);
 		}
 	}
 	free_loop(env_cpy);

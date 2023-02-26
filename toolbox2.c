@@ -42,6 +42,7 @@ void	reset_data(t_data *data)
 	data->prev_outfile = data->outfile;
 	data->outfile = -1;
 	free_loop(data->argz);
+	data->argz = NULL;
 	trim_leftovers(data->line);	
 }
 

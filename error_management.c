@@ -16,7 +16,7 @@
 
 void	error_permission(void)
 {
-	ft_putstr_fd(" Permission denied", STDERR_FILENO);
+	ft_putstr_fd(" Permission denied\n", STDERR_FILENO);
 	err_code = 1;
 }
 
