@@ -30,7 +30,10 @@ char	*extract_redir(char *line, int spot)//GOOD
 	int	z;
 	
 	spot++;
-	while (line[spot] == ' ' && line[spot])
+	while ((line[spot] == ' '
+		|| line[spot] == '>'
+		|| line[spot] == '<')
+		&& line[spot])
 		spot++;
 	if (line[spot] == 34 || line[spot] == 39)//ascii des quotes
 		to_test = extract_from_quotes(line, spot);
