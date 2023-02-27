@@ -45,14 +45,18 @@ void	treat_command(t_data *data)
 void	wait_loop(t_data *data)
 {
 	int	z;
+	int	status;
 	
 	z = 0;
-	while (z < data->nb_forks)
+	waitpid(data->last_pid, &status, 0);
+	while (z < data->nb_forks - 1)
 	{
 		waitpid(-1, NULL, 0);
 		z++;
 	}
 	data->nb_forks = 0;
+	if (WIFEXITED(status))
+		err_code = WEXITSTATUS(status);
 }
 
 int	main(int argc, char **argv, char **envp)

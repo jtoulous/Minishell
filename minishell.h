@@ -64,6 +64,7 @@ typedef struct pipex_data
 	int		exec_stat;
 	int		nb_cmds;
 	int		nb_forks;
+	int		last_pid;
 }		t_data;
 
 //minishiat.c
@@ -74,6 +75,7 @@ void	wait_loop(t_data *data);
 void	clean_dat_biach(t_data *data);
 void	prep_exec(t_data *data, int end);
 void	parse(t_data *data);
+int	check_redirz(t_data *data, int end);
 
 //error_management.c
 int		error_inredir(char *failed_redir, int error);
@@ -115,7 +117,7 @@ void	get_doc_argz(int fd, char *lim);
 //inredir.c
 int		the_last_inredir(char *line, int spot);
 int		set_up_inredir(char *file, t_data *data, int spot);
-int		check_inredir(t_data *data, int end);
+int		check_inredir(t_data *data, int z);
 void	treat_command(t_data *data);
 
 //outredir.c

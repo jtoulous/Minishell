@@ -37,17 +37,17 @@ int	set_up_inredir(char *file, t_data *data, int spot)
 	return (1);
 }
 
-int	check_inredir(t_data *data, int end)
+int	check_inredir(t_data *data, int z)
 {
-	int	z;
+	//int	z;
 	char	*file;
 	
-	z = 0;
+	/*z = 0;
 	while (z < end)
 	{
 		end = end_of_cmd(data->line, z);
 		if (data->line[z] == '<' && valid_inredir(data->line, z) == 1)
-		{
+		{*/
 			file = extract_redir(data->line, z);
 			if (the_last_inredir(data->line, z) == 1)
 				return (set_up_inredir(file, data, z));//open, store in data->infile
@@ -58,8 +58,8 @@ int	check_inredir(t_data *data, int end)
 				trim_redir(data->line, z);
 				free (file);
 			}
-		}
-		z++;
-	}
+		//}
+		//z++;
+	//}
 	return (1);
 }

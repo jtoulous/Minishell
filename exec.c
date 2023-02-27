@@ -45,6 +45,7 @@ void	simple_exec(t_data *data)
 				execve(data->argz[0], data->argz, envp);
 			exit (0);
 		}
+		data->last_pid = pid;
 	}
 	free_loop(envp);
 }
@@ -70,7 +71,7 @@ void	first_multiple(t_data *data)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (1);	
+			exit (0);	
 		}
 	}
 	free_loop(env_cpy);	
@@ -99,11 +100,13 @@ void	last_multiple(t_data *data, int z)
 			close_all(data);
 			if (built_in(data) == -1)	
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (1);
+			exit (0);
 		}
+		data->last_pid = pid;
 	}
 	free_loop(env_cpy);
 }
+
 void	multiple_exec(t_data *data, int z)
 {
 	int 	pid;
@@ -129,7 +132,7 @@ void	multiple_exec(t_data *data, int z)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, env_cpy);
-			exit (1);
+			exit (0);
 		}
 	}
 	free_loop(env_cpy);
