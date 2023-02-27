@@ -18,7 +18,10 @@ void	check_syntax(t_data *data, char to_check)
 	
 	z = 0;
 	if (to_check == '|')
+	{
 		check_syntax_pipes(data);
+		return ;
+	}
 	while (data->line[z] && data->exec_stat == 1)
 	{
 		if (data->line[z] == to_check && in_or_out(data->line, z) == 0)

@@ -48,15 +48,19 @@ void	wait_loop(t_data *data)
 	int	status;
 	
 	z = 0;
-	waitpid(data->last_pid, &status, 0);
+	if (data->err_stat != 1)
+	{	
+		waitpid(data->last_pid, &status, 0);
+		if (WIFEXITED(status))
+		err_code = WEXITSTATUS(status);
+	}
 	while (z < data->nb_forks - 1)
 	{
 		waitpid(-1, NULL, 0);
 		z++;
 	}
 	data->nb_forks = 0;
-	if (WIFEXITED(status))
-		err_code = WEXITSTATUS(status);
+	data->err_stat = 0;
 }
 
 int	main(int argc, char **argv, char **envp)

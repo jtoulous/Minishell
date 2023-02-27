@@ -34,6 +34,7 @@ void	init_data(t_data *data, char **envp)
 	data->exec_stat = 1;
 	data->prev_outfile = -1;
 	data->nb_forks = 0;
+	data->err_stat = 0;
 }
 
 void	reset_data(t_data *data)
@@ -43,7 +44,8 @@ void	reset_data(t_data *data)
 	data->outfile = -1;
 	free_loop(data->argz);
 	data->argz = NULL;
-	trim_leftovers(data->line);	
+	trim_leftovers(data->line);
+	data->err_stat = 0;
 }
 
 void	pipes_prep(t_data *data, int nb_cmdz)

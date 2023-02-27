@@ -6,13 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:26 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:48:51 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:48:29 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*extract_from_quotes(char *line, int spot)
+/*char	*extract_from_quotes(char *line, int spot)
 {
 	char	*extract;
 	int	end;
@@ -22,9 +22,36 @@ char	*extract_from_quotes(char *line, int spot)
 		end++;
 	extract = ft_substr(line, spot + 1, end - (spot + 1));
 	return (extract);
+}*/
+
+char	*extract_from_quotes(char *line, int spot)
+{
+	int	end;
+	int	z;
+	char	*extract;
+	
+	z = 0;
+	end = spot + 1;
+	while ((line[end] != ' ' || in_or_out(line, end) != 0)
+		&& (line[end] != '|' || valid_pipe(line, end) != 1)
+		&& line[end])
+		end++;
+	extract = ft_calloc(end - spot + 1, sizeof(char));
+	while ((line[spot] != ' ' || in_or_out(line, spot) != 0)
+		&& (line[spot] != '|' || valid_pipe(line, spot) != 1)
+		&& line[spot])
+	{
+		if (line[spot] != 34 && line[spot] != 39)
+		{
+			extract[z] = line[spot];
+			z++;
+		}
+		spot++;
+	}
+	return (extract);
 }
 
-char	*extract_redir(char *line, int spot)//GOOD
+char	*extract_redir(char *line, int spot)
 {
 	char	*to_test;
 	int	z;
@@ -35,9 +62,9 @@ char	*extract_redir(char *line, int spot)//GOOD
 		|| line[spot] == '<')
 		&& line[spot])
 		spot++;
-	if (line[spot] == 34 || line[spot] == 39)//ascii des quotes
+	if (line[spot] == 34 || line[spot] == 39)
 		to_test = extract_from_quotes(line, spot);
-	else	
+	else
 	{
 		z = spot;
 		while ((line[z] != ' ' || in_or_out(line, z) != 0)
@@ -122,7 +149,7 @@ void	clean_quotes(char *extract)
 	}
 }
 
-char	*get_nxt_stuff(char *line)//return the first word u meet
+char	*get_nxt_stuff(char *line)
 {
 	int	z;
 	char	*extracted;
@@ -130,9 +157,6 @@ char	*get_nxt_stuff(char *line)//return the first word u meet
 	z = 0;
 	while (line[z] == ' ' && line[z])
 		z++;
-	//if (line[z] == 39 || line[z] == 34)
-	//	extracted = extract_wipe_quotes(line, z);
-	//else
 	extracted = extract_wipe(line, z);
 	return (extracted);
 }

@@ -4,10 +4,9 @@ SRC = error_management.c\
 	  checks.c\
 	  exec.c\
 	  extract.c\
-	  inredir.c\
+	  redir.c\
 	  heredoc.c\
 	  minishiat.c\
-	  outredir.c\
 	  parse.c\
 	  toolbox.c\
 	  toolbox2.c\

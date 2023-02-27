@@ -14,9 +14,10 @@
 #include "minishell.h"
 #include <readline/readline.h>
 
-void	error_permission(void)
+void	error_permission(t_data *data)
 {
 	ft_putstr_fd(" Permission denied\n", STDERR_FILENO);
+	data->err_stat = 1;
 	err_code = 1;
 }
 
