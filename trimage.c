@@ -17,7 +17,10 @@ void	trim_redir(char *line, int spot)
 	int	z;
 	
 	z = spot + 1;
-	while (line[z] == ' ' && line[z])
+	while ((line[z] == ' '
+		|| line[z] == '>'
+		|| line[z] == '<')
+		&& line[z])
 		z++;
 	while ((line[z] != ' ' || in_or_out(line, z) != 0)
 		&& (line[z] != '|' || valid_pipe(line, z) != 0)
