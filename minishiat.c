@@ -21,7 +21,7 @@ void	treat_command(t_data *data)
 	int	z;
 	
 	z = 0;
-	check(data);//check "" et '', ...
+	check(data);
 	if (data->exec_stat == 1)
 	{
 		if (data->nb_cmds > 1)

@@ -35,7 +35,7 @@ void	prep_exec(t_data *data, int end)
 		leftovers = count_leftovers(data->line, end_of_cmd(data->line, 0));
 		while (z <= leftovers)
 		{
-			data->argz[z] =get_nxt_stuff(data->line);//and wipe it
+			data->argz[z] =get_nxt_stuff(data->line);
 			z++;
 		}
 		data->argz[z] = NULL;
