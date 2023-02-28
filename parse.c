@@ -39,6 +39,7 @@ void	prep_exec(t_data *data, int end)
 			z++;
 		}
 		data->argz[z] = NULL;
+		free (cmd);
 	}
 }
 

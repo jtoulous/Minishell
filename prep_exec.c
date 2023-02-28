@@ -61,6 +61,7 @@ char	**path_lst(t_data *data)
 	path_list = env_search(data->env, "PATH");
 	s_trimage(path_list, 5);
 	paths = ft_split(path_list, ':');
+	free (path_list);
 	return (paths);
 }
 

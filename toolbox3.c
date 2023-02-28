@@ -4,7 +4,10 @@
 void	free_and_close_all(t_data *data, int opt)
 {
 	if (opt == 2)
+	{	
 		free_lst(data->env);
+		return ;
+	}
 	if (data->line)
 	{	
 		free (data->line);
@@ -50,10 +53,10 @@ void	close_pipes(int **pipes, int nb)
 	{
 		close (pipes[z][0]);
 		close (pipes[z][1]);
-		//free (pipes[z]);
+		free (pipes[z]);
 		z++;
 	}
-	//free (pipes);
+	free (pipes);
 }
 
 void	free_lst(t_list *lst)
