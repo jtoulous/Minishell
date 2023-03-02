@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 15:05:10 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:08:14 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ void	wait_loop(t_data *data)
 	
 	z = 0;
 	if (data->err_stat != 1)
-	{	
+	{
+		status = 1;
 		waitpid(data->last_pid, &status, 0);
 		if (WIFEXITED(status))
 		err_code = WEXITSTATUS(status);
 	}
 	while (z < data->nb_forks - 1)
 	{
-		waitpid(-1, NULL, 0);
+		status = 0;
+		waitpid(-1, &status, 0);
 		z++;
 	}
 	data->nb_forks = 0;
@@ -72,17 +74,17 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	init_data(&data, envp);
-	//while (1)
-	//{
-		//data.line =readline("\e[0;31mküçük_kabuk🦃>\e[0;m ") ;
-		data.line = ft_strdup(argv[1]);
-	//	if (data.line == NULL)
-	//		break;
-	//	add_history(data.line);
+	while (1)
+	{
+		data.line =readline("\e[0;31mküçük_kabuk🦃>\e[0;m ") ;
+		/* data.line = ft_strdup(argv[1]); */
+		if (data.line == NULL)
+			break;
+		add_history(data.line);
 		data.nb_cmds = nb_cmd(data.line);
 		treat_command(&data);
 		wait_loop(&data);
-	//}
+	}
 	ft_putstr_fd("exit", 1);
 	free_and_close_all(&data, 2);
 	return (0);

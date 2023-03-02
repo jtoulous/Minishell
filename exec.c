@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/16 10:15:48 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:50:05 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	exec(t_data *data, int z)
 
 void	simple_exec(t_data *data)
 {
-	int	pid;
+	int		pid;
 	char	**envp;
-		
+
 	envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
 	{
@@ -40,7 +40,7 @@ void	simple_exec(t_data *data)
 				dup2(data->infile, STDIN_FILENO);
 			if (data->outfile != -1)
 				dup2(data->outfile, STDOUT_FILENO);
-			close_all(data);	
+			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, envp);
 			exit (0);

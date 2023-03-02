@@ -6,10 +6,27 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 09:31:06 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:25:21 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+
+static int	built_in_bis(t_data *data)
+{
+	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
+	{
+		built_in_unset(data);
+		return (0);
+	}
+	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)
+	{
+		built_in_env(data);
+		return (0);
+	}
+	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
+		built_in_exit(data);
+	return (-1);
+}
 
 int	built_in(t_data *data)
 {
@@ -33,17 +50,32 @@ int	built_in(t_data *data)
 		built_in_export(data);
 		return (0);
 	}
-	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
-	{
-		built_in_unset(data);
-		return (0);
-	}
-	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)
-	{
-		built_in_env(data);
-		return (0);
-	}
-	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
-		built_in_exit(data);
+	built_in_bis(data);
 	return (-1);
-}	
+}
+
+int	check_if_builtin(char *cmd)
+{
+	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("echo"))
+		return (1);
+	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("cd"))
+		return (1);
+	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("pwd"))
+		return (1);
+	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("export"))
+		return (1);
+	if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("unset"))
+		return (1);
+	if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("env"))
+		return (1);
+	if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0
+		&& ft_strlen(cmd) == ft_strlen("exit"))
+		return (1);
+	return (0);
+}

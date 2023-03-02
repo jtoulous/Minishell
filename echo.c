@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:24:11 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/16 10:22:52 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:32:02 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ static void	built_in_echo_utils(t_data *data)
 	printf("\n");
 }	
 
+static void	print_echo(t_data *data, int i)
+{
+	while (data->argz[i])
+	{
+		if (data->argz[i + 1] != NULL)
+			printf("%s ", data->argz[i]);
+		else
+			printf("%s", data->argz[i]);
+		i++;
+	}
+}
+
 void	built_in_echo(t_data *data)
 {
 	int	i;
@@ -47,14 +59,7 @@ void	built_in_echo(t_data *data)
 			else
 				break ;
 		}
-		while (data->argz[i])
-		{
-			if (data->argz[i + 1] != NULL)
-				printf("%s ", data->argz[i]);
-			else
-				printf("%s", data->argz[i]);
-			i++;
-		}
+		print_echo(data, i);
 	}	
 	else
 		built_in_echo_utils(data);
