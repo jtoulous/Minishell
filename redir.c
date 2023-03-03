@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inredir.c                                          :+:      :+:    :+:   */
+/*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:25 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:35:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:08:52 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	the_last_inredir(char *line, int spot)//GOOD
+int	the_last_inredir(char *line, int spot)
 {
 	int	end;
-	
+
 	spot++;
 	end = end_of_cmd(line, spot);
 	while (spot < end)
@@ -43,7 +43,7 @@ int	check_inredir(t_data *data, int z)
 
 	file = extract_redir(data->line, z);
 	if (the_last_inredir(data->line, z) == 1)
-		return (set_up_inredir(file, data, z));//open, store in data->infile
+		return (set_up_inredir(file, data, z));
 	else
 	{			
 		if (access(file, F_OK) != 0)
@@ -57,7 +57,7 @@ int	check_inredir(t_data *data, int z)
 int	set_up_outredir(t_data *data, int spot)
 {
 	char	*file;
-	
+
 	file = extract_redir(data->line, spot);
 	if (access(file, X_OK) != 0 && access(file, F_OK) == 0)
 	{
@@ -75,17 +75,17 @@ int	set_up_outredir(t_data *data, int spot)
 int	check_redirz(t_data *data, int end)
 {
 	int	z;
-	
+
 	z = 0;
 	while (z < end)
 	{
 		end = end_of_cmd(data->line, 0);
 		if (data->line[z] == '>' && in_or_out(data->line, z) == 0)
 		{	
-				if (data->outfile != -1)
-					close (data->outfile);
-				if (set_up_outredir(data, z) != 1)
-					return (0);
+			if (data->outfile != -1)
+				close (data->outfile);
+			if (set_up_outredir(data, z) != 1)
+				return (0);
 		}
 		if (data->line[z] == '<' && valid_inredir(data->line, z) == 1)
 		{

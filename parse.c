@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/03 10:06:24 by agoichon          #+#    #+#             */
+/*   Updated: 2023/03/03 10:06:56 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	clean_dat_biach(t_data *data)
 {
 	int	z;
 	int	end;
-	
+
 	z = 0;
 	end = end_of_cmd(data->line, 0);
 	while (z < end)
@@ -15,13 +27,12 @@ void	clean_dat_biach(t_data *data)
 	}
 }
 
-
 void	prep_exec(t_data *data, int end)
 {
-	int	z;
-	int	leftovers;
+	int		z;
+	int		leftovers;
 	char	*cmd;
-	
+
 	z = 1;
 	malloc_dat_shiat(data, end);
 	cmd = get_nxt_stuff(data->line);
@@ -35,7 +46,7 @@ void	prep_exec(t_data *data, int end)
 		leftovers = count_leftovers(data->line, end_of_cmd(data->line, 0));
 		while (z <= leftovers)
 		{
-			data->argz[z] =get_nxt_stuff(data->line);
+			data->argz[z] = get_nxt_stuff(data->line);
 			z++;
 		}
 		data->argz[z] = NULL;
@@ -46,7 +57,7 @@ void	prep_exec(t_data *data, int end)
 void	parse(t_data *data)
 {
 	int	end;
-	
+
 	end = end_of_cmd(data->line, 0);
 	clean_dat_biach(data);
 	if (check_redirz(data, end) != 1)

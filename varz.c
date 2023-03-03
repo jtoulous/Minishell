@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:56 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/15 16:41:22 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:12:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	replace_var(t_data *data, int spot, int end_var, char *var_val)
 {
 	char	*ante;
 	char	*pre;
-	
+
 	ante = ft_substr(data->line, 0, spot);
 	pre = ft_substr(data->line, end_var, ft_strlen(data->line) - end_var);
 	free (data->line);
@@ -28,7 +28,7 @@ void	sub_var(t_data *data, int spot, int end_var)
 {
 	char	*var_val;
 	char	*var;
-	
+
 	var = ft_substr(data->line, spot + 1, end_var - (spot + 1));
 	var_val = env_search(data->env, var);
 	//if (data->line[end_var + 1] == """)
@@ -42,11 +42,11 @@ void	sub_var(t_data *data, int spot, int end_var)
 
 void	sub_err_code(t_data *data, int spot)
 {
-	int	z;
+	int		z;
 	char	*ante;
 	char	*pre;
 	char	*error;
-	
+
 	z = spot + 2;
 	while (data->line[z])
 		z++;
@@ -60,31 +60,30 @@ void	sub_err_code(t_data *data, int spot)
 
 int	scan_varz(t_data *data, int end, int spot)
 {
-		int	z;
-		
-		z = spot + 1;
-		if (data->line[spot] == '$' && in_or_out(data->line, z) != 2)
+	int	z;
+
+	z = spot + 1;
+	if (data->line[spot] == '$' && in_or_out(data->line, z) != 2)
+	{
+		if (data->line[z] == ' '
+			|| data->line[z] == 34
+			|| data->line[z] == 39
+			|| data->line[z] == '\0'
+			|| valid_pipe(data->line, z) == 1)
+			return (0);
+		if (data->line[z] == '?')
+			sub_err_code(data, spot);
+		else
 		{
-			
-			if (data->line[z] == ' '
-				|| data->line[z] == 34
-				|| data->line[z] == 39
-				|| data->line[z] == '\0'
-				|| valid_pipe(data->line, z) == 1)
-				return (0); 
-			if (data->line[z] == '?')
-				sub_err_code(data, spot);
-			else
-			{
-				while (data->line[z] != ' ' 
-					&& data->line[z] != 34
-					&& data->line[z] != 39
-					&& (data->line[z] != '$') 
-					&& z < end)
-					z++;
-				sub_var(data, spot, z);
-			}
-			return (1);
+			while (data->line[z] != ' '
+				&& data->line[z] != 34
+				&& data->line[z] != 39
+				&& (data->line[z] != '$')
+				&& z < end)
+				z++;
+			sub_var(data, spot, z);
 		}
-		return (0);
+		return (1);
+	}
+	return (0);
 }

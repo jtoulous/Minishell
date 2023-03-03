@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:00:39 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:23:04 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
 
 void	exec(t_data *data, int z)
 {
@@ -34,8 +35,9 @@ void	simple_exec(t_data *data)
 	{
 		data->nb_forks++;
 		pid = fork();
+		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
-		{	
+		{
 			if (data->infile != -1)
 				dup2(data->infile, STDIN_FILENO);
 			if (data->outfile != -1)

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:05 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/02 12:57:09 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:17:17 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	skip_out(char *line, int *z)
 {
 	char	q_type;
-	
+
 	q_type = line[*z];
 	*z += 1;
 	while (line[*z] != q_type && line[*z])
@@ -26,7 +26,7 @@ void	skip_out(char *line, int *z)
 int	in_or_out(char *line, int index)
 {
 	int	z;
-	
+
 	z = 0;
 	while (z < index)
 	{
@@ -44,8 +44,8 @@ int	in_or_out(char *line, int index)
 int	nb_cmd(char *line)
 {
 	static int	count;
-	int		z;
-	
+	int			z;
+
 	z = 0;
 	if (line == NULL)
 		return (count);
@@ -61,8 +61,8 @@ int	nb_cmd(char *line)
 
 int	end_of_cmd(char *line, int spot)
 {
-	while ((line[spot] != '|' 
-		|| valid_pipe(line, spot) != 1)
+	while ((line[spot] != '|'
+			|| valid_pipe(line, spot) != 1)
 		&& line[spot])
 		spot++;
 	return (spot);
@@ -72,8 +72,8 @@ char	**convert_env(t_list *env)
 {
 	char	**converted;
 	t_list	*tmp;
-	int	z;
-	
+	int		z;
+
 	tmp = env;
 	z = ft_lstsize(env);
 	converted = ft_calloc(z + 1, sizeof(char *));
@@ -87,5 +87,3 @@ char	**convert_env(t_list *env)
 	converted[z] = ft_strdup(tmp->env_copy);
 	return (converted);
 }
-
-

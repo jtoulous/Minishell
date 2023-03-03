@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:39 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 13:03:29 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:15:08 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_if_used(char *line, int spot, int end)
 	{
 		if (line[spot] == '<'
 			&& (valid_hd(line, spot) == 1
-			|| valid_inredir(line, spot) == 1))
+				|| valid_inredir(line, spot) == 1))
 			return (0);
 		spot++;
 	}
@@ -68,7 +68,7 @@ void	unlinkz(char *new)
 int	lim_size(char *line, int spot)
 {
 	int	z;
-	
+
 	z = spot;
 	while (line[z] != ' ')
 		z++;
@@ -78,15 +78,15 @@ int	lim_size(char *line, int spot)
 char	*hdoc_limit(char *line, int spot)
 {
 	char	*fnl;
-	int	z;
-	
+	int		z;
+
 	z = 0;
-	while ((line[spot] == '<' 
-		|| line[spot] == ' ')
+	while ((line[spot] == '<'
+			|| line[spot] == ' ')
 		&& line[spot])
 		spot++;
 	fnl = ft_calloc(lim_size(line, spot),
-			sizeof(char));	
+			sizeof(char));
 	while (line[spot] != ' ')
 	{
 		if (line[spot] == 34 || line[spot] == 39)
@@ -104,7 +104,7 @@ char	*hdoc_limit(char *line, int spot)
 void	skip_n_copy_quote(char *line, char *fnl, int *spot, int *z)
 {
 	char	q_type;
-	
+
 	q_type = line[*spot];
 	*spot += 1;
 	while (line[*spot] != q_type && line[*spot])

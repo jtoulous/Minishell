@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/04 13:05:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:15:38 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	export_env(t_list **env, char **envp)
 {
 	int	z;
-	
+
 	z = 0;
 	while (envp[z])
 	{

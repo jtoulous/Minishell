@@ -6,16 +6,16 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:47 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/02 16:37:47 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:12:28 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	valid_inredir(char *line, int spot)//GOOD
+int	valid_inredir(char *line, int spot)
 {
 	int	end;
-	
+
 	end = end_of_cmd(line, spot);
 	if (in_or_out(line, spot) != 0
 		|| line[spot + 1] == '<'

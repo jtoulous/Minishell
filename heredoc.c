@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/06 10:28:59 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:05:56 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	replace_hdoc(char *line, char *file, int spot)
 {
 	char	*ante;
 	char	*pre;
-	int	end_hd;
-	int	end_line;
-	
+	int		end_hd;
+	int		end_line;
+
 	end_hd = spot;
-	while ((line[end_hd] == '<' || line[end_hd] == ' ') 
+	while ((line[end_hd] == '<' || line[end_hd] == ' ')
 		&& line[end_hd])
 		end_hd++;
 	while ((line[end_hd] != ' ' || in_or_out(line, end_hd) != 0)
@@ -60,8 +60,8 @@ void	prep_hdoc(t_data *data, int z)
 {
 	char	*file;
 	char	*fileno;
-	int	fd;
-	
+	int		fd;
+
 	fileno = ft_itoa(z);
 	file = ft_strjoin(".heredoc", fileno);
 	free (fileno);
@@ -93,14 +93,14 @@ void	fake_prep_hdoc(char *lim)
 void	hdoc_scan(t_data *data)
 {
 	int	z;
-	
+
 	z = 0;
 	while (data->line[z])
 	{
-		if (data->line[z] == '<' 
+		if (data->line[z] == '<'
 			&& valid_hd(data->line, z) == 1)
 		{
-			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)//check si ta pas une autre inredir dans la meme cmd  
+			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)
 				prep_hdoc(data, z);
 			else
 			{

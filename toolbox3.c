@@ -1,4 +1,15 @@
-#include "libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   toolbox3.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/03 10:15:32 by agoichon          #+#    #+#             */
+/*   Updated: 2023/03/03 10:15:33 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	free_and_close_all(t_data *data, int opt)
@@ -47,7 +58,7 @@ void	close_all(t_data *data)
 void	close_pipes(int **pipes, int nb)
 {
 	int	z;
-	
+
 	z = 0;
 	while (z < nb)
 	{
@@ -62,7 +73,7 @@ void	close_pipes(int **pipes, int nb)
 void	free_lst(t_list *lst)
 {
 	t_list	*tmp;
-	
+
 	tmp = lst->next;
 	while (tmp)
 	{
@@ -83,7 +94,7 @@ char	*env_search(t_list *env, char *var)
 	{
 		if (ft_strncmp(var, tmp->env_copy, ft_strlen(var)) == 0)
 		{
-			value = ft_substr(tmp->env_copy, ft_strlen(var) + 1, 
+			value = ft_substr(tmp->env_copy, ft_strlen(var) + 1,
 					ft_strlen(tmp->env_copy) - ft_strlen(var));
 			return (value);
 		}

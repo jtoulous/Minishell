@@ -6,13 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/02 12:47:50 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:07:29 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
-#include <stdlib.h>
 
 void	built_in_cd(t_data *data)
 {
@@ -78,14 +76,16 @@ void	built_in_unset(t_data *data)
 	tmp = data->env;
 	while (data->argz[i])
 	{
-		if (ft_strncmp(tmp->env_copy, data->argz[i], ft_strlen(data->argz[i])) == 0)
+		if (ft_strncmp(tmp->env_copy, data->argz[i],
+				ft_strlen(data->argz[i])) == 0)
 		{
 			data->env = data->env->next;
 			free(tmp);
 		}
 		else
 		{
-			while (ft_strncmp(tmp->next->env_copy, data->argz[i], ft_strlen(data->argz[i])) != 0)
+			while (ft_strncmp(tmp->next->env_copy, data->argz[i],
+					ft_strlen(data->argz[i])) != 0)
 			{
 				tmp = tmp->next;
 				if (tmp->next == NULL)

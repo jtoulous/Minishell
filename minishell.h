@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/10 13:08:07 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:10:42 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	wait_loop(t_data *data);
 void	clean_dat_biach(t_data *data);
 void	prep_exec(t_data *data, int end);
 void	parse(t_data *data);
-int	check_redirz(t_data *data, int end);
+int		check_redirz(t_data *data, int end);
 
 //error_management.c
 int		error_inredir(char *failed_redir, int error);
@@ -91,7 +91,7 @@ void	check(t_data *data);
 void	check_syntax(t_data *data, char to_check);
 int		check_if_fork(t_data *data);
 int		check_if_builtin(char *cmd);
-void		check_syntax_pipes(t_data *data);
+void	check_syntax_pipes(t_data *data);
 
 //exec.c
 void	exec(t_data *data, int z);
@@ -119,8 +119,8 @@ void	get_doc_argz(int fd, char *lim);
 int		the_last_inredir(char *line, int spot);
 int		set_up_inredir(char *file, t_data *data, int spot);
 int		check_inredir(t_data *data, int z);
-int	set_up_outredir(t_data *data, int spot);
-int	check_redirz(t_data *data, int end);
+int		set_up_outredir(t_data *data, int spot);
+int		check_redirz(t_data *data, int end);
 
 //prep_exec.c
 void	path_finder(t_data *data, char *cmd);
@@ -171,12 +171,12 @@ int		valid_hd(char *line, int spot);
 //varz.c
 void	replace_var(t_data *data, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var);
-int	scan_varz(t_data *data, int end, int spot);
+int		scan_varz(t_data *data, int end, int spot);
 
 //builtin.c
 int		built_in(t_data *data);
 void	built_in_unset(t_data *data);
-void	built_in_export(t_data *data);;
+void	built_in_export(t_data *data);
 
 //echo.c
 void	built_in_echo(t_data *data);
@@ -191,6 +191,6 @@ int		built_in_exit(t_data *data);
 
 //signal.c
 void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
+void	handle_sigchild(int sig);
 
 #endif
