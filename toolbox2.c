@@ -19,7 +19,7 @@ void	export_env(t_list **env, char **envp)
 	z = 0;
 	while (envp[z])
 	{
-		ft_lstadd_back(env, ft_lstnew(envp[z]));
+		ft_lstadd_back(env, ft_lstnew(ft_strdup(envp[z])));
 		z++;
 	}
 }

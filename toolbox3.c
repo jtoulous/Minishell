@@ -14,10 +14,11 @@
 
 void	free_and_close_all(t_data *data, int opt)
 {
-	if (opt == 2)
+	if (opt > 1)
 	{	
 		free_lst(data->env);
-		return ;
+		if (opt == 2)
+			return ;
 	}
 	if (data->line)
 	{	
@@ -29,7 +30,8 @@ void	free_and_close_all(t_data *data, int opt)
 		free_loop(data->argz);
 		data->argz = NULL;
 	}
-	close_all(data);
+	if (opt != 3)
+		close_all(data);
 	data->exec_stat = 1;
 	unlinkz(NULL);
 }
@@ -70,18 +72,18 @@ void	close_pipes(int **pipes, int nb)
 	free (pipes);
 }
 
-void	free_lst(t_list *lst)
+void free_lst(t_list *lst)
 {
-	t_list	*tmp;
+    t_list *tmp;
 
-	tmp = lst->next;
-	while (tmp)
-	{
-		free (lst);
-		lst = tmp;
-		tmp = tmp->next;
-	}
-	free (lst);
+    while (lst != NULL)
+    {
+        tmp = lst->next;
+        free(lst->env_copy);
+        lst->env_copy = NULL;
+        free(lst);
+        lst = tmp;
+    }
 }
 
 char	*env_search(t_list *env, char *var)
@@ -101,4 +103,21 @@ char	*env_search(t_list *env, char *var)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+void	free_loop(char **str)
+{
+	int	z;
+
+	z = 0;
+	if (str)
+	{
+		while (str[z])
+		{
+			free (str[z]);
+			str[z] = NULL;
+			z++;
+		}
+		free (str);
+	}
 }

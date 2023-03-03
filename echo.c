@@ -63,5 +63,5 @@ void	built_in_echo(t_data *data)
 	}	
 	else
 		built_in_echo_utils(data);
-	free_and_close_all(data, 2);
+	//free_and_close_all(data, 2);
 }

@@ -193,4 +193,6 @@ int		built_in_exit(t_data *data);
 void	handle_sigint(int sig);
 void	handle_sigchild(int sig);
 
+void	free_loop(char **str);
+
 #endif

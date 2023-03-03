@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	free_loop(char **str)
+/*void	free_loop(char **str)
 {
 	int	z;
 
@@ -26,7 +26,7 @@ void	free_loop(char **str)
 		}
 		free (str);
 	}
-}
+}*/
 
 void	mega_free(char *s1, char *s2, char *s3, char *s4)
 {

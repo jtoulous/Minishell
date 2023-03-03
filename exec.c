@@ -45,6 +45,8 @@ void	simple_exec(t_data *data)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, envp);
+			free_and_close_all(data, 3);
+			free_loop(envp);
 			exit (0);
 		}
 		data->last_pid = pid;
@@ -55,9 +57,9 @@ void	simple_exec(t_data *data)
 void	first_multiple(t_data *data)
 {
 	int		pid;
-	char	**env_cpy;
+	char	**envp;
 
-	env_cpy = convert_env(data->env);
+	envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
 	{	
 		data->nb_forks++;
@@ -72,19 +74,21 @@ void	first_multiple(t_data *data)
 				dup2(data->pipes[0][1], STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, env_cpy);
+				execve(data->argz[0], data->argz, envp);
+			free_and_close_all(data, 3);
+			free_loop(envp);	
 			exit (0);
 		}
 	}
-	free_loop(env_cpy);
+	free_loop(envp);
 }
 
 void	last_multiple(t_data *data, int z)
 {
 	int		pid;
-	char	**env_cpy;
+	char	**envp;
 
-	env_cpy = convert_env(data->env);
+	envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
@@ -101,20 +105,22 @@ void	last_multiple(t_data *data, int z)
 				dup2(data->outfile, STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, env_cpy);
+				execve(data->argz[0], data->argz, envp);
+			free_and_close_all(data, 3);
+			free_loop(envp);
 			exit (0);
 		}
 		data->last_pid = pid;
 	}
-	free_loop(env_cpy);
+	free_loop(envp);
 }
 
 void	multiple_exec(t_data *data, int z)
 {
 	int		pid;
-	char	**env_cpy;
+	char	**envp;
 
-	env_cpy = convert_env(data->env);
+	envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
@@ -133,9 +139,11 @@ void	multiple_exec(t_data *data, int z)
 				dup2(data->pipes[z][1], STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, env_cpy);
+				execve(data->argz[0], data->argz, envp);
+			free_and_close_all(data, 3);
+			free_loop(envp);
 			exit (0);
 		}
 	}
-	free_loop(env_cpy);
+	free_loop(envp);
 }
