@@ -50,7 +50,6 @@ void	built_in_pwd(t_data *data)
 		ft_putstr_fd("Error getting current working directory\n", 1);
 	else
 		printf("%s\n", cwd);
-	free_and_close_all(data, 2);
 }
 
 void	built_in_env(t_data *data)

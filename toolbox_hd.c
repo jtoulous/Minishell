@@ -61,7 +61,7 @@ void	unlinkz(char *new)
 			tmp = tmp->next;
 		}
 		unlink(tmp->env_copy);
-		//free_lst(unlinks);
+		free_lst(unlinks);
 	}
 }
 

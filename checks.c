@@ -90,7 +90,7 @@ void	check(t_data *data)
 	}
 }
 
-int	check_if_fork(t_data *data)
+int	check_if_fork(t_data *data, char **envp)
 {
 	if (ft_strncmp(data->argz[0], "cd", ft_strlen(data->argz[0])) == 0)
 	{
@@ -109,6 +109,7 @@ int	check_if_fork(t_data *data)
 	}	
 	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
 	{
+		free_loop(envp);
 		built_in(data);
 		return (1);
 	}

@@ -31,7 +31,7 @@ void	simple_exec(t_data *data)
 	char	**envp;
 
 	envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
+	if (check_if_fork(data, envp) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
@@ -60,7 +60,7 @@ void	first_multiple(t_data *data)
 	char	**envp;
 
 	envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
+	if (check_if_fork(data, envp) != 1)
 	{	
 		data->nb_forks++;
 		pid = fork();
@@ -89,7 +89,7 @@ void	last_multiple(t_data *data, int z)
 	char	**envp;
 
 	envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
+	if (check_if_fork(data, envp) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
@@ -121,7 +121,7 @@ void	multiple_exec(t_data *data, int z)
 	char	**envp;
 
 	envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
+	if (check_if_fork(data, envp) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();

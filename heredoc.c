@@ -24,7 +24,7 @@ void	get_doc_argz(int fd, char *lim)
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
 			&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
-			mega_free(buf, lim, NULL, NULL);
+			free(buf);
 			return ;
 		}		
 		write (fd, buf, ft_strlen(buf));
@@ -44,6 +44,7 @@ void	replace_hdoc(char *line, char *file, int spot)
 		&& line[end_hd])
 		end_hd++;
 	while ((line[end_hd] != ' ' || in_or_out(line, end_hd) != 0)
+		&& valid_pipe(line, end_hd) != 1
 		&& line[end_hd])
 		end_hd++;
 	end_line = end_hd;
@@ -56,7 +57,7 @@ void	replace_hdoc(char *line, char *file, int spot)
 	mega_free(ante, pre, NULL, NULL);
 }
 
-void	prep_hdoc(t_data *data, int z)
+void	prep_hdoc(t_data *data, int z, char *lim)
 {
 	char	*file;
 	char	*fileno;
@@ -66,9 +67,10 @@ void	prep_hdoc(t_data *data, int z)
 	file = ft_strjoin(".heredoc", fileno);
 	free (fileno);
 	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777);
-	get_doc_argz(fd, hdoc_limit(data->line, z));
+	get_doc_argz(fd, lim);
 	replace_hdoc(data->line, file, z);
 	unlinkz(file);
+	//free (file);
 	close (fd);
 }
 
@@ -83,7 +85,7 @@ void	fake_prep_hdoc(char *lim)
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
 			&& ft_strlen(buf) == ft_strlen(lim))
 		{
-			mega_free(buf, lim, NULL, NULL);
+			free (buf);
 			return ;
 		}
 		free (buf);
@@ -93,20 +95,23 @@ void	fake_prep_hdoc(char *lim)
 void	hdoc_scan(t_data *data)
 {
 	int	z;
-
+	char	*lim;
+	
 	z = 0;
 	while (data->line[z])
 	{
 		if (data->line[z] == '<'
 			&& valid_hd(data->line, z) == 1)
 		{
+			lim = hdoc_limit(data->line, z);
 			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)
-				prep_hdoc(data, z);
+				prep_hdoc(data, z, lim);
 			else
 			{
-				fake_prep_hdoc(hdoc_limit(data->line, z));
+				fake_prep_hdoc(lim);
 				trim_hdoc(data->line, z);
 			}
+			free (lim);
 		}
 		z++;
 	}

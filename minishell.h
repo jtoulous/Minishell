@@ -89,7 +89,7 @@ void	error_permission(t_data *data);
 void	check_closed_quotes(t_data *data);
 void	check(t_data *data);
 void	check_syntax(t_data *data, char to_check);
-int		check_if_fork(t_data *data);
+int		check_if_fork(t_data *data, char **envp);
 int		check_if_builtin(char *cmd);
 void	check_syntax_pipes(t_data *data);
 
@@ -111,7 +111,7 @@ void	clean_quotes(char *extract);
 //heredoc.c
 void	hdoc_scan(t_data *data);
 void	fake_prep_hdoc(char *lim);
-void	prep_hdoc(t_data *data, int z);
+void	prep_hdoc(t_data *data, int z, char *lim);
 void	replace_hdoc(char *line, char *file, int spot);
 void	get_doc_argz(int fd, char *lim);
 

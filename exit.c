@@ -57,6 +57,7 @@ int	built_in_exit(t_data *data)
 		return (1);
 	}	
 	ft_putstr_fd("exit\n", 1);
+	free_and_close_all(data, 1);
 	free_and_close_all(data, 2);
 	err_code = n % 256;
 	exit (n % 256);
