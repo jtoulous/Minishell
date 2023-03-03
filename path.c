@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/16 10:44:47 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:47:50 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	built_in_pwd(t_data *data)
 		ft_putstr_fd("Error getting current working directory\n", 1);
 	else
 		printf("%s\n", cwd);
+	free_and_close_all(data, 2);
 }
 
 void	built_in_env(t_data *data)

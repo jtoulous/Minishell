@@ -6,13 +6,14 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:08 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/13 08:34:27 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 09:59:19 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
 #include <readline/readline.h>
+#include <unistd.h>
 
 void	error_permission(t_data *data)
 {
@@ -33,14 +34,14 @@ int	error_inredir(char *failed_redir, int error)
 void	error_quotes(t_data *data)
 {
 	data->exec_stat = 0;
-	ft_putstr_fd("Don't forget to close those quotes tight, Or you'll face an error with all its might!\n", STDOUT_FILENO);
+	ft_putstr_fd("Don't forget to close those quotes tight ", STDOUT_FILENO);
+	ft_putstr_fd("Or you'll face an error with all its might!\n", STDOUT_FILENO);
 }
-
 
 void	error_path(char *cmd)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
-	if((cmd[0] == '.' && cmd[1] == '/')
+	if ((cmd[0] == '.' && cmd[1] == '/')
 		|| cmd[0] == '/')
 	{	
 		err_code = 126;
@@ -55,10 +56,6 @@ void	error_path(char *cmd)
 			err_code += 1;
 		}
 	}
-	else if (cmd[0] == '/')
-	{
-		
-	}
 	else
 	{	
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
@@ -70,7 +67,7 @@ void	error_path(char *cmd)
 void	error_syntax(t_data *data, int z)
 {
 	char	err_char;
-	
+
 	err_char = data->line[z];
 	data->exec_stat = 0;
 	ft_putstr_fd("syntax error near unexpected token `", 1);

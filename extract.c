@@ -6,30 +6,18 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:26 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/27 12:48:29 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:03:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*char	*extract_from_quotes(char *line, int spot)
-{
-	char	*extract;
-	int	end;
-	
-	end = spot + 1;
-	while (line[end] != line[spot])
-		end++;
-	extract = ft_substr(line, spot + 1, end - (spot + 1));
-	return (extract);
-}*/
-
 char	*extract_from_quotes(char *line, int spot)
 {
-	int	end;
-	int	z;
+	int		end;
+	int		z;
 	char	*extract;
-	
+
 	z = 0;
 	end = spot + 1;
 	while ((line[end] != ' ' || in_or_out(line, end) != 0)
@@ -54,12 +42,12 @@ char	*extract_from_quotes(char *line, int spot)
 char	*extract_redir(char *line, int spot)
 {
 	char	*to_test;
-	int	z;
-	
+	int		z;
+
 	spot++;
 	while ((line[spot] == ' '
-		|| line[spot] == '>'
-		|| line[spot] == '<')
+			|| line[spot] == '>'
+			|| line[spot] == '<')
 		&& line[spot])
 		spot++;
 	if (line[spot] == 34 || line[spot] == 39)
@@ -68,7 +56,7 @@ char	*extract_redir(char *line, int spot)
 	{
 		z = spot;
 		while ((line[z] != ' ' || in_or_out(line, z) != 0)
-			&& (line[z] != '|' || valid_pipe(line, z) != 1) 
+			&& (line[z] != '|' || valid_pipe(line, z) != 1)
 			&& line[z])
 			z++;
 		to_test = ft_substr(line, spot, z - spot);
@@ -76,40 +64,14 @@ char	*extract_redir(char *line, int spot)
 	return (to_test);
 }
 
-/*char	*extract_wipe_quotes(char *line, int z)
-{
-	char	*extract;
-	int 	end;
-	
-	end = z + 1;
-	while ((line[end] != '\"' || in_or_out(line, end) != 0)
-		&& (line[end] != '\'' || in_or_out(line, end) != 0)		
-		&& line[end])
-		end++;
-	extract = ft_substr(line, z + 1, end - (z + 1));
-	end++;
-	while (line[end])
-	{
-		line[z] = line[end];
-		z++;
-		end++;
-	}
-	while (line[z])
-	{
-		line[z] = '\0';
-		z++;
-	}
-	return (extract);
-}*/
-
 char	*extract_wipe(char *line, int z)
 {
 	char	*extract;
-	int 	end;
-	
+	int		end;
+
 	end = z + 1;
 	while ((line[end] != ' ' || in_or_out(line, end) != 0)
-		&& valid_pipe(line, end) != 1		
+		&& valid_pipe(line, end) != 1
 		&& line[end])
 		end++;
 	extract = ft_substr(line, z, end - z);
@@ -130,9 +92,9 @@ char	*extract_wipe(char *line, int z)
 
 void	clean_quotes(char *extract)
 {
-	int	z;
+	int		z;
 	char	q_type;
-	
+
 	z = 0;
 	while (extract[z])
 	{
@@ -142,7 +104,7 @@ void	clean_quotes(char *extract)
 			m_trim(extract, z, z);
 			while (extract[z] != q_type && extract[z])
 				z++;
-			m_trim(extract, z, z);	
+			m_trim(extract, z, z);
 		}
 		else
 			z++;
@@ -151,7 +113,7 @@ void	clean_quotes(char *extract)
 
 char	*get_nxt_stuff(char *line)
 {
-	int	z;
+	int		z;
 	char	*extracted;
 
 	z = 0;

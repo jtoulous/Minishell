@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/16 10:12:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:02:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	built_in_export(t_data *data)
 	int		j;
 	t_list	*p_val;
 	char	*c_val;
-	
+
 	if (data->argz[1] != NULL)
 	{
 		if (data->argz[1][0] == '=')
@@ -119,7 +119,7 @@ void	built_in_export(t_data *data)
 			err_code = 1;
 			ft_putstr_fd(data->argz[1], 2);
 			ft_putstr_fd(" : not a valid identifier\n", 2);
-			return;
+			return ;
 		}
 		i = 1;
 		j = 0;
@@ -144,7 +144,7 @@ void	built_in_export(t_data *data)
 				ft_putstr_fd(data->argz[i], 2);
 				ft_putstr_fd(" : not a valid identifier\n", 2);
 				err_code = 1;
-				return;
+				return ;
 			}
 			while (data->argz[i][j] != '=' && data->argz[i][j])
 			{
