@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:29:04 by agoichon          #+#    #+#             */
-/*   Updated: 2023/02/16 10:05:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:13:19 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	built_in_exit_utils(t_data *data)
 		{
 			ft_putstr_fd("exit\n", 1);
 			ft_putstr_fd(" numeric argument required\n", 2);
+			free_and_close_all(data, 3);
 			exit(2);
 		}					
 		i++;
@@ -57,7 +58,6 @@ int	built_in_exit(t_data *data)
 		return (1);
 	}	
 	ft_putstr_fd("exit\n", 1);
-	free_and_close_all(data, 1);
 	free_and_close_all(data, 2);
 	err_code = n % 256;
 	exit (n % 256);

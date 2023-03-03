@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:23:04 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:17:15 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	simple_exec(t_data *data)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, envp);
-			free_and_close_all(data, 3);
+					free_and_close_all(data, 3);
 			free_loop(envp);
 			exit (0);
 		}
