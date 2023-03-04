@@ -94,7 +94,8 @@ char	*env_search(t_list *env, char *var)
 	tmp = env;
 	while (tmp)
 	{
-		if (ft_strncmp(var, tmp->env_copy, ft_strlen(var)) == 0)
+		if (ft_strncmp(var, tmp->env_copy, ft_strlen(var)) == 0
+			&& tmp->env_copy[ft_strlen(var)] == '=')
 		{
 			value = ft_substr(tmp->env_copy, ft_strlen(var) + 1,
 					ft_strlen(tmp->env_copy) - ft_strlen(var));

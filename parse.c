@@ -62,5 +62,6 @@ void	parse(t_data *data)
 	clean_dat_biach(data);
 	if (check_redirz(data, end) != 1)
 		return ;
+	end = end_of_cmd(data->line, 0);	
 	prep_exec(data, end);
 }

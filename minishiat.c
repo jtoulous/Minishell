@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		data.line = readline("\e[0;31mküçük_kabuk🦃>\e[0;m ");
+	//	data.line = ft_strdup(argv[1]);
 		if (data.line == NULL)
 			break ;
 		add_history(data.line);

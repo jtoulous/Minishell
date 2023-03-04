@@ -112,7 +112,7 @@ void	clean_quotes(char *extract);
 void	hdoc_scan(t_data *data);
 void	fake_prep_hdoc(char *lim);
 void	prep_hdoc(t_data *data, int z, char *lim);
-void	replace_hdoc(char *line, char *file, int spot);
+void	replace_hdoc(t_data *data, char *file, int spot);
 void	get_doc_argz(int fd, char *lim);
 
 //redir.c

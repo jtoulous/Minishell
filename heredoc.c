@@ -32,7 +32,7 @@ void	get_doc_argz(int fd, char *lim)
 	}
 }
 
-void	replace_hdoc(char *line, char *file, int spot)
+void	replace_hdoc(t_data *data, char *file, int spot)
 {
 	char	*ante;
 	char	*pre;
@@ -40,20 +40,20 @@ void	replace_hdoc(char *line, char *file, int spot)
 	int		end_line;
 
 	end_hd = spot;
-	while ((line[end_hd] == '<' || line[end_hd] == ' ')
-		&& line[end_hd])
+	while ((data->line[end_hd] == '<' || data->line[end_hd] == ' ')
+		&& data->line[end_hd])
 		end_hd++;
-	while ((line[end_hd] != ' ' || in_or_out(line, end_hd) != 0)
-		&& valid_pipe(line, end_hd) != 1
-		&& line[end_hd])
+	while ((data->line[end_hd] != ' ' || in_or_out(data->line, end_hd) != 0)
+		&& valid_pipe(data->line, end_hd) != 1
+		&& data->line[end_hd])
 		end_hd++;
 	end_line = end_hd;
-	while (line[end_line])
+	while (data->line[end_line])
 		end_line++;
-	ante = ft_substr(line, 0, spot + 1);
-	pre = ft_substr(line, end_hd, end_line - end_hd);
-	free (line);
-	line = triple_strjoin(ante, file, pre);
+	ante = ft_substr(data->line, 0, spot + 1);
+	pre = ft_substr(data->line, end_hd, end_line - end_hd);
+	free (data->line);
+	data->line = triple_strjoin(ante, file, pre);
 	mega_free(ante, pre, NULL, NULL);
 }
 
@@ -68,7 +68,7 @@ void	prep_hdoc(t_data *data, int z, char *lim)
 	free (fileno);
 	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777);
 	get_doc_argz(fd, lim);
-	replace_hdoc(data->line, file, z);
+	replace_hdoc(data, file, z);
 	unlinkz(file);
 	//free (file);
 	close (fd);
