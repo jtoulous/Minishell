@@ -57,6 +57,7 @@ typedef struct pipex_data
 	t_list	*env;
 	char	*line;
 	char	**argz;
+	char	**envp;
 	int		**pipes;
 	int		infile;
 	int		outfile;
@@ -89,7 +90,7 @@ void	error_permission(t_data *data);
 void	check_closed_quotes(t_data *data);
 void	check(t_data *data);
 void	check_syntax(t_data *data, char to_check);
-int		check_if_fork(t_data *data, char **envp);
+int		check_if_fork(t_data *data);
 int		check_if_builtin(char *cmd);
 void	check_syntax_pipes(t_data *data);
 

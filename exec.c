@@ -28,10 +28,10 @@ void	exec(t_data *data, int z)
 void	simple_exec(t_data *data)
 {
 	int		pid;
-	char	**envp;
+	//char	**envp;
 
-	envp = convert_env(data->env);
-	if (check_if_fork(data, envp) != 1)
+	data->envp = convert_env(data->env);
+	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
@@ -44,23 +44,24 @@ void	simple_exec(t_data *data)
 				dup2(data->outfile, STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, envp);
+				execve(data->argz[0], data->argz, data->envp);
 					free_and_close_all(data, 3);
-			free_loop(envp);
+			free_loop(data->envp);
 			exit (0);
 		}
 		data->last_pid = pid;
 	}
-	free_loop(envp);
+	//if (envp != NULL)
+	free_loop(data->envp);
 }
 
 void	first_multiple(t_data *data)
 {
 	int		pid;
-	char	**envp;
+	//char	**envp;
 
-	envp = convert_env(data->env);
-	if (check_if_fork(data, envp) != 1)
+	data->envp = convert_env(data->env);
+	if (check_if_fork(data) != 1)
 	{	
 		data->nb_forks++;
 		pid = fork();
@@ -74,22 +75,22 @@ void	first_multiple(t_data *data)
 				dup2(data->pipes[0][1], STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, envp);
+				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
-			free_loop(envp);	
+			free_loop(data->envp);	
 			exit (0);
 		}
 	}
-	free_loop(envp);
+	free_loop(data->envp);
 }
 
 void	last_multiple(t_data *data, int z)
 {
 	int		pid;
-	char	**envp;
+	//char	**envp;
 
-	envp = convert_env(data->env);
-	if (check_if_fork(data, envp) != 1)
+	data->envp = convert_env(data->env);
+	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
@@ -105,23 +106,23 @@ void	last_multiple(t_data *data, int z)
 				dup2(data->outfile, STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, envp);
+				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
-			free_loop(envp);
+			free_loop(data->envp);
 			exit (0);
 		}
 		data->last_pid = pid;
 	}
-	free_loop(envp);
+	free_loop(data->envp);
 }
 
 void	multiple_exec(t_data *data, int z)
 {
 	int		pid;
-	char	**envp;
+	//char	**envp;
 
-	envp = convert_env(data->env);
-	if (check_if_fork(data, envp) != 1)
+	data->envp = convert_env(data->env);
+	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
@@ -139,11 +140,11 @@ void	multiple_exec(t_data *data, int z)
 				dup2(data->pipes[z][1], STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, envp);
+				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
-			free_loop(envp);
+			free_loop(data->envp);
 			exit (0);
 		}
 	}
-	free_loop(envp);
+	free_loop(data->envp);
 }

@@ -27,6 +27,7 @@ void	export_env(t_list **env, char **envp)
 void	init_data(t_data *data, char **envp)
 {
 	data->env = NULL;
+	//data->envp = NULL;
 	export_env(&data->env, envp);
 	data->infile = -1;
 	data->outfile = -1;

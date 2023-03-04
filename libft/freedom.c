@@ -26,6 +26,7 @@
 		}
 		free (str);
 	}
+	str = NULL;
 }*/
 
 void	mega_free(char *s1, char *s2, char *s3, char *s4)

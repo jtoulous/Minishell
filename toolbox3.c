@@ -116,9 +116,9 @@ void	free_loop(char **str)
 		while (str[z])
 		{
 			free (str[z]);
-			str[z] = NULL;
 			z++;
 		}
 		free (str);
 	}
+	str = NULL;
 }
