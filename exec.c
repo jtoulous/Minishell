@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 15:17:15 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:49:32 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	exec(t_data *data, int z)
 void	simple_exec(t_data *data)
 {
 	int		pid;
-	//char	**envp;
 
 	data->envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
@@ -45,20 +44,21 @@ void	simple_exec(t_data *data)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, data->envp);
-			free_and_close_all(data, 3);
-			free_loop(data->envp);
+			else
+			{	
+				free_loop(data->envp);
+				free_and_close_all(data, 3);
+			}	
 			exit (0);
 		}
 		data->last_pid = pid;
 	}
-	//if (envp != NULL)
 	free_loop(data->envp);
 }
 
 void	first_multiple(t_data *data)
 {
 	int		pid;
-	//char	**envp;
 
 	data->envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
