@@ -64,24 +64,24 @@ void	error_path(char *cmd)
 	free (cmd);
 }
 
-void	error_syntax(t_data *data, int z)
+void	error_syntax(t_data *data, int z, int opt)
 {
 	char	err_char;
 
 	err_char = data->line[z];
 	data->exec_stat = 0;
-	ft_putstr_fd("syntax error near unexpected token `", 1);
-	if (err_char == '\0')
-		ft_putstr_fd("newline", 1);
+	ft_putstr_fd(" syntax error near unexpected token `", STDERR_FILENO);
+	if (err_char == '\0' && opt != 2)
+		ft_putstr_fd("newline", STDERR_FILENO);
 	else
 	{	
 		while (data->line[z] == err_char)
 		{
-			ft_putchar_fd(err_char, 1);
+			ft_putchar_fd(err_char, STDERR_FILENO);
 			z++;
 		}
 	}
-	ft_putchar_fd(39, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putchar_fd(39, STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
 	err_code = 2;
 }

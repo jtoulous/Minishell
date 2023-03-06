@@ -45,7 +45,7 @@ void	simple_exec(t_data *data)
 			close_all(data);
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, data->envp);
-					free_and_close_all(data, 3);
+			free_and_close_all(data, 3);
 			free_loop(data->envp);
 			exit (0);
 		}

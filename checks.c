@@ -34,7 +34,7 @@ void	check_syntax(t_data *data, char to_check)
 			if (data->line[z] == '<' || data->line[z] == '>'
 				|| valid_pipe(data->line, z) == 1
 				|| data->line[z] == '\0')
-				error_syntax(data, z);
+				error_syntax(data, z, 1);
 		}
 		z++;
 	}
@@ -43,17 +43,29 @@ void	check_syntax(t_data *data, char to_check)
 void	check_syntax_pipes(t_data *data)
 {
 	int	z;
-
+	int	y;
+	
 	z = 0;
 	while (data->line[z] && data->exec_stat == 1)
 	{
 		if (valid_pipe(data->line, z) == 1)
 		{
-			z++;
-			while (data->line[z] == ' ' && data->line[z])
-				z++;
-			if (data->line[z] == '\0')
-				error_syntax(data, z);
+			y = z - 1;
+			while (y > 0 && data->line[y] == ' ')
+				y--;
+			if (y <= 0)
+			{
+				error_syntax(data, z, 2);
+				return ;
+			}
+			y = z + 1;
+			while (data->line[y] == ' ' && data->line[z])
+				y++;
+			if (data->line[y] == '\0')
+			{
+				error_syntax(data, z, 2);
+				return ;
+			}		
 		}
 		z++;
 	}
@@ -79,14 +91,17 @@ void	check(t_data *data)
 {	
 	check_closed_quotes(data);
 	if (data->exec_stat == 1)
-		check_syntax(data, '<');
+		check_syntax(data, '|');
+		//check_syntax(data, '<');
 	if (data->exec_stat == 1)
 	{
 		if (nb_hdocs(data->line) != 0)
 			hdoc_scan(data);
-		check_syntax(data, '>');
+		check_syntax(data, '<');
+		//check_syntax(data, '>');
 		if (data->exec_stat == 1)
-			check_syntax(data, '|');
+			check_syntax(data, '>');
+			//check_syntax(data, '|');
 	}
 }
 

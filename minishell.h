@@ -83,7 +83,7 @@ int		check_redirz(t_data *data, int end);
 int		error_inredir(char *failed_redir, int error);
 void	error_quotes(t_data *data);
 void	error_path(char *cmd);
-void	error_syntax(t_data *data, int z);
+void	error_syntax(t_data *data, int z, int opt);
 void	error_permission(t_data *data);
 
 //checks.c
