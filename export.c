@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:02:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:11:27 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_swap(char **s1, char **s2)
 	tmp = ft_strdup(*s1);
 	*s1 = ft_strdup(*s2);
 	*s2 = ft_strdup(tmp);
-	free (tmp);
+	/* free (tmp); */
 }	
 
 static void	ft_sort_ascii(char **str)
@@ -87,7 +87,7 @@ static void	built_in_export_utils(t_data *data)
 		}	
 	}
 	err_code = 0;
-	free(envp);
+	free_loop(envp);
 }	
 
 static char	*export_tools(char **str, int i)
