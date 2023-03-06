@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/06 11:11:27 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:02:59 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_swap(char **s1, char **s2)
 	tmp = ft_strdup(*s1);
 	*s1 = ft_strdup(*s2);
 	*s2 = ft_strdup(tmp);
-	/* free (tmp); */
+	free (tmp);
 }	
 
 static void	ft_sort_ascii(char **str)
@@ -129,11 +129,12 @@ void	built_in_export(t_data *data)
 		p_val = data->env;
 		while (data->argz[i])
 		{
-			while (p_val)
+			while (p_val->next != NULL)
 			{	
-				if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(c_val)) == 0)
+				if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(p_val->env_copy)) == 0)
 				{
 					free(p_val->env_copy);
+					p_val->env_copy = NULL;
 					p_val->env_copy = ft_strdup(data->argz[i]);
 					return ;
 				}	

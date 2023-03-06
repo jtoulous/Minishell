@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:26 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:03:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:02:06 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*extract_wipe(char *line, int z)
 	char	*extract;
 	int		end;
 
-	end = z + 1;
+	end = z ;
 	while ((line[end] != ' ' || in_or_out(line, end) != 0)
 		&& valid_pipe(line, end) != 1
 		&& line[end])

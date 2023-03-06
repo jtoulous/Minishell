@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:15:38 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:08:18 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	export_env(t_list **env, char **envp)
 void	init_data(t_data *data, char **envp)
 {
 	data->env = NULL;
-	//data->envp = NULL;
+	data->envp = NULL;
 	export_env(&data->env, envp);
 	data->infile = -1;
 	data->outfile = -1;
