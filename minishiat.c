@@ -48,12 +48,12 @@ void	wait_loop(t_data *data)
 	int	status;
 
 	z = 0;
-	if (data->err_stat != 1)
+	if (data->err_stat != 1 && data->nb_forks != 0)
 	{
 		status = 1;
 		waitpid(data->last_pid, &status, 0);
 		if (WIFEXITED(status))
-		err_code = WEXITSTATUS(status);
+			err_code = WEXITSTATUS(status);
 	}
 	while (z < data->nb_forks - 1)
 	{
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		data.line = readline("\e[0;31mküçük_kabuk🦃>\e[0;m ");
-	//	data.line = ft_strdup(argv[1]);
+		//data.line = ft_strdup(argv[1]);
 		if (data.line == NULL)
 			break ;
 		add_history(data.line);

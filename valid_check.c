@@ -17,9 +17,13 @@ int	valid_inredir(char *line, int spot)
 	int	end;
 
 	end = end_of_cmd(line, spot);
+	if (spot != 0)
+	{
+		if (line[spot - 1] == '<')
+			return (0);
+	}
 	if (in_or_out(line, spot) != 0
-		|| line[spot + 1] == '<'
-		|| line[spot - 1] == '<')
+		|| line[spot + 1] == '<')
 		return (0);
 	while (spot < end)
 	{

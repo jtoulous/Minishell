@@ -90,16 +90,16 @@ static void	built_in_export_utils(t_data *data)
 	free_loop(envp);
 }	
 
-static char	*export_tools(char **str, int i)
+static char	*export_tools(char **argz, int i)
 {
 	int		j;
 	char	*rtn;
 
 	j = 0;
-	rtn = ft_calloc(sizeof(char), ft_strlen(str[i]));
-	while (str[i][j] != '=' && str[i][j])
+	rtn = ft_calloc(sizeof(char), ft_strlen(argz[i]) + 1);
+	while (argz[i][j] != '=' && argz[i][j])
 	{
-		rtn[j] = str[i][j];
+		rtn[j] = argz[i][j];
 		j++;
 	}
 	return (rtn);

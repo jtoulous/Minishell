@@ -54,12 +54,13 @@ void	built_in_pwd(t_data *data)
 
 void	built_in_env(t_data *data)
 {
-	while (data->env != NULL)
+	int	z;
+	
+	z = 0;
+	while (data->envp[z])
 	{
-		printf("%s\n", data->env->env_copy);
-		if (data->env != NULL)
-			free(data->env);
-		data->env = data->env->next;
+		printf("%s\n", data->envp[z]);
+		z++;
 	}
 }
 

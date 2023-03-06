@@ -84,6 +84,7 @@ void free_lst(t_list *lst)
         free(lst);
         lst = tmp;
     }
+    lst = NULL;
 }
 
 char	*env_search(t_list *env, char *var)

@@ -38,7 +38,7 @@ int	built_in_exit(t_data *data)
 	int	n;
 
 	i = 0;
-	n = 0;
+	n = 1;
 	if (data->argz[1] != NULL && data->argz[2] == NULL)
 	{	
 		built_in_exit_utils(data);
