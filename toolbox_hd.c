@@ -100,18 +100,3 @@ char	*hdoc_limit(char *line, int spot)
 	}	
 	return (fnl);
 }
-
-void	skip_n_copy_quote(char *line, char *fnl, int *spot, int *z)
-{
-	char	q_type;
-
-	q_type = line[*spot];
-	*spot += 1;
-	while (line[*spot] != q_type && line[*spot])
-	{
-		fnl[*z] = line[*spot];
-		*z += 1;
-		*spot += 1;
-	}
-	*spot += 1;
-}
