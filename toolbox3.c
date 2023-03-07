@@ -33,7 +33,11 @@ void	free_and_close_all(t_data *data, int opt)
 	if (opt != 3)
 		close_all(data);
 	data->exec_stat = 1;
-	unlinkz(NULL);
+	if (data->doc_stat == 1)
+	{
+		data->doc_stat = 0;
+		unlinkz(NULL);
+	}
 }
 
 void	close_all(t_data *data)

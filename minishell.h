@@ -66,6 +66,7 @@ typedef struct pipex_data
 	int		nb_forks;
 	int		last_pid;
 	int		err_stat;
+	int		doc_stat;
 }		t_data;
 
 //minishiat.c

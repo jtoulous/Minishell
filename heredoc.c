@@ -68,6 +68,7 @@ void	prep_hdoc(t_data *data, int z, char *lim)
 	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777);
 	get_doc_argz(fd, lim);
 	replace_hdoc(data, file, z);
+	data->doc_stat = 1;
 	unlinkz(file);
 	close (fd);
 }
