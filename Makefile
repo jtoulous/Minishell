@@ -10,11 +10,12 @@ SRC = error_management.c\
 	  parse.c\
 	  toolbox.c\
 	  toolbox2.c\
-	  trimage.c\
-	  prep_exec.c\
 	  toolbox3.c\
+	  toolbox4.c\
 	  toolbox_hd.c\
 	  toolbox_export.c\
+	  trimage.c\
+	  prep_exec.c\
 	  valid_check.c\
 	  varz.c\
 	  built_in.c\

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:21:45 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:08:11 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:53:10 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	**path_lst(t_data *data)
 	path_list = env_search(data->env, "PATH");
 	if (!path_list)
 		return (NULL);
-	//s_trimage(path_list, 5);
 	paths = ft_split(path_list, ':');
 	free (path_list);
 	return (paths);
@@ -78,31 +77,4 @@ int	check_already_pathed(t_data *data, char *cmd)
 		return (1);
 	}
 	return (0);
-}
-
-void	path_finder(t_data *data, char *cmd)
-{
-	char	**paths;
-	int		z;
-
-	z = 0;
-	if (check_already_pathed(data, cmd) == 1)
-		return ;
-	paths = path_lst(data);
-	if (paths != NULL)
-	{
-		while (paths[z])
-		{
-			data->argz[0] = triple_strjoin(paths[z], "/", cmd);
-			if (access(data->argz[0], F_OK) == 0)
-			{
-				free_loop(paths);
-				return ;
-			}
-			free (data->argz[0]);
-			z++;
-		}
-	}	
-	data->argz = NULL;
-	free_loop(paths);
 }

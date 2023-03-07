@@ -106,20 +106,3 @@ char	*env_search(t_list *env, char *var)
 	}
 	return (NULL);
 }
-
-void	free_loop(char **str)
-{
-	int	z;
-
-	z = 0;
-	if (str)
-	{
-		while (str[z])
-		{
-			free (str[z]);
-			z++;
-		}
-		free (str);
-	}
-	str = NULL;
-}
