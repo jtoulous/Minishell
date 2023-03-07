@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:39:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:03:37 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	multiple_exec(t_data *data, int z);
 //extract.c
 char	*extract_from_quotes(char *line, int spot);
 char	*extract_redir(char *line, int spot);
-//char	*extract_wipe_quotes(char *line, int z);
 char	*extract_wipe(char *line, int z);
 char	*get_nxt_stuff(char *line);
 void	clean_quotes(char *extract);
@@ -197,4 +196,9 @@ void	handle_sigchild(int sig);
 
 void	free_loop(char **str);
 
+//toolvox_export.c
+void	ft_swap(char **s1, char **s2);
+void	ft_sort_ascii(char **str);
+void	ft_strcp(char *dest, char *src);
+char	*export_tools(char **argz, int i);
 #endif

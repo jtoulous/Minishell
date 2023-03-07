@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:29:04 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:41:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:58:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ static void	built_in_exit_utils(t_data *data)
 	}
 }	
 
+static int	error_many_arg(void)
+{
+	printf("exit\n");
+	ft_putstr_fd(" too many arguments\n", 2);
+	g_err_code = 1;
+	return (1);
+}	
+
 int	built_in_exit(t_data *data)
 {
 	int	i;
@@ -51,12 +59,7 @@ int	built_in_exit(t_data *data)
 		n = ft_atol(data->argz[1]);
 	}
 	else if (data->argz[2] != NULL)
-	{
-		printf("exit\n");
-		ft_putstr_fd(" too many arguments\n", 2);
-		g_err_code = 1;
-		return (1);
-	}	
+		error_many_arg();
 	ft_putstr_fd("exit\n", 1);
 	free_and_close_all(data, 3);
 	free_loop(data->envp);

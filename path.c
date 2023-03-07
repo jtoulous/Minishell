@@ -6,10 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:43:41 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:53:05 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "minishell.h"
 
 void	built_in_cd(t_data *data)
@@ -64,6 +65,26 @@ void	built_in_env(t_data *data)
 	}
 }
 
+static void	built_in_unset_two(t_data *data, t_list *tmp, t_list *p_tmp, int i)
+{	
+	while (ft_strncmp(tmp->next->env_copy, data->argz[i],
+			ft_strlen(data->argz[i])) != 0)
+	{
+		tmp = tmp->next;
+		if (tmp->next == NULL)
+		{
+			tmp = NULL;
+			g_err_code = 0;
+			free(tmp);
+			return ;
+		}	
+	}						
+	p_tmp = tmp->next;
+	tmp->next = p_tmp->next;
+	g_err_code = 0;
+	free(p_tmp);
+}
+
 void	built_in_unset(t_data *data)
 {
 	t_list	*tmp;
@@ -74,6 +95,7 @@ void	built_in_unset(t_data *data)
 		return ;
 	i = 1;
 	tmp = data->env;
+	p_tmp = NULL;
 	while (data->argz[i])
 	{
 		if (ft_strncmp(tmp->env_copy, data->argz[i],
@@ -83,24 +105,7 @@ void	built_in_unset(t_data *data)
 			free(tmp);
 		}
 		else
-		{
-			while (ft_strncmp(tmp->next->env_copy, data->argz[i],
-					ft_strlen(data->argz[i])) != 0)
-			{
-				tmp = tmp->next;
-				if (tmp->next == NULL)
-				{
-					tmp = NULL;
-					g_err_code = 0;
-					free(tmp);
-					return ;
-				}	
-			}						
-			p_tmp = tmp->next;
-			tmp->next = p_tmp->next;
-			g_err_code = 0;
-			free(p_tmp);
-		}
+			built_in_unset_two(data, tmp, p_tmp, i);
 		i++;
 	}
 }

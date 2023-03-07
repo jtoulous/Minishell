@@ -14,6 +14,7 @@ SRC = error_management.c\
 	  prep_exec.c\
 	  toolbox3.c\
 	  toolbox_hd.c\
+	  toolbox_export.c\
 	  valid_check.c\
 	  varz.c\
 	  built_in.c\

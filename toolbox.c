@@ -6,11 +6,10 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:05 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:17:17 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:05:03 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
 
 void	skip_out(char *line, int *z)

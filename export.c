@@ -6,101 +6,47 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:42:11 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:11:10 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_swap(char **s1, char **s2)
+static void	print_export(t_data *data, int i, char *name, char *result)
 {
-	char	*tmp;
-
-	tmp = ft_strdup(*s1);
-	*s1 = ft_strdup(*s2);
-	*s2 = ft_strdup(tmp);
-	free (tmp);
-}	
-
-static void	ft_sort_ascii(char **str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i + 1])
-	{	
-		if (ft_strcmp(str[i], str[i + 1]) > 0)
-		{
-			ft_swap(&str[i], &str[i + 1]);
-			i = 0;
-		}
-		else
+	if (data->envp[i][0] == '_')
 			i++;
-	}	
-}
-
-void	ft_strcp(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
+	else
+	{	
+		printf("declare -x %s=\"%s\"\n", name, result);
+		free(name);
 		i++;
 	}
-	dest[i] = '\0';
-}
+}	
 
 static void	built_in_export_utils(t_data *data)
 {
 	int		i;
 	int		len;
-	char	**envp;
 	char	*result;
 	char	*name;
 
 	i = 0;
-	envp = convert_env(data->env);
-	ft_sort_ascii(envp);
-	while (envp[i])
+	ft_sort_ascii(data->envp);
+	while (data->envp[i])
 	{	
 		len = 0;
-		while (envp[i][len] != '=' && envp[i][len])
+		while (data->envp[i][len] != '=' && data->envp[i][len])
 			len++;
-		result = ft_strchr(envp[i], '=') + 1;
-		name = ft_substr(envp[i], 0, len);
-		if (ft_strchr(envp[i], '=') == 0)
+		result = ft_strchr(data->envp[i], '=') + 1;
+		name = ft_substr(data->envp[i], 0, len);
+		if (ft_strchr(data->envp[i], '=') == 0)
 			i++;
 		else
-		{
-			if (*envp[i] == '_')
-				i++;
-			else
-			{	
-				printf("declare -x %s=\"%s\"\n", name, result);
-				free(name);
-				i++;
-			}
-		}	
+			print_export(data, i, name, result);
 	}
 	g_err_code = 0;
-	free_loop(envp);
-}	
-
-static char	*export_tools(char **argz, int i)
-{
-	int		j;
-	char	*rtn;
-
-	j = 0;
-	rtn = ft_calloc(sizeof(char), ft_strlen(argz[i]) + 1);
-	while (argz[i][j] != '=' && argz[i][j])
-	{
-		rtn[j] = argz[i][j];
-		j++;
-	}
-	return (rtn);
+	free_loop(data->envp);
 }	
 
 void	built_in_export(t_data *data)
