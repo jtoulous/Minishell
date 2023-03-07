@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:07:18 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/02 11:19:54 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:45:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ long long	ft_atol_check(const char *nptr)
 		z++;
 	if (nptr[z] == '-' || nptr[z] == '+')
 	{	
-		if (nptr[z] == '-')
+		if (nptr[z++] == '-')
 			lim[18] = '8';
-		z++;
 	}	
 	y = z;
 	while (nptr[y])

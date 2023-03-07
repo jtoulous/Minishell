@@ -6,47 +6,46 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 10:11:10 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:44:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_export(t_data *data, int i, char *name, char *result)
-{
-	if (data->envp[i][0] == '_')
-			i++;
-	else
-	{	
-		printf("declare -x %s=\"%s\"\n", name, result);
-		free(name);
-		i++;
-	}
-}	
-
 static void	built_in_export_utils(t_data *data)
 {
 	int		i;
 	int		len;
+	char	**envp;
 	char	*result;
 	char	*name;
 
 	i = 0;
-	ft_sort_ascii(data->envp);
-	while (data->envp[i])
+	envp = convert_env(data->env);
+	ft_sort_ascii(envp);
+	while (envp[i])
 	{	
 		len = 0;
-		while (data->envp[i][len] != '=' && data->envp[i][len])
+		while (envp[i][len] != '=' && envp[i][len])
 			len++;
-		result = ft_strchr(data->envp[i], '=') + 1;
-		name = ft_substr(data->envp[i], 0, len);
-		if (ft_strchr(data->envp[i], '=') == 0)
+		result = ft_strchr(envp[i], '=') + 1;
+		name = ft_substr(envp[i], 0, len);
+		if (ft_strchr(envp[i], '=') == 0)
 			i++;
 		else
-			print_export(data, i, name, result);
+		{
+			if (*envp[i] == '_')
+				i++;
+			else
+			{	
+				printf("declare -x %s=\"%s\"\n", name, result);
+				free(name);
+				i++;
+			}
+		}	
 	}
 	g_err_code = 0;
-	free_loop(data->envp);
+	free_loop(envp);
 }	
 
 void	built_in_export(t_data *data)
