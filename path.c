@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:53:05 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:27:07 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,13 @@ void	built_in_unset(t_data *data)
 	i = 1;
 	tmp = data->env;
 	p_tmp = NULL;
+	if (ft_isalpha(data->argz[i][0]) == 0)
+	{
+		ft_putstr_fd(data->argz[i], 2);
+		ft_putstr_fd(" : not a valid identifier\n", 2);
+		g_err_code = 1;
+		return ;
+	}
 	while (data->argz[i])
 	{
 		if (ft_strncmp(tmp->env_copy, data->argz[i],

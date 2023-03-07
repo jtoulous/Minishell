@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 10:44:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:57:21 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	built_in_export_utils(t_data *data)
 			}
 		}	
 	}
-	g_err_code = 0;
+	g_err_code = 1;
 	free_loop(envp);
 }	
 
@@ -72,10 +72,10 @@ void	built_in_export(t_data *data)
 		p_val = data->env;
 		while (data->argz[i])
 		{
-			while (p_val->next != NULL)
+			while (p_val != NULL)
 			{	
 				if (ft_strncmp(p_val->env_copy, c_val,
-						ft_strlen(p_val->env_copy)) == 0)
+						ft_strlen(c_val)) == 0)
 				{
 					free(p_val->env_copy);
 					p_val->env_copy = NULL;
