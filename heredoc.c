@@ -6,12 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:05:56 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:39:36 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <readline/readline.h>
 
 void	get_doc_argz(int fd, char *lim)
 {
@@ -70,7 +69,6 @@ void	prep_hdoc(t_data *data, int z, char *lim)
 	get_doc_argz(fd, lim);
 	replace_hdoc(data, file, z);
 	unlinkz(file);
-	//free (file);
 	close (fd);
 }
 
@@ -94,9 +92,9 @@ void	fake_prep_hdoc(char *lim)
 
 void	hdoc_scan(t_data *data)
 {
-	int	z;
+	int		z;
 	char	*lim;
-	
+
 	z = 0;
 	while (data->line[z])
 	{

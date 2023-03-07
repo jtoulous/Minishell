@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:15:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:15:33 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:45:10 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,19 @@ void	close_pipes(int **pipes, int nb)
 	free (pipes);
 }
 
-void free_lst(t_list *lst)
+void	free_lst(t_list *lst)
 {
-    t_list *tmp;
+	t_list	*tmp;
 
-    while (lst != NULL)
-    {
-        tmp = lst->next;
-        free(lst->env_copy);
-        lst->env_copy = NULL;
-        free(lst);
-        lst = tmp;
-    }
-    lst = NULL;
+	while (lst != NULL)
+	{
+		tmp = lst->next;
+		free(lst->env_copy);
+		lst->env_copy = NULL;
+		free(lst);
+		lst = tmp;
+	}
+	lst = NULL;
 }
 
 char	*env_search(t_list *env, char *var)

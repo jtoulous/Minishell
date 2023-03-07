@@ -6,11 +6,10 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:29:04 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 15:13:19 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:41:35 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
 
 static void	built_in_exit_utils(t_data *data)
@@ -45,7 +44,7 @@ int	built_in_exit(t_data *data)
 		n = ft_atol_check(data->argz[1]);
 		if (n == 1)
 		{
-			err_code = 2;
+			g_err_code = 2;
 			ft_putstr_fd(" numeric argument required\n", 2);
 			return (1);
 		}	
@@ -55,12 +54,12 @@ int	built_in_exit(t_data *data)
 	{
 		printf("exit\n");
 		ft_putstr_fd(" too many arguments\n", 2);
-		err_code = 1;
+		g_err_code = 1;
 		return (1);
 	}	
 	ft_putstr_fd("exit\n", 1);
 	free_and_close_all(data, 3);
 	free_loop(data->envp);
-	err_code = n % 256;
+	g_err_code = n % 256;
 	exit (n % 256);
 }

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/06 12:08:18 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:44:11 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	reset_data(t_data *data)
 void	pipes_prep(t_data *data, int nb_cmdz)
 {
 	int	z;
-	
+
 	z = 0;
 	data->pipes = ft_calloc(nb_cmdz, sizeof(int *));
 	while (z < nb_cmdz)
@@ -67,7 +67,7 @@ int	count_leftovers(char *line, int end)
 {
 	int	z;
 	int	leftovers;
-	
+
 	z = 0;
 	leftovers = 0;
 	while (line[z] == ' ' && z < end)

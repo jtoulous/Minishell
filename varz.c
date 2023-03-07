@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:56 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:12:12 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:46:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	sub_var(t_data *data, int spot, int end_var)
 
 	var = ft_substr(data->line, spot + 1, end_var - (spot + 1));
 	var_val = env_search(data->env, var);
-	//if (data->line[end_var + 1] == """)
-	//	end_var++;
 	if (!var_val)
 		m_trim(data->line, spot, end_var - 1);
 	else
@@ -50,7 +48,7 @@ void	sub_err_code(t_data *data, int spot)
 	z = spot + 2;
 	while (data->line[z])
 		z++;
-	error = ft_itoa(err_code);
+	error = ft_itoa(g_err_code);
 	ante = ft_substr(data->line, 0, spot);
 	pre = ft_substr(data->line, spot + 2, z - (spot + 2));
 	free (data->line);

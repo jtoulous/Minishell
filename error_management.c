@@ -6,20 +6,17 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:08 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 09:59:19 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:41:01 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
-#include <readline/readline.h>
-#include <unistd.h>
 
 void	error_permission(t_data *data)
 {
 	ft_putstr_fd(" Permission denied\n", STDERR_FILENO);
 	data->err_stat = 1;
-	err_code = 1;
+	g_err_code = 1;
 }
 
 int	error_inredir(char *failed_redir, int error)
@@ -27,7 +24,7 @@ int	error_inredir(char *failed_redir, int error)
 	ft_putstr_fd(failed_redir, STDERR_FILENO);
 	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	free (failed_redir);
-	err_code = error;
+	g_err_code = error;
 	return (0);
 }
 
@@ -44,7 +41,7 @@ void	error_path(char *cmd)
 	if ((cmd[0] == '.' && cmd[1] == '/')
 		|| cmd[0] == '/')
 	{	
-		err_code = 126;
+		g_err_code = 126;
 		if (access(cmd, X_OK) == -1 && access(cmd, F_OK) == 0)
 			ft_putstr_fd(": Permission denied", STDERR_FILENO);
 		else if (access(cmd, F_OK) == 0
@@ -53,13 +50,13 @@ void	error_path(char *cmd)
 		else
 		{	
 			ft_putstr_fd(": No such file or directory", STDERR_FILENO);
-			err_code += 1;
+			g_err_code += 1;
 		}
 	}
 	else
 	{	
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		err_code = 127;
+		g_err_code = 127;
 	}
 	free (cmd);
 }
@@ -83,5 +80,5 @@ void	error_syntax(t_data *data, int z, int opt)
 	}
 	ft_putchar_fd(39, STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
-	err_code = 2;
+	g_err_code = 2;
 }

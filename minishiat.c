@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/06 11:58:01 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:42:44 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	treat_command(t_data *data)
 			parse(data);
 			if (data->argz != NULL)
 			{	
-				err_code = 0;
+				g_err_code = 0;
 				exec(data, z);
 			}	
 			if (z < data->nb_cmds - 1)
@@ -53,7 +53,7 @@ void	wait_loop(t_data *data)
 		status = 1;
 		waitpid(data->last_pid, &status, 0);
 		if (WIFEXITED(status))
-			err_code = WEXITSTATUS(status);
+			g_err_code = WEXITSTATUS(status);
 	}
 	while (z < data->nb_forks - 1)
 	{
@@ -77,7 +77,6 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		data.line = readline("\e[0;31mküçük_kabuk🦃>\e[0;m ");
-		//data.line = ft_strdup(argv[1]);
 		if (data.line == NULL)
 			break ;
 		add_history(data.line);

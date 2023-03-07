@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:06:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:06:56 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:42:56 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	parse(t_data *data)
 	clean_dat_biach(data);
 	if (check_redirz(data, end) != 1)
 		return ;
-	end = end_of_cmd(data->line, 0);	
+	end = end_of_cmd(data->line, 0);
 	prep_exec(data, end);
 }

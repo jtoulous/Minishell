@@ -6,13 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/06 12:02:59 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:42:11 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "minishell.h"
-#include <stdlib.h>
 
 static void	ft_swap(char **s1, char **s2)
 {
@@ -86,7 +84,7 @@ static void	built_in_export_utils(t_data *data)
 			}
 		}	
 	}
-	err_code = 0;
+	g_err_code = 0;
 	free_loop(envp);
 }	
 
@@ -116,7 +114,7 @@ void	built_in_export(t_data *data)
 	{
 		if (data->argz[1][0] == '=')
 		{
-			err_code = 1;
+			g_err_code = 1;
 			ft_putstr_fd(data->argz[1], 2);
 			ft_putstr_fd(" : not a valid identifier\n", 2);
 			return ;
@@ -131,7 +129,8 @@ void	built_in_export(t_data *data)
 		{
 			while (p_val->next != NULL)
 			{	
-				if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(p_val->env_copy)) == 0)
+				if (ft_strncmp(p_val->env_copy, c_val,
+						ft_strlen(p_val->env_copy)) == 0)
 				{
 					free(p_val->env_copy);
 					p_val->env_copy = NULL;
@@ -144,7 +143,7 @@ void	built_in_export(t_data *data)
 			{
 				ft_putstr_fd(data->argz[i], 2);
 				ft_putstr_fd(" : not a valid identifier\n", 2);
-				err_code = 1;
+				g_err_code = 1;
 				return ;
 			}
 			while (data->argz[i][j] != '=' && data->argz[i][j])
@@ -156,7 +155,7 @@ void	built_in_export(t_data *data)
 					{	
 						if (ft_isalnum(data->argz[i][j]) == 0)
 						{
-							err_code = 1;
+							g_err_code = 1;
 							ft_putstr_fd(" not a valid identifier\n", 2);
 							return ;
 						}
@@ -168,7 +167,7 @@ void	built_in_export(t_data *data)
 			if (data->argz[i][j - 1] == '-')
 			{
 				ft_putstr_fd(" not a valid identifier\n", 2);
-				err_code = 1;
+				g_err_code = 1;
 				return ;
 			}
 			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));

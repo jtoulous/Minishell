@@ -6,12 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/06 11:49:32 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:37:04 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <signal.h>
 
 void	exec(t_data *data, int z)
 {
@@ -65,6 +64,7 @@ void	first_multiple(t_data *data)
 	{	
 		data->nb_forks++;
 		pid = fork();
+		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
 			if (data->infile != -1)
@@ -77,7 +77,7 @@ void	first_multiple(t_data *data)
 			if (built_in(data) == -1)
 				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
-			free_loop(data->envp);	
+			free_loop(data->envp);
 			exit (0);
 		}
 	}
@@ -87,13 +87,13 @@ void	first_multiple(t_data *data)
 void	last_multiple(t_data *data, int z)
 {
 	int		pid;
-	//char	**envp;
 
 	data->envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
+		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
 			if (data->prev_outfile != -1)
@@ -119,13 +119,13 @@ void	last_multiple(t_data *data, int z)
 void	multiple_exec(t_data *data, int z)
 {
 	int		pid;
-	//char	**envp;
 
 	data->envp = convert_env(data->env);
 	if (check_if_fork(data) != 1)
 	{
 		data->nb_forks++;
 		pid = fork();
+		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
 			if (data->prev_outfile != -1)

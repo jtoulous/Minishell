@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:10:42 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:39:57 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-extern int	err_code;
+extern int	g_err_code;
 
 typedef struct pipex_data
 {
