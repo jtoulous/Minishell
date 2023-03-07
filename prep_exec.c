@@ -59,10 +59,25 @@ char	**path_lst(t_data *data)
 	char	**paths;
 
 	path_list = env_search(data->env, "PATH");
+	if (!path_list)
+		return (NULL);
 	s_trimage(path_list, 5);
 	paths = ft_split(path_list, ':');
 	free (path_list);
 	return (paths);
+}
+
+int	check_already_pathed(t_data *data, char *cmd)
+{
+	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
+	{
+		if (access(cmd, F_OK) == 0 || check_if_builtin(cmd) == 1)
+			data->argz[0] = ft_strdup(cmd);
+		else
+			data->argz = NULL;
+		return (1);
+	}
+	return (0);
 }
 
 void	path_finder(t_data *data, char *cmd)
@@ -71,26 +86,23 @@ void	path_finder(t_data *data, char *cmd)
 	int		z;
 
 	z = 0;
-	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
-	{
-		if (access(cmd, F_OK) == 0 || check_if_builtin(cmd) == 1)
-			data->argz[0] = ft_strdup(cmd);
-		else
-			data->argz = NULL;
+	if (check_already_pathed(data, cmd) == 1)
 		return ;
-	}
 	paths = path_lst(data);
-	while (paths[z])
+	if (paths != NULL)
 	{
-		data->argz[0] = triple_strjoin(paths[z], "/", cmd);
-		if (access(data->argz[0], F_OK) == 0)
+		while (paths[z])
 		{
-			free_loop(paths);
-			return ;
+			data->argz[0] = triple_strjoin(paths[z], "/", cmd);
+			if (access(data->argz[0], F_OK) == 0)
+			{
+				free_loop(paths);
+				return ;
+			}
+			free (data->argz[0]);
+			z++;
 		}
-		free (data->argz[0]);
-		z++;
-	}
+	}	
 	data->argz = NULL;
 	free_loop(paths);
 }
