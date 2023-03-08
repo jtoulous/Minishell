@@ -6,12 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/08 12:06:23 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:39:08 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
+#include <linux/limits.h>
 #include <stdlib.h>
 
 void	built_in_cd(t_data *data)
@@ -107,7 +108,7 @@ void	built_in_unset(t_data *data)
 
 	if (data->argz[1] == NULL)
 		return ;
-	i = 1;
+	i = 0;
 	tmp = data->env;
 	p_tmp = NULL;
 	if (ft_isalpha(data->argz[i][0]) == 0)

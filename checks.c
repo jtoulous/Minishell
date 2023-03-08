@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:58:47 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:23:19 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:57:50 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,16 @@ int	check_if_fork(t_data *data)
 		return (1);
 	}	
 	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
+	{
+		built_in(data);
+		return (1);
+	}
+	if (ft_strncmp(data->argz[0], "pwd", ft_strlen(data->argz[0])) == 0)
+	{
+		built_in(data);
+		return (1);
+	}
+	if (ft_strncmp(data->argz[0], "echo", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in(data);
 		return (1);
