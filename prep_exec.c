@@ -51,7 +51,7 @@ void	malloc_dat_shiat(t_data *data, int end)
 		else
 			z++;
 	}
-	data->argz = ft_calloc(sizeof(char *), m_size + 1);
+	data->argz = ft_calloc(sizeof(char *), m_size + 2);
 }
 
 char	**path_lst(t_data *data)

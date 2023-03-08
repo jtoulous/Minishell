@@ -12,14 +12,6 @@
 
 #include "minishell.h"
 
-void	handle_sigdoc(int sig)
-{
-	(void)sig;
-	ft_putchar_fd('\n', 1);
-	close (STDIN_FILENO);
-	g_err_code = 130;
-}
-
 void	get_doc_argz(int fd, char *lim)
 {
 	char	*buf;
@@ -80,7 +72,9 @@ void	prep_hdoc(t_data *data, int z, char *lim)
 	get_doc_argz(fd, lim);
 	if (g_err_code == 130)
 	{	
-		data->exec_stat = 0;
+		close (fd);
+		unlink (file);
+		free (file);
 		return ;
 	}
 	replace_hdoc(data, file, z);
@@ -93,10 +87,13 @@ void	fake_prep_hdoc(char *lim)
 {
 	char	*buf;
 
-	while (1)
+	signal(SIGINT, handle_sigdoc);
+	while (1 && g_err_code != 130)
 	{
 		ft_putstr_fd(">", 1);
 		buf = get_next_line(0);
+		if (g_err_code == 130)
+			return ;
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
 			&& ft_strlen(buf) == ft_strlen(lim))
 		{
@@ -107,10 +104,26 @@ void	fake_prep_hdoc(char *lim)
 	}
 }
 
+void	treat_hdoc(t_data *data, int z)
+{
+	char	*lim;
+	
+	lim = hdoc_limit(data->line, z);
+	if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)
+		prep_hdoc(data, z, lim);	
+	else
+	{
+		fake_prep_hdoc(lim);
+		trim_hdoc(data->line, z);
+	}
+	if (g_err_code == 130)
+		data->exec_stat = 0;
+	free (lim);
+}
+ 
 void	hdoc_scan(t_data *data)
 {
 	int		z;
-	char	*lim;
 
 	z = 0;
 	while (data->line[z] && data->exec_stat == 1)
@@ -120,22 +133,14 @@ void	hdoc_scan(t_data *data)
 		{
 			if (data->stdin_copy == -1)
 				data->stdin_copy = dup(STDIN_FILENO);
-			lim = hdoc_limit(data->line, z);
 			if (g_err_code == 130)
 				g_err_code = -1;
-			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)
-				prep_hdoc(data, z, lim);	
-			else
-			{
-				fake_prep_hdoc(lim);
-				trim_hdoc(data->line, z);
-			}
-			free (lim);
+			treat_hdoc(data, z);
 			if (g_err_code == 130)
 				dup2(data->stdin_copy, STDIN_FILENO);
+			if (g_err_code == -1)
+				g_err_code = 130;	
 		}
-		if (g_err_code == -1)
-				g_err_code = 130;
 		z++;
 	}
 }

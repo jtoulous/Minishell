@@ -115,6 +115,7 @@ void	fake_prep_hdoc(char *lim);
 void	prep_hdoc(t_data *data, int z, char *lim);
 void	replace_hdoc(t_data *data, char *file, int spot);
 void	get_doc_argz(int fd, char *lim);
+void	treat_hdoc(t_data *data, int z);
 
 //redir.c
 int		the_last_inredir(char *line, int spot);
@@ -194,8 +195,7 @@ int		built_in_exit(t_data *data);
 //signal.c
 void	handle_sigint(int sig);
 void	handle_sigchild(int sig);
-
-void	free_loop(char **str);
+void	handle_sigdoc(int sig);
 
 //toolvox_export.c
 void	ft_swap(char **s1, char **s2);
