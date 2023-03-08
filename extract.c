@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:26 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/06 12:02:06 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:54:58 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*extract_redir(char *line, int spot)
 			&& (line[z] != '|' || valid_pipe(line, z) != 1)
 			&& line[z])
 			z++;
-		to_test = ft_substr(line, spot, z - spot);
+		to_test = ft_substr(line, spot, (z - spot));
 	}
 	return (to_test);
 }

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:21:45 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 10:53:10 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:44:11 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	malloc_dat_shiat(t_data *data, int end)
 		else
 			z++;
 	}
-	data->argz = ft_calloc(m_size + 2, sizeof(char *));
+	data->argz = ft_calloc(sizeof(char *), m_size + 1);
 }
 
 char	**path_lst(t_data *data)

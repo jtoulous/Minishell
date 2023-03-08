@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:05 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 10:05:03 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:13:31 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
 
 void	skip_out(char *line, int *z)
 {
@@ -75,7 +76,7 @@ char	**convert_env(t_list *env)
 
 	tmp = env;
 	z = ft_lstsize(env);
-	converted = ft_calloc(z + 1, sizeof(char *));
+	converted = ft_calloc(sizeof(char *), z + 1);
 	z = 0;
 	while (tmp->next != NULL)
 	{

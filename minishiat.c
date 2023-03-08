@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:42:44 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 12:27:11 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	treat_command(t_data *data)
 
 	z = 0;
 	check(data);
+	if (data->line[0] == '\0')
+		data->exec_stat = 0;
 	if (data->exec_stat == 1)
 	{
 		if (data->nb_cmds > 1)
