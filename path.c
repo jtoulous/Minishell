@@ -6,12 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 13:27:07 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:43:14 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "minishell.h"
+#include <stdlib.h>
 
 void	built_in_cd(t_data *data)
 {
@@ -56,10 +57,23 @@ void	built_in_pwd(t_data *data)
 void	built_in_env(t_data *data)
 {
 	int	z;
+	int	y;
 
 	z = 0;
 	while (data->envp[z])
 	{
+		y = 1;
+		while (data->envp[z][y])
+		{
+			if (data->envp[z][y] == '=')
+				break ;
+			if (data->envp[z][y + 1] == '\0' && data->envp[z][y] != '=')
+			{
+				z++;
+				y = 0;
+			}	
+			y++;
+		}
 		printf("%s\n", data->envp[z]);
 		z++;
 	}
@@ -103,7 +117,7 @@ void	built_in_unset(t_data *data)
 		g_err_code = 1;
 		return ;
 	}
-	while (data->argz[i])
+	while (data->argz[i++])
 	{
 		if (ft_strncmp(tmp->env_copy, data->argz[i],
 				ft_strlen(data->argz[i])) == 0)
@@ -113,6 +127,5 @@ void	built_in_unset(t_data *data)
 		}
 		else
 			built_in_unset_two(data, tmp, p_tmp, i);
-		i++;
 	}
 }
