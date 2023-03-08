@@ -22,8 +22,6 @@ void	treat_command(t_data *data)
 
 	z = 0;
 	check(data);
-	if (data->line[0] == '\0')
-		data->exec_stat = 0;
 	if (data->exec_stat == 1)
 	{
 		if (data->nb_cmds > 1)

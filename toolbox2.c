@@ -37,6 +37,7 @@ void	init_data(t_data *data, char **envp)
 	data->nb_forks = 0;
 	data->err_stat = 0;
 	data->doc_stat = 0;
+	data->stdin_copy = -1;
 }
 
 void	reset_data(t_data *data)

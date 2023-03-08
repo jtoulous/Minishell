@@ -59,6 +59,11 @@ void	close_all(t_data *data)
 		close (data->prev_outfile);
 		data->prev_outfile = -1;
 	}
+	if (data->stdin_copy != -1)
+	{	
+		close (data->stdin_copy);
+		data->stdin_copy = -1;
+	}
 }
 
 void	close_pipes(int **pipes, int nb)

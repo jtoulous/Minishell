@@ -89,7 +89,10 @@ void	check_closed_quotes(t_data *data)
 
 void	check(t_data *data)
 {	
-	check_closed_quotes(data);
+	if (data->line[0] == '\0')
+		data->exec_stat = 0;
+	if (data->exec_stat == 1)
+		check_closed_quotes(data);
 	if (data->exec_stat == 1)
 		check_syntax(data, '|');
 	if (data->exec_stat == 1)

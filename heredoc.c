@@ -12,20 +12,31 @@
 
 #include "minishell.h"
 
+void	handle_sigdoc(int sig)
+{
+	(void)sig;
+	ft_putchar_fd('\n', 1);
+	close (STDIN_FILENO);
+	g_err_code = 130;
+}
+
 void	get_doc_argz(int fd, char *lim)
 {
 	char	*buf;
 
-	while (1)
-	{
+	signal(SIGINT, handle_sigdoc);
+	while (1 && g_err_code != 130)
+	{	
 		ft_putstr_fd(">", 1);
 		buf = get_next_line(0);
+		if (g_err_code == 130)
+			return ;
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
 			&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
-			free(buf);
+			free(buf);		
 			return ;
-		}		
+		}
 		write (fd, buf, ft_strlen(buf));
 		free (buf);
 	}
@@ -67,6 +78,11 @@ void	prep_hdoc(t_data *data, int z, char *lim)
 	free (fileno);
 	fd = open(file, O_WRONLY | O_RDONLY | O_CREAT, 0777);
 	get_doc_argz(fd, lim);
+	if (g_err_code == 130)
+	{	
+		data->exec_stat = 0;
+		return ;
+	}
 	replace_hdoc(data, file, z);
 	data->doc_stat = 1;
 	unlinkz(file);
@@ -97,21 +113,29 @@ void	hdoc_scan(t_data *data)
 	char	*lim;
 
 	z = 0;
-	while (data->line[z])
+	while (data->line[z] && data->exec_stat == 1)
 	{
 		if (data->line[z] == '<'
 			&& valid_hd(data->line, z) == 1)
 		{
+			if (data->stdin_copy == -1)
+				data->stdin_copy = dup(STDIN_FILENO);
 			lim = hdoc_limit(data->line, z);
+			if (g_err_code == 130)
+				g_err_code = -1;
 			if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)
-				prep_hdoc(data, z, lim);
+				prep_hdoc(data, z, lim);	
 			else
 			{
 				fake_prep_hdoc(lim);
 				trim_hdoc(data->line, z);
 			}
 			free (lim);
+			if (g_err_code == 130)
+				dup2(data->stdin_copy, STDIN_FILENO);
 		}
+		if (g_err_code == -1)
+				g_err_code = 130;
 		z++;
 	}
 }

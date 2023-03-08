@@ -67,6 +67,7 @@ typedef struct pipex_data
 	int		last_pid;
 	int		err_stat;
 	int		doc_stat;
+	int		stdin_copy;
 }		t_data;
 
 //minishiat.c
@@ -201,4 +202,5 @@ void	ft_swap(char **s1, char **s2);
 void	ft_sort_ascii(char **str);
 void	ft_strcp(char *dest, char *src);
 char	*export_tools(char **argz, int i);
+
 #endif

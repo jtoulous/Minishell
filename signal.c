@@ -20,6 +20,8 @@ void	handle_sigint(int sig)
 	rl_replace_line("", sig);
 	rl_on_new_line();
 	rl_redisplay();
+	//close (STDIN_FILENO);
+	g_err_code = 130;
 }
 
 void	handle_sigchild(int sig)
