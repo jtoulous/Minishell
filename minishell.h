@@ -180,7 +180,7 @@ int		valid_hd(char *line, int spot);
 //varz.c
 void	replace_var(t_data *data, int spot, int end_var, char *var_val);
 void	sub_var(t_data *data, int spot, int end_var);
-int		scan_varz(t_data *data, int end, int spot);
+int		scan_varz(t_data *data, int end, int spot, int z);
 
 //builtin.c
 int		built_in(t_data *data);

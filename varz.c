@@ -56,11 +56,8 @@ void	sub_err_code(t_data *data, int spot)
 	mega_free(ante, pre, error, NULL);
 }
 
-int	scan_varz(t_data *data, int end, int spot)
+int	scan_varz(t_data *data, int end, int spot, int z)
 {
-	int	z;
-
-	z = spot + 1;
 	if (data->line[spot] == '$' && in_or_out(data->line, z) != 2)
 	{
 		if (data->line[z] == ' '

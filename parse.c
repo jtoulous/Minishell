@@ -21,7 +21,7 @@ void	clean_dat_biach(t_data *data)
 	end = end_of_cmd(data->line, 0);
 	while (z < end)
 	{
-		if (scan_varz(data, end, z) != 1)
+		if (scan_varz(data, end, z, z + 1) != 1)
 			z++;
 		end = end_of_cmd(data->line, 0);
 	}
