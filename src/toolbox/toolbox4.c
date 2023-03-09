@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:50:10 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:56:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:05:45 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	free_loop(char **str)
 {

@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:24:11 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:54:40 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:04:44 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static void	built_in_echo_utils(t_data *data)
 {

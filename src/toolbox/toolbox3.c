@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:15:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:56:41 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:05:40 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	free_and_close_all(t_data *data, int opt)
 {

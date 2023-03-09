@@ -6,10 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:54:20 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:03:39 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../minishell.h"
+
+#include "../../minishell.h"
 
 static int	built_in_bis(t_data *data)
 {

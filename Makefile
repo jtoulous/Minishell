@@ -15,18 +15,18 @@ SRC = src/error_management.c\
 	  src/signal.c\
 	  src/global.c\
 	  src/childs.c\
-	  toolbox/toolbox.c\
-	  toolbox/toolbox2.c\
-	  toolbox/toolbox3.c\
-	  toolbox/toolbox4.c\
-	  toolbox/toolbox_hd.c\
-	  toolbox/toolbox_export.c\
-	  built_in/built_in.c\
-	  built_in/echo.c\
-	  built_in/export.c\
-	  built_in/path.c\
-	  built_in/exit.c\
-	  built_in/cd.c
+	  src/toolbox/toolbox.c\
+	  src/toolbox/toolbox2.c\
+	  src/toolbox/toolbox3.c\
+	  src/toolbox/toolbox4.c\
+	  src/toolbox/toolbox_hd.c\
+	  src/toolbox/toolbox_export.c\
+	  src/built_in/built_in.c\
+	  src/built_in/echo.c\
+	  src/built_in/export.c\
+	  src/built_in/path.c\
+	  src/built_in/exit.c\
+	  src/built_in/cd.c
 	  
 CFLAGS = -Wall -Wextra -Werror -g
 

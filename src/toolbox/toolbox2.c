@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:56:48 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:05:21 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	export_env(t_list **env, char **envp)
 {
