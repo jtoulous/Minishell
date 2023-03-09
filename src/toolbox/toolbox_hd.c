@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:39 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 15:05:58 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:54:48 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	unlinkz(char *new)
 		}
 		unlink(tmp->env_copy);
 		free_lst(unlinks);
+		unlinks = NULL;
 	}
 }
 

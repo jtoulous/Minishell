@@ -46,19 +46,22 @@ void	built_in_echo(t_data *data)
 	int	j;
 
 	i = 1;
-	if (ft_strncmp(data->argz[1], "-n", 2) == 0)
+	if (data->argz[1] != NULL)
 	{
-		while (ft_strncmp(data->argz[i], "-n", 2) == 0)
-		{	
-			j = 2;
-			while (data->argz[i][j] == 'n')
-					j++;
-			if (data->argz[i][j] == '\0')
-				i++;
-			else
-				break ;
-		}
-		print_echo(data, i);
+		if (ft_strncmp(data->argz[1], "-n", 2) == 0)
+		{
+			while (ft_strncmp(data->argz[i], "-n", 2) == 0)
+			{	
+				j = 2;
+				while (data->argz[i][j] == 'n')
+						j++;
+				if (data->argz[i][j] == '\0')
+					i++;
+				else
+					break ;
+			}
+			print_echo(data, i);
+		}	
 	}	
 	else
 		built_in_echo_utils(data);

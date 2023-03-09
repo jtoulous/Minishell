@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:53:06 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:50:44 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	fake_prep_hdoc(char *lim)
 		if (g_err_code == 130)
 			return ;
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
-			&& ft_strlen(buf) == ft_strlen(lim))
+			&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
 			free (buf);
 			return ;
