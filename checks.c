@@ -132,12 +132,5 @@ int	check_if_fork(t_data *data)
 		built_in(data);
 		return (1);
 	}
-	if (ft_strncmp(data->argz[0], "echo", ft_strlen(data->argz[0])) == 0)
-	{
-		if (data->nb_cmds > 1)
-			return (0);
-		built_in(data);
-		return (1);
-	}
 	return (0);
 }

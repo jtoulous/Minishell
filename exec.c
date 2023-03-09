@@ -46,7 +46,7 @@ void	simple_exec(t_data *data)
 			else
 			{	
 				free_loop(data->envp);
-				free_and_close_all(data, 2);
+				free_and_close_all(data, 3);
 				exit (0);
 			}
 		}
