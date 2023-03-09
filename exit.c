@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:29:04 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/08 12:40:44 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 13:00:08 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,14 @@ static void	built_in_exit_utils(t_data *data)
 		}					
 		i++;
 	}
-}	
+}
+
+static void	error_exit(void)
+{
+	g_err_code = 2;
+	ft_putstr_fd("exit\n", 1);
+	ft_putstr_fd(" numeric argument required\n", 2);
+}
 
 static void	error_many_arg(void)
 {
@@ -49,12 +56,9 @@ int	built_in_exit(t_data *data)
 	if (data->argz[1] != NULL && data->argz[2] == NULL)
 	{	
 		built_in_exit_utils(data);
-		n = ft_atol_check(data->argz[1]);
-		if (n == 1)
+		if (ft_atol_check(data->argz[1]) == 1)
 		{
-			g_err_code = 2;
-			ft_putstr_fd("exit\n", 1);
-			ft_putstr_fd(" numeric argument required\n", 2);
+			error_exit();
 			return (1);
 		}	
 		n = ft_atol(data->argz[1]);
