@@ -47,7 +47,7 @@ int	built_in(t_data *data)
 	}
 	if (ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0)
 	{
-		built_in_export(data);
+		built_in_export(data, 1, 0);
 		return (0);
 	}
 	built_in_bis(data);

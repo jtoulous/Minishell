@@ -48,73 +48,98 @@ static void	built_in_export_utils(t_data *data)
 	free_loop(envp);
 }	
 
-void	built_in_export(t_data *data)
+int	export_check_three(t_data *data, int *i, int *j)
 {
-	int		i;
-	int		j;
+	while (data->argz[*i][*j] != '=' && data->argz[*i][*j])
+	{
+		if (data->argz[*i][*j] == '\0')
+		{
+			*j = 0;
+			while (data->argz[*i][*j])
+			{	
+				if (ft_isalnum(data->argz[*i][*j]) == 0)
+				{
+					g_err_code = 1;
+					ft_putstr_fd(" not a valid identifier\n", 2);
+					return (0);
+				}
+				*j += 1;
+			}		
+		}	
+		*j += 1;
+	}
+	if (data->argz[*i][*j - 1] == '-')
+	{
+		ft_putstr_fd(" not a valid identifier\n", 2);
+		g_err_code = 1;
+		return (0) ;
+	}
+	return (1);
+}
+
+int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
+{
+	while (p_val != NULL)
+	{	
+		if (ft_strncmp(p_val->env_copy, c_val,
+				ft_strlen(c_val)) == 0)
+		{
+			free(p_val->env_copy);
+			p_val->env_copy = NULL;
+			p_val->env_copy = ft_strdup(data->argz[i]);
+			return (0);
+		}	
+		p_val = p_val->next;
+	}
+	if (ft_isalpha(data->argz[i][0]) == 0)
+	{
+		ft_putstr_fd(data->argz[i], 2);
+		ft_putstr_fd(" : not a valid identifier\n", 2);
+		g_err_code = 1;
+		return (0);
+	}
+	return (1);
+}
+
+int	export_check_one(t_data *data)
+{
+	if (data->argz[1][0] == '=')
+	{
+		g_err_code = 1;
+		ft_putstr_fd(data->argz[1], 2);
+		ft_putstr_fd(" : not a valid identifier\n", 2);
+		return (0);
+	}
+	if (data->nb_cmds > 1)
+			return (0);
+	return (1);
+}
+
+void	built_in_export(t_data *data, int i, int j)
+{
+	//int		i;
+	//int		j;
 	t_list	*p_val;
 	char	*c_val;
 
 	if (data->argz[1] != NULL)
 	{
-		if (data->argz[1][0] == '=')
-		{
-			g_err_code = 1;
-			ft_putstr_fd(data->argz[1], 2);
-			ft_putstr_fd(" : not a valid identifier\n", 2);
-			return ;
-		}
-		i = 1;
-		j = 0;
-		if (data->nb_cmds > 1)
-			return ;
+	
+		//i = 1;
+		//j = 0;
+		
+		if (export_check_one(data) == 0)
+			return ;	
 		c_val = export_tools(data->argz, i);
 		p_val = data->env;
 		while (data->argz[i])
 		{
-			while (p_val != NULL)
-			{	
-				if (ft_strncmp(p_val->env_copy, c_val,
-						ft_strlen(c_val)) == 0)
-				{
-					free(p_val->env_copy);
-					p_val->env_copy = NULL;
-					p_val->env_copy = ft_strdup(data->argz[i]);
-					return ;
-				}	
-				p_val = p_val->next;
-			}
-			if (ft_isalpha(data->argz[i][0]) == 0)
-			{
-				ft_putstr_fd(data->argz[i], 2);
-				ft_putstr_fd(" : not a valid identifier\n", 2);
-				g_err_code = 1;
+	
+			if (export_check_two(data, p_val, c_val, i) == 0)
 				return ;
-			}
-			while (data->argz[i][j] != '=' && data->argz[i][j])
-			{
-				if (data->argz[i][j] == '\0')
-				{
-					j = 0;
-					while (data->argz[i][j])
-					{	
-						if (ft_isalnum(data->argz[i][j]) == 0)
-						{
-							g_err_code = 1;
-							ft_putstr_fd(" not a valid identifier\n", 2);
-							return ;
-						}
-						j++;
-					}		
-				}	
-				j++;
-			}
-			if (data->argz[i][j - 1] == '-')
-			{
-				ft_putstr_fd(" not a valid identifier\n", 2);
-				g_err_code = 1;
+			if (export_check_three(data, &i, &j) == 0)
 				return ;
-			}
+	
 			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
 			i++;
 		}

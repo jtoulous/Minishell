@@ -209,4 +209,8 @@ void	ft_sort_ascii(char **str);
 void	ft_strcp(char *dest, char *src);
 char	*export_tools(char **argz, int i);
 
+int	export_check_one(t_data *data);
+int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i);
+int	export_check_three(t_data *data, int *i, int *j);
+
 #endif
