@@ -6,12 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:09:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:21:41 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:53:45 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "minishell.h"
+#include "../minishell.h"
 
 void	handle_sigint(int sig)
 {

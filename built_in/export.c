@@ -6,11 +6,28 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 12:57:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:54:55 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
+
+static void	export_display(char **envp, int *i, char *name, char *result)
+{
+	if (ft_strchr(envp[*i], '=') == 0)
+		*i += 1;
+	else
+	{
+		if (*envp[*i] == '_')
+			*i += 1;
+		else
+		{	
+			printf("declare -x %s=\"%s\"\n", name, result);
+			free(name);
+			*i += 1;
+		}
+	}	
+}
 
 static void	built_in_export_utils(t_data *data)
 {
@@ -30,19 +47,7 @@ static void	built_in_export_utils(t_data *data)
 			len++;
 		result = ft_strchr(envp[i], '=') + 1;
 		name = ft_substr(envp[i], 0, len);
-		if (ft_strchr(envp[i], '=') == 0)
-			i++;
-		else
-		{
-			if (*envp[i] == '_')
-				i++;
-			else
-			{	
-				printf("declare -x %s=\"%s\"\n", name, result);
-				free(name);
-				i++;
-			}
-		}	
+		export_display(envp, &i, name, result);
 	}
 	g_err_code = 1;
 	free_loop(envp);
@@ -72,7 +77,7 @@ int	export_check_three(t_data *data, int *i, int *j)
 	{
 		ft_putstr_fd(" not a valid identifier\n", 2);
 		g_err_code = 1;
-		return (0) ;
+		return (0);
 	}
 	return (1);
 }
@@ -101,45 +106,23 @@ int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 	return (1);
 }
 
-int	export_check_one(t_data *data)
-{
-	if (data->argz[1][0] == '=')
-	{
-		g_err_code = 1;
-		ft_putstr_fd(data->argz[1], 2);
-		ft_putstr_fd(" : not a valid identifier\n", 2);
-		return (0);
-	}
-	if (data->nb_cmds > 1)
-			return (0);
-	return (1);
-}
-
 void	built_in_export(t_data *data, int i, int j)
 {
-	//int		i;
-	//int		j;
 	t_list	*p_val;
 	char	*c_val;
 
 	if (data->argz[1] != NULL)
 	{
-	
-		//i = 1;
-		//j = 0;
-		
 		if (export_check_one(data) == 0)
-			return ;	
+			return ;
 		c_val = export_tools(data->argz, i);
 		p_val = data->env;
 		while (data->argz[i])
 		{
-	
 			if (export_check_two(data, p_val, c_val, i) == 0)
 				return ;
 			if (export_check_three(data, &i, &j) == 0)
 				return ;
-	
 			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
 			i++;
 		}

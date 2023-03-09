@@ -6,12 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:05 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/08 13:55:16 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:57:50 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <stdlib.h>
+#include "../minishell.h"
 
 void	skip_out(char *line, int *z)
 {

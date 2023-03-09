@@ -6,12 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:24:11 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/08 13:56:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:54:40 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	built_in_echo_utils(t_data *data)
 {

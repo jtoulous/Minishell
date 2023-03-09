@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:06:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/08 12:24:46 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:53:23 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	clean_dat_biach(t_data *data)
 {

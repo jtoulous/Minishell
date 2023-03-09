@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 10:15:42 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:52:06 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct pipex_data
 	int		stdin_copy;
 }		t_data;
 
-//minishiat.c
+//minishell.c
 void	treat_command(t_data *data);
 void	wait_loop(t_data *data);
 
@@ -185,7 +185,7 @@ int		scan_varz(t_data *data, int end, int spot, int z);
 //builtin.c
 int		built_in(t_data *data);
 void	built_in_unset(t_data *data);
-void	built_in_export(t_data *data);
+void	built_in_export(t_data *data, int i, int j);
 
 //echo.c
 void	built_in_echo(t_data *data);
@@ -209,8 +209,8 @@ void	ft_sort_ascii(char **str);
 void	ft_strcp(char *dest, char *src);
 char	*export_tools(char **argz, int i);
 
-int	export_check_one(t_data *data);
-int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i);
-int	export_check_three(t_data *data, int *i, int *j);
+int		export_check_one(t_data *data);
+int		export_check_two(t_data *data, t_list *p_val, char *c_val, int i);
+int		export_check_three(t_data *data, int *i, int *j);
 
 #endif

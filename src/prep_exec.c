@@ -6,12 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:21:45 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/08 13:19:32 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:53:33 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <stdlib.h>
+#include "../minishell.h"
 
 void	skip_redir(char *line, int *z, int end)
 {

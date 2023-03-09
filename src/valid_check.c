@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:47 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:45:42 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:53:55 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	valid_inredir(char *line, int spot)
 {

@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:56 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:46:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:54:02 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	replace_var(t_data *data, int spot, int end_var, char *var_val)
 {

@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:42 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/03 10:14:18 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:53:50 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	trim_redir(char *line, int spot)
 {

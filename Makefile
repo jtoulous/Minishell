@@ -1,33 +1,33 @@
 NAME =  minishell
 
-SRC = error_management.c\
-	  checks.c\
-	  exec.c\
-	  extract.c\
-	  redir.c\
-	  heredoc.c\
-	  minishiat.c\
-	  parse.c\
-	  toolbox.c\
-	  toolbox2.c\
-	  toolbox3.c\
-	  toolbox4.c\
-	  toolbox_hd.c\
-	  toolbox_export.c\
-	  trimage.c\
-	  prep_exec.c\
-	  valid_check.c\
-	  varz.c\
-	  built_in.c\
-	  echo.c\
-	  export.c\
-	  path.c\
-	  exit.c\
-	  signal.c\
-	  global.c\
-	  childs.c\
-	  cd.c\
-
+SRC = src/error_management.c\
+	  src/checks.c\
+	  src/exec.c\
+	  src/extract.c\
+	  src/redir.c\
+	  src/heredoc.c\
+	  src/minishell.c\
+	  src/trimage.c\
+	  src/prep_exec.c\
+	  src/valid_check.c\
+	  src/varz.c\
+	  src/parse.c\
+	  src/signal.c\
+	  src/global.c\
+	  src/childs.c\
+	  toolbox/toolbox.c\
+	  toolbox/toolbox2.c\
+	  toolbox/toolbox3.c\
+	  toolbox/toolbox4.c\
+	  toolbox/toolbox_hd.c\
+	  toolbox/toolbox_export.c\
+	  built_in/built_in.c\
+	  built_in/echo.c\
+	  built_in/export.c\
+	  built_in/path.c\
+	  built_in/exit.c\
+	  built_in/cd.c
+	  
 CFLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(SRC:.c=.o)

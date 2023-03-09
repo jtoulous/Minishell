@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 11:23:06 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 11:23:13 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:52:23 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	simple_child(t_data *data)
 {

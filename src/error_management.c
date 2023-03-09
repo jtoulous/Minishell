@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:08 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:41:01 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:52:30 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	error_permission(t_data *data)
 {

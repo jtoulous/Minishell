@@ -6,11 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:50:10 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 10:42:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:56:34 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	free_loop(char **str)
 {
@@ -93,4 +93,18 @@ void	hdoc_scan(t_data *data)
 		}
 		z++;
 	}
+}
+
+int	export_check_one(t_data *data)
+{
+	if (data->argz[1][0] == '=')
+	{
+		g_err_code = 1;
+		ft_putstr_fd(data->argz[1], 2);
+		ft_putstr_fd(" : not a valid identifier\n", 2);
+		return (0);
+	}
+	if (data->nb_cmds > 1)
+		return (0);
+	return (1);
 }
