@@ -65,9 +65,9 @@ int	set_up_outredir(t_data *data, int spot)
 		return (0);
 	}
 	if (data->line[spot + 1] == '>')
-		data->outfile = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		data->outfile = open(file, O_RDWR | O_CREAT | O_APPEND, 0777);
 	else
-		data->outfile = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		data->outfile = open(file, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	trim_redir(data->line, spot);
 	return (1);
 }
