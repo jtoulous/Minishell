@@ -93,7 +93,7 @@ void	check(t_data *data);
 void	check_syntax(t_data *data, char to_check);
 int		check_if_fork(t_data *data);
 int		check_if_builtin(char *cmd);
-void	check_syntax_pipes(t_data *data);
+void	check_syntax_pipes(t_data *data, int z, int y);
 
 //exec.c
 void	exec(t_data *data, int z);

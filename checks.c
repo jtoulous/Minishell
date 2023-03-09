@@ -19,7 +19,7 @@ void	check_syntax(t_data *data, char to_check)
 	z = 0;
 	if (to_check == '|')
 	{
-		check_syntax_pipes(data);
+		check_syntax_pipes(data, 0, 0);
 		return ;
 	}
 	while (data->line[z] && data->exec_stat == 1)
@@ -40,12 +40,8 @@ void	check_syntax(t_data *data, char to_check)
 	}
 }
 
-void	check_syntax_pipes(t_data *data)
+void	check_syntax_pipes(t_data *data, int z, int y)
 {
-	int	z;
-	int	y;
-
-	z = 0;
 	while (data->line[z] && data->exec_stat == 1)
 	{
 		if (valid_pipe(data->line, z) == 1)
@@ -107,30 +103,14 @@ void	check(t_data *data)
 
 int	check_if_fork(t_data *data)
 {
-	if (ft_strncmp(data->argz[0], "cd", ft_strlen(data->argz[0])) == 0)
+	if (ft_strncmp(data->argz[0], "cd", ft_strlen(data->argz[0])) == 0
+		|| ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0
+		|| ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0
+		|| ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0
+		|| ft_strncmp(data->argz[0], "pwd", ft_strlen(data->argz[0])) == 0)
 	{
 		built_in(data);
 		return (1);
 	}	
-	if (ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0)
-	{
-		built_in(data);
-		return (1);
-	}	
-	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
-	{
-		built_in(data);
-		return (1);
-	}	
-	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)
-	{
-		built_in(data);
-		return (1);
-	}
-	if (ft_strncmp(data->argz[0], "pwd", ft_strlen(data->argz[0])) == 0)
-	{
-		built_in(data);
-		return (1);
-	}
 	return (0);
 }
