@@ -36,19 +36,17 @@ void	simple_exec(t_data *data)
 		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
-			if (data->infile != -1)
+			/*if (data->infile != -1)
 				dup2(data->infile, STDIN_FILENO);
 			if (data->outfile != -1)
 				dup2(data->outfile, STDOUT_FILENO);
 			close_all(data);
 			if (built_in(data) == -1)
-				execve(data->argz[0], data->argz, data->envp);
-			else
-			{	
-				free_loop(data->envp);
-				free_and_close_all(data, 3);
-				exit (0);
-			}
+				execve(data->argz[0], data->argz, data->envp);	
+			free_loop(data->envp);
+			free_and_close_all(data, 3);
+			exit (0);*/
+			simple_child(data);
 		}
 		data->last_pid = pid;
 	}
@@ -67,7 +65,7 @@ void	first_multiple(t_data *data)
 		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
-			if (data->infile != -1)
+			/*if (data->infile != -1)
 				dup2(data->infile, STDIN_FILENO);
 			if (data->outfile != -1)
 				dup2(data->outfile, STDOUT_FILENO);
@@ -78,7 +76,8 @@ void	first_multiple(t_data *data)
 				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
 			free_loop(data->envp);
-			exit (0);
+			exit (0);*/
+			first_child(data);
 		}
 	}
 	free_loop(data->envp);
@@ -96,7 +95,7 @@ void	last_multiple(t_data *data, int z)
 		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
-			if (data->prev_outfile != -1)
+			/*if (data->prev_outfile != -1)
 				dup2(data->prev_outfile, STDIN_FILENO);
 			else if (data->infile != -1)
 				dup2(data->infile, STDIN_FILENO);
@@ -109,7 +108,8 @@ void	last_multiple(t_data *data, int z)
 				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
 			free_loop(data->envp);
-			exit (0);
+			exit (0);*/
+			last_child(data, z);
 		}
 		data->last_pid = pid;
 	}
@@ -128,7 +128,7 @@ void	multiple_exec(t_data *data, int z)
 		signal(SIGINT, handle_sigchild);
 		if (pid == 0)
 		{
-			if (data->prev_outfile != -1)
+			/*if (data->prev_outfile != -1)
 				dup2(data->prev_outfile, STDIN_FILENO);
 			else if (data->infile != -1)
 				dup2(data->infile, STDIN_FILENO);
@@ -143,7 +143,8 @@ void	multiple_exec(t_data *data, int z)
 				execve(data->argz[0], data->argz, data->envp);
 			free_and_close_all(data, 3);
 			free_loop(data->envp);
-			exit (0);
+			exit (0);*/
+			multiple_child(data, z);
 		}
 	}
 	free_loop(data->envp);

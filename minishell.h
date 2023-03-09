@@ -102,6 +102,12 @@ void	first_multiple(t_data *data);
 void	last_multiple(t_data *data, int z);
 void	multiple_exec(t_data *data, int z);
 
+//childs.c
+void	simple_child(t_data *data);
+void	first_child(t_data *data);
+void	last_child(t_data *data, int z);
+void	multiple_child(t_data *data, int z);
+
 //extract.c
 char	*extract_from_quotes(char *line, int spot);
 char	*extract_redir(char *line, int spot);
