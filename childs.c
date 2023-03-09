@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   childs.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/09 11:23:06 by agoichon          #+#    #+#             */
+/*   Updated: 2023/03/09 11:23:13 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	simple_child(t_data *data)
@@ -8,7 +20,7 @@ void	simple_child(t_data *data)
 		dup2(data->outfile, STDOUT_FILENO);
 	close_all(data);
 	if (built_in(data) == -1)
-		execve(data->argz[0], data->argz, data->envp);	
+		execve(data->argz[0], data->argz, data->envp);
 	free_loop(data->envp);
 	free_and_close_all(data, 3);
 	exit (0);
