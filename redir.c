@@ -62,6 +62,7 @@ int	set_up_outredir(t_data *data, int spot)
 	if (access(file, X_OK) != 0 && access(file, F_OK) == 0)
 	{
 		error_permission(data);
+		free (file);
 		return (0);
 	}
 	if (data->line[spot + 1] == '>')
@@ -69,6 +70,7 @@ int	set_up_outredir(t_data *data, int spot)
 	else
 		data->outfile = open(file, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	trim_redir(data->line, spot);
+	free (file);
 	return (1);
 }
 
