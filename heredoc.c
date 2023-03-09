@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/07 09:39:36 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/09 10:41:20 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_doc_argz(int fd, char *lim)
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
 			&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
-			free(buf);		
+			free(buf);
 			return ;
 		}
 		write (fd, buf, ft_strlen(buf));
@@ -107,10 +107,10 @@ void	fake_prep_hdoc(char *lim)
 void	treat_hdoc(t_data *data, int z)
 {
 	char	*lim;
-	
+
 	lim = hdoc_limit(data->line, z);
 	if (check_if_used(data->line, z, end_of_cmd(data->line, z)) == 1)
-		prep_hdoc(data, z, lim);	
+		prep_hdoc(data, z, lim);
 	else
 	{
 		fake_prep_hdoc(lim);
@@ -119,28 +119,4 @@ void	treat_hdoc(t_data *data, int z)
 	if (g_err_code == 130)
 		data->exec_stat = 0;
 	free (lim);
-}
- 
-void	hdoc_scan(t_data *data)
-{
-	int		z;
-
-	z = 0;
-	while (data->line[z] && data->exec_stat == 1)
-	{
-		if (data->line[z] == '<'
-			&& valid_hd(data->line, z) == 1)
-		{
-			if (data->stdin_copy == -1)
-				data->stdin_copy = dup(STDIN_FILENO);
-			if (g_err_code == 130)
-				g_err_code = -1;
-			treat_hdoc(data, z);
-			if (g_err_code == 130)
-				dup2(data->stdin_copy, STDIN_FILENO);
-			if (g_err_code == -1)
-				g_err_code = 130;	
-		}
-		z++;
-	}
 }
