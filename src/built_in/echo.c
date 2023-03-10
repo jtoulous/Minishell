@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:24:11 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/10 09:19:07 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:37:43 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	built_in_echo(t_data *data)
 	int	j;
 
 	i = 1;
+	if (data->argz[1] == NULL)
+	{
+		printf("\n");
+		return ;
+	}	
 	if (ft_strncmp(data->argz[1], "-n", 2) == 0)
 	{
 		while (ft_strncmp(data->argz[i], "-n", 2) == 0)
