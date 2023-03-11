@@ -60,6 +60,7 @@ void	wait_loop(t_data *data)
 	data->nb_forks = 0;
 	data->err_stat = 0;
 }
+
 static void	argc_err(char *arg)
 {
 	ft_putstr_fd("minishell: ", 2);
