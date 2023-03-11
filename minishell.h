@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:52:06 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:19:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ int		built_in_exit(t_data *data);
 void	handle_sigint(int sig);
 void	handle_sigchild(int sig);
 void	handle_sigdoc(int sig);
+void	handle_sigquit(int sig);
 
 //toolvox_export.c
 void	ft_swap(char **s1, char **s2);

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:09:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:53:45 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:19:24 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,9 @@ void	handle_sigdoc(int sig)
 	close (STDIN_FILENO);
 	g_err_code = 130;
 }
+
+void	handle_sigquit(int sig)
+{
+	(void) sig;
+	ft_putstr_fd("Quit (core dumped)\n", 1);
+}	

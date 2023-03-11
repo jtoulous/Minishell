@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/10 09:34:03 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:14:20 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	built_in_unset(t_data *data)
 
 	if (data->argz[1] == NULL)
 		return ;
-	i = 0;
+	i = 1;
 	tmp = data->env;
 	p_tmp = NULL;
-	if (ft_isalpha(data->argz[i][0]) == 0)
+	if (ft_isalpha(data->argz[i][0]) == 0 || data->argz[i][0] == '/')
 	{
 		first_check_unset(data, i);
 		return ;
