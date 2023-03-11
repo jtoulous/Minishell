@@ -39,5 +39,6 @@ void	handle_sigdoc(int sig)
 void	handle_sigquit(int sig)
 {
 	(void) sig;
+	g_err_code = 131;
 	ft_putstr_fd("Quit (core dumped)\n", 1);
 }	

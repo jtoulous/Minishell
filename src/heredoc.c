@@ -23,12 +23,14 @@ void	get_doc_argz(int fd, char *lim)
 		buf = get_next_line(0);
 		if (g_err_code == 130)
 			return ;
+		if (!buf)	
+			return ;
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
-			&& ft_strlen(buf) == ft_strlen(lim) + 1)
+		&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
 			free(buf);
 			return ;
-		}
+		}			
 		write (fd, buf, ft_strlen(buf));
 		free (buf);
 	}

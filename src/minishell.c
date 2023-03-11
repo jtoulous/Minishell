@@ -60,13 +60,21 @@ void	wait_loop(t_data *data)
 	data->nb_forks = 0;
 	data->err_stat = 0;
 }
+static void	argc_err(char *arg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": No such file or directory", 2);
+	exit (127);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	(void) argc;
 	(void) argv;
+	if (argc != 1)
+		argc_err(argv[1]);
 	init_data(&data, envp);
 	while (1)
 	{

@@ -71,7 +71,7 @@ int	lim_size(char *line, int spot)
 	int	z;
 
 	z = spot;
-	while (line[z] != ' ')
+	while (line[z] != ' ' && line[z])
 		z++;
 	return (z - spot + 1);
 }
@@ -88,7 +88,7 @@ char	*hdoc_limit(char *line, int spot)
 		spot++;
 	fnl = ft_calloc(lim_size(line, spot),
 			sizeof(char));
-	while (line[spot] != ' ')
+	while (line[spot] != ' ' && line[spot])
 	{
 		if (line[spot] == 34 || line[spot] == 39)
 			skip_n_copy_quote(line, fnl, &spot, &z);
