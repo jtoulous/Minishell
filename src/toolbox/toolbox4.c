@@ -63,10 +63,12 @@ void	path_finder(t_data *data, char *cmd)
 				free_loop(paths);
 				return ;
 			}
-			free (data->argz[0]);
+			if (paths[z + 1] != NULL)
+				free (data->argz[0]);
 			z++;
 		}
 	}
+	free_loop(data->argz);
 	data->argz = NULL;
 	free_loop(paths);
 }
