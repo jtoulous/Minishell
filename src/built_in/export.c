@@ -6,50 +6,11 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/13 11:17:51 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:15:31 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-#include <stdlib.h>
-
-static void	export_display(char **envp, int *i, char *name, char *result)
-{
-	if (ft_strchr(envp[*i], '=') == 0)
-		*i += 1;
-	else
-	{
-		if (*envp[*i] == '_')
-			*i += 1;
-		else
-		{	
-			printf("declare -x %s=\"%s\"\n", name, result);
-			*i += 1;
-		}
-	}	
-}
-
-/*static void	built_in_export_utils(t_data *data)
-{
-	int		i;
-	int		len;
-	char	*result;
-	char	*name;
-
-	i = 0;
-	ft_sort_ascii(data->envp);
-	while (data->envp[i])
-	{	
-		len = 0;
-		while (data->envp[i][len] != '=' && data->envp[i][len])
-			len++;
-		result = ft_strchr(data->envp[i], '=') + 1;
-		name = ft_substr(data->envp[i], 0, len);
-		export_display(data->envp, &i, name, result);
-		free (name);
-	}
-	g_err_code = 1;
-}*/	
 
 static int	export_check_three(t_data *data, int *i, int *j)
 {
@@ -109,7 +70,7 @@ static int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 static int	plus_check(t_data *data, char *c_val, t_list *p_val, int i)
 {
 	char	*tmp;
-	
+
 	if (c_val[ft_strlen(c_val) - 1] == '+')
 	{
 		while (p_val != NULL)
@@ -127,14 +88,14 @@ static int	plus_check(t_data *data, char *c_val, t_list *p_val, int i)
 			p_val = p_val->next;
 		}	
 	}
-	return (0);	
+	return (0);
 }
 
 static void	export_checks(t_data *data, int i, int j)
 {
 	t_list	*p_val;
 	char	*c_val;
-	
+
 	if (export_check_one(data) == 0)
 		return ;
 	c_val = export_tools(data->argz, i);

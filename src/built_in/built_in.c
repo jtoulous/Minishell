@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/13 13:47:24 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:17:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,20 @@ int	check_if_builtin(char *cmd)
 		&& ft_strlen(cmd) == ft_strlen("exit"))
 		return (1);
 	return (0);
+}
+
+void	export_display(char **envp, int *i, char *name, char *result)
+{
+	if (ft_strchr(envp[*i], '=') == 0)
+		*i += 1;
+	else
+	{
+		if (*envp[*i] == '_')
+			*i += 1;
+		else
+		{
+			printf("declare -x %s=\"%s\"\n", name, result);
+			*i += 1;
+		}
+	}
 }

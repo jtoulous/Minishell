@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:35:22 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 17:50:44 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:19:30 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	get_doc_argz(int fd, char *lim)
 		buf = get_next_line(0);
 		if (g_err_code == 130)
 			return ;
-		if (!buf)	
+		if (!buf)
 			return ;
 		if (ft_strncmp(buf, lim, ft_strlen(lim)) == 0
-		&& ft_strlen(buf) == ft_strlen(lim) + 1)
+			&& ft_strlen(buf) == ft_strlen(lim) + 1)
 		{
 			free(buf);
 			return ;
