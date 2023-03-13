@@ -63,5 +63,11 @@ void	parse(t_data *data)
 	if (check_redirz(data, end) != 1)
 		return ;
 	end = end_of_cmd(data->line, 0);
+	if (data->line[0] == '\0')
+	{
+		free_loop(data->argz);
+		data->argz = NULL;
+		return ;
+	}
 	prep_exec(data, end);
 }
