@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 15:03:39 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:47:24 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	built_in_bis(t_data *data)
 {
 	if (ft_strncmp(data->argz[0], "unset", ft_strlen(data->argz[0])) == 0)
 	{
-		built_in_unset(data);
+		built_in_unset(data, 1);
 		return (0);
 	}
 	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)

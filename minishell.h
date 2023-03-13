@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/11 09:19:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:45:23 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int		scan_varz(t_data *data, int end, int spot, int z);
 
 //builtin.c
 int		built_in(t_data *data);
-void	built_in_unset(t_data *data);
+void	built_in_unset(t_data *data, int i);
 void	built_in_export(t_data *data, int i, int j);
 
 //echo.c
@@ -209,9 +209,6 @@ void	ft_swap(char **s1, char **s2);
 void	ft_sort_ascii(char **str);
 void	ft_strcp(char *dest, char *src);
 char	*export_tools(char **argz, int i);
-
 int		export_check_one(t_data *data);
-//int		export_check_two(t_data *data, t_list *p_val, char *c_val, int i);
-//int		export_check_three(t_data *data, int *i, int *j);
 
 #endif
