@@ -36,7 +36,8 @@ void	check_syntax(t_data *data, char to_check)
 				|| data->line[z] == '\0')
 				error_syntax(data, z, 1);
 		}
-		z++;
+		if (data->line[z] != '\0')
+			z++;
 	}
 }
 
@@ -47,7 +48,8 @@ void	check_syntax_pipes(t_data *data, int z, int y)
 		if (valid_pipe(data->line, z) == 1)
 		{
 			y = z - 1;
-			while (y > 0 && data->line[y] == ' ')
+			while (y > 0 && data->line[y] == ' '
+				&& data->line[y])
 				y--;
 			if (y <= 0)
 			{
