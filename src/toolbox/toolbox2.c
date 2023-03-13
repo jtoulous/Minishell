@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 15:05:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:02:42 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void	export_env(t_list **env, char **envp)
 {
-	int	z;
+	int		z;
+	char	*tmp;
 
 	z = 0;
 	while (envp[z])
 	{
-		ft_lstadd_back(env, ft_lstnew(ft_strdup(envp[z])));
+		tmp = ft_strdup(envp[z]);
+		if (tmp == NULL)
+			return ;
+		ft_lstadd_back(env, ft_lstnew(tmp));
 		z++;
 	}
 }

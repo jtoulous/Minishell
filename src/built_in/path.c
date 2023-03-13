@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/13 13:48:04 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 15:10:20 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ static void	built_in_unset_two(t_data *data, t_list *tmp, t_list *p_tmp, int i)
 			free(tmp);
 			return ;
 		}	
-	}						
+	}
 	p_tmp = tmp->next;
 	tmp->next = p_tmp->next;
 	g_err_code = 0;
+	free(p_tmp->env_copy);
 	free(p_tmp);
 }
 
@@ -95,6 +96,7 @@ void	built_in_unset(t_data *data, int i)
 				ft_strlen(data->argz[i])) == 0)
 		{
 			data->env = data->env->next;
+			free(tmp->env_copy);
 			free(tmp);
 		}
 		else
