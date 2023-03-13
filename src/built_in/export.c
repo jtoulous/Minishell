@@ -24,37 +24,34 @@ static void	export_display(char **envp, int *i, char *name, char *result)
 		else
 		{	
 			printf("declare -x %s=\"%s\"\n", name, result);
-			free(name);
 			*i += 1;
 		}
 	}	
 }
 
-static void	built_in_export_utils(t_data *data)
+/*static void	built_in_export_utils(t_data *data)
 {
 	int		i;
 	int		len;
-	char	**envp;
 	char	*result;
 	char	*name;
 
 	i = 0;
-	envp = convert_env(data->env);
-	ft_sort_ascii(envp);
-	while (envp[i])
+	ft_sort_ascii(data->envp);
+	while (data->envp[i])
 	{	
 		len = 0;
-		while (envp[i][len] != '=' && envp[i][len])
+		while (data->envp[i][len] != '=' && data->envp[i][len])
 			len++;
-		result = ft_strchr(envp[i], '=') + 1;
-		name = ft_substr(envp[i], 0, len);
-		export_display(envp, &i, name, result);
+		result = ft_strchr(data->envp[i], '=') + 1;
+		name = ft_substr(data->envp[i], 0, len);
+		export_display(data->envp, &i, name, result);
+		free (name);
 	}
 	g_err_code = 1;
-	free_loop(envp);
-}	
+}*/	
 
-int	export_check_three(t_data *data, int *i, int *j)
+static int	export_check_three(t_data *data, int *i, int *j)
 {
 	while (data->argz[*i][*j] != '=' && data->argz[*i][*j])
 	{
@@ -83,7 +80,7 @@ int	export_check_three(t_data *data, int *i, int *j)
 	return (1);
 }
 
-int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
+static int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 {
 	while (p_val != NULL)
 	{
@@ -93,6 +90,7 @@ int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 			free(p_val->env_copy);
 			p_val->env_copy = NULL;
 			p_val->env_copy = ft_strdup(data->argz[i]);
+			free (c_val);
 			return (0);
 		}	
 		p_val = p_val->next;
@@ -102,52 +100,85 @@ int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 		ft_putstr_fd(data->argz[i], 2);
 		ft_putstr_fd(" : not a valid identifier\n", 2);
 		g_err_code = 1;
+		free (c_val);
 		return (0);
 	}
 	return (1);
 }
 
-void	built_in_export(t_data *data, int i, int j)
+static int	plus_check(t_data *data, char *c_val, t_list *p_val, int i)
+{
+	char	*tmp;
+	
+	if (c_val[ft_strlen(c_val) - 1] == '+')
+	{
+		while (p_val != NULL)
+		{
+			if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(c_val) - 1) == 0)
+			{
+				free(c_val);
+				c_val = ft_strdup(p_val->env_copy);
+				tmp = ft_strchr(data->argz[i], '=') + 1;
+				free(p_val->env_copy);
+				p_val->env_copy = ft_strjoin(c_val, tmp);
+				free(c_val);
+				return (1);
+			}	
+			p_val = p_val->next;
+		}	
+	}
+	return (0);	
+}
+
+static void	export_checks(t_data *data, int i, int j)
 {
 	t_list	*p_val;
 	char	*c_val;
+	
+	if (export_check_one(data) == 0)
+		return ;
+	c_val = export_tools(data->argz, i);
+	p_val = data->env;
+	while (data->argz[i])
+	{
+		if (export_check_two(data, p_val, c_val, i) == 0)
+			return ;
+		if (export_check_three(data, &i, &j) == 0)
+		{	
+			free (c_val);
+			return ;
+		}	
+		if (plus_check(data, c_val, p_val, i) == 1)
+			return ;
+		ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
+		i++;
+	}
+	free (c_val);
+}
+
+void	built_in_export(t_data *data, int i, int j)
+{
+	int		z;
 	int		len;
-	char	*tmp;
+	char	*result;
+	char	*name;
 
 	if (data->argz[1] != NULL)
-	{
-		if (export_check_one(data) == 0)
-			return ;
-		c_val = export_tools(data->argz, i);
-		p_val = data->env;
-		while (data->argz[i])
-		{
-			if (export_check_two(data, p_val, c_val, i) == 0)
-				return ;
-			if (export_check_three(data, &i, &j) == 0)
-				return ;
-			len = ft_strlen(c_val);
-			if (c_val[len - 1] == '+')
-			{
-				while (p_val != NULL)
-				{
-					if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(c_val) - 1) == 0)
-					{
-						free(c_val);
-						c_val = ft_strdup(p_val->env_copy);
-						tmp = ft_strchr(data->argz[i], '=') + 1;
-						free(p_val->env_copy);
-						p_val->env_copy = ft_strjoin(c_val, tmp);
-						free(c_val);
-						return ;
-					}	
-					p_val = p_val->next;
-				}	
-			}	
-			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
-			i++;
-		}
-	}	
+		export_checks(data, i, j);
 	else
-		built_in_export_utils(data);
+	{
+		z = 0;
+		ft_sort_ascii(data->envp);
+		while (data->envp[z])
+		{	
+			len = 0;
+			while (data->envp[z][len] != '=' && data->envp[z][len])
+				len++;
+			result = ft_strchr(data->envp[z], '=') + 1;
+			name = ft_substr(data->envp[z], 0, len);
+			export_display(data->envp, &z, name, result);
+			free (name);
+		}
+		g_err_code = 1;
+	}
 }

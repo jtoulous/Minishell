@@ -17,7 +17,9 @@ void	ft_swap(char **s1, char **s2)
 	char	*tmp;
 
 	tmp = ft_strdup(*s1);
+	free (*s1);
 	*s1 = ft_strdup(*s2);
+	free (*s2);
 	*s2 = ft_strdup(tmp);
 	free (tmp);
 }
