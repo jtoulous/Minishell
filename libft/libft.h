@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/03/02 11:10:45 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:19:03 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ char			*strjoin_n_free(char *s1, char *s2);
 char			*ft_strchr_reverse(const char *s, int c);
 long long		ft_atol(const char *nptr);
 long long		ft_atol_check(const char *nptr);
+char			*ft_strncat(char *dest, char *src, unsigned int nb);
 #endif

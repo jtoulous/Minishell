@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 15:04:55 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/13 11:17:51 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <stdlib.h>
 
 static void	export_display(char **envp, int *i, char *name, char *result)
 {
@@ -85,7 +86,7 @@ int	export_check_three(t_data *data, int *i, int *j)
 int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 {
 	while (p_val != NULL)
-	{	
+	{
 		if (ft_strncmp(p_val->env_copy, c_val,
 				ft_strlen(c_val)) == 0)
 		{
@@ -110,6 +111,8 @@ void	built_in_export(t_data *data, int i, int j)
 {
 	t_list	*p_val;
 	char	*c_val;
+	int		len;
+	char	*tmp;
 
 	if (data->argz[1] != NULL)
 	{
@@ -123,6 +126,24 @@ void	built_in_export(t_data *data, int i, int j)
 				return ;
 			if (export_check_three(data, &i, &j) == 0)
 				return ;
+			len = ft_strlen(c_val);
+			if (c_val[len - 1] == '+')
+			{
+				while (p_val != NULL)
+				{
+					if (ft_strncmp(p_val->env_copy, c_val, ft_strlen(c_val) - 1) == 0)
+					{
+						free(c_val);
+						c_val = ft_strdup(p_val->env_copy);
+						tmp = ft_strchr(data->argz[i], '=') + 1;
+						free(p_val->env_copy);
+						p_val->env_copy = ft_strjoin(c_val, tmp);
+						free(c_val);
+						return ;
+					}	
+					p_val = p_val->next;
+				}	
+			}	
 			ft_lstadd_back(&data->env, ft_lstnew(ft_strdup(data->argz[i])));
 			i++;
 		}

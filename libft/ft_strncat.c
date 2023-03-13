@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 10:30:18 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/03/11 10:03:08 by agoichon         ###   ########.fr       */
+/*   Created: 2022/06/15 16:42:41 by agoichon          #+#    #+#             */
+/*   Updated: 2023/03/13 10:17:50 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	size_t	z;
+	unsigned int	x;
+	unsigned int	dest_strlen;
 
-	z = 0;
-	if (s1[0] == '\0' || s2[0] == '\0')
-		return (0);
-	while (z < n && (s2[z] || s1[z]))
+	x = 0;
+	dest_strlen = ft_strlen(dest);
+	while (src[x] && nb > x)
 	{
-		if (s1[z] != s2[z])
-			return ((unsigned char)s1[z] - (unsigned char)s2[z]);
-		z++;
+		dest[dest_strlen + x] = src[x];
+		x++;
 	}
-	return (0);
+	dest[dest_strlen + x] = '\0';
+	return (dest);
 }
