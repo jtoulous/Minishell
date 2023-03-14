@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/13 15:15:31 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:19:34 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,8 @@ static void	export_checks(t_data *data, int i, int j)
 	free (c_val);
 }
 
-void	built_in_export(t_data *data, int i, int j)
+void	built_in_export(t_data *data, int i, int j, int z)
 {
-	int		z;
 	int		len;
 	char	*result;
 	char	*name;
@@ -128,17 +127,20 @@ void	built_in_export(t_data *data, int i, int j)
 		export_checks(data, i, j);
 	else
 	{
-		z = 0;
 		ft_sort_ascii(data->envp);
 		while (data->envp[z])
 		{	
 			len = 0;
 			while (data->envp[z][len] != '=' && data->envp[z][len])
 				len++;
-			result = ft_strchr(data->envp[z], '=') + 1;
 			name = ft_substr(data->envp[z], 0, len);
-			export_display(data->envp, &z, name, result);
+			result = ft_strchr(data->envp[z], '=') + 1;
+			if (data->envp[z][len] != '\0')
+				export_display(data->envp, &z, name, result);
+			else
+				printf("declare -x %s\n", name);
 			free (name);
+			z++;
 		}
 		g_err_code = 1;
 	}

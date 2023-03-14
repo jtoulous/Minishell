@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:07:05 by jtoulous          #+#    #+#             */
-/*   Updated: 2022/09/29 10:29:01 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:08:30 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (s[z] == c)
 		return ((char *)s + z);
-	return (0);
+	return (NULL);
 }

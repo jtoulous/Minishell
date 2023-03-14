@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/13 15:17:12 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:12:56 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	built_in(t_data *data)
 	}
 	if (ft_strncmp(data->argz[0], "export", ft_strlen(data->argz[0])) == 0)
 	{
-		built_in_export(data, 1, 0);
+		built_in_export(data, 1, 0, 0);
 		return (0);
 	}
 	built_in_bis(data);
@@ -83,16 +83,8 @@ int	check_if_builtin(char *cmd)
 
 void	export_display(char **envp, int *i, char *name, char *result)
 {
-	if (ft_strchr(envp[*i], '=') == 0)
-		*i += 1;
+	if (*envp[*i] == '_')
+		return ;
 	else
-	{
-		if (*envp[*i] == '_')
-			*i += 1;
-		else
-		{
-			printf("declare -x %s=\"%s\"\n", name, result);
-			*i += 1;
-		}
-	}
+		printf("declare -x %s=\"%s\"\n", name, result);
 }
