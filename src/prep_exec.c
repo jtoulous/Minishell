@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:21:45 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/14 10:21:09 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:33:22 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,22 @@ char	**path_lst(t_data *data)
 	return (paths);
 }
 
-int	check_already_pathed(t_data *data, char *cmd)
+int	check_already_pathed(t_data *data, char *cmd, int z)
 {
 	if (cmd[0] == '/' || check_if_builtin(cmd) == 1
 		|| cmd[0] == '.')
 	{
-		if (access(cmd, F_OK) == 0 || check_if_builtin(cmd) == 1)
+		if (cmd[0] == '.')
+		{
+			z += 2;
+			while (cmd[z] != '/' && cmd[z])
+				z++;
+			if (cmd[z] == '/' && access(cmd, R_OK) == 0)
+				return (1);
+			else
+				return (0);
+		}		
+		else if (access(cmd, R_OK) == 0 || check_if_builtin(cmd) == 1)
 			data->argz[0] = ft_strdup(cmd);
 		else
 		{

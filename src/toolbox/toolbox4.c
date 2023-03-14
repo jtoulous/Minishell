@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 10:50:10 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 15:05:45 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:23:39 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	path_finder(t_data *data, char *cmd)
 	int		z;
 
 	z = 0;
-	if (check_already_pathed(data, cmd) == 1)
+	if (check_already_pathed(data, cmd, 0) == 1)
 		return ;
 	paths = path_lst(data);
 	if (paths != NULL)
