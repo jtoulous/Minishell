@@ -68,12 +68,16 @@ char	**path_lst(t_data *data)
 
 int	check_already_pathed(t_data *data, char *cmd)
 {
-	if (cmd[0] == '/' || check_if_builtin(cmd) == 1)
+	if (cmd[0] == '/' || check_if_builtin(cmd) == 1
+		|| cmd[0] == '.')
 	{
 		if (access(cmd, F_OK) == 0 || check_if_builtin(cmd) == 1)
 			data->argz[0] = ft_strdup(cmd);
 		else
+		{
+			free_loop(data->argz);	
 			data->argz = NULL;
+		}	
 		return (1);
 	}
 	return (0);

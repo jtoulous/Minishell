@@ -26,6 +26,7 @@ void	handle_sigchild(int sig)
 {
 	(void) sig;
 	ft_putstr_fd("\n", 1);
+	g_err_code = 130;
 }
 
 void	handle_sigdoc(int sig)

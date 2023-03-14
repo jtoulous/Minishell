@@ -28,22 +28,25 @@ void	built_in_env(t_data *data)
 	int	z;
 	int	y;
 
-	z = 0;
+	z = 1;
 	while (data->envp[z])
 	{
-		y = 1;
+		y = 0;
 		while (data->envp[z][y])
 		{
 			if (data->envp[z][y] == '=')
+			{	
+				printf("%s\n", data->envp[z]);
 				break ;
-			if (data->envp[z][y + 1] == '\0' && data->envp[z][y] != '=')
+			}
+			if (data->envp[z][y] == '\0')
 			{
 				z++;
 				y = 0;
+				break ;
 			}	
 			y++;
 		}
-		printf("%s\n", data->envp[z]);
 		z++;
 	}
 }
