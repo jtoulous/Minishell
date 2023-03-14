@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:21:45 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 14:53:33 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:21:09 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_already_pathed(t_data *data, char *cmd)
 			data->argz[0] = ft_strdup(cmd);
 		else
 		{
-			free_loop(data->argz);	
+			free_loop(data->argz);
 			data->argz = NULL;
 		}	
 		return (1);
