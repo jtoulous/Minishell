@@ -46,7 +46,7 @@ void	built_in_echo(t_data *data)
 	int	j;
 
 	i = 1;
-	if (data->argz[1] == NULL)
+	if (data->argz[1] == NULL || data->argz[1][0] == '\0')
 	{
 		printf("\n");
 		return ;
