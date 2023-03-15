@@ -81,7 +81,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		data.line = readline("\001\e[0;31mküçük_kabuk>\002\e[0;m ");
+		//data.line = readline("\001\e[0;31mküçük_kabuk>\002\e[0;m ");
+		data.line = readline("mküçük_kabuk> ");
 		if (data.line == NULL)
 			break ;
 		add_history(data.line);

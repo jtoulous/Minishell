@@ -13,8 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//# define BUFFER_SIZE 1 
-
 /*Colors*/
 /*---------------------------------------------------------------------*/
 # define BLACK "\e[0;30m"

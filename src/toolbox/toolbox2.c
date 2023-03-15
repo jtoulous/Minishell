@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 14:02:54 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:45:47 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	export_env(t_list **env, char **envp)
 	int	z;
 
 	z = 0;
-	/*if (!envp[z++])
-	{
-		ft_putstr_fd("va te faire enculer laisse le env", 2);
-		exit(1);
-	}*/
 	while (envp[z])
 	{
 		ft_lstadd_back(env, ft_lstnew(ft_strdup(envp[z])));
@@ -35,7 +30,7 @@ void	create_env(t_list **env)
 {
 	char	*tmp;
 	char	buf[1024];
-	
+
 	getcwd(buf, 1023);
 	tmp = ft_strjoin("PWD=", buf);
 	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));

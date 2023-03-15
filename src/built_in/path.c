@@ -28,7 +28,7 @@ void	built_in_env(t_data *data)
 	int	z;
 	int	y;
 
-	z = 1;
+	z = 0;
 	if (!data->envp[0])
 		return;
 	while (data->envp[z])
