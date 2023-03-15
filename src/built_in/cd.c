@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:06:06 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 11:26:27 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 14:50:55 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	cd_utils(t_data *data)
 {
 	char	*tmp;
 	char	buf[1024];
-	//char	*new_pwd;
-	//char	*pwd;
 
 	chdir(data->argz[1]);
 	free (data->argz[1]);
@@ -28,20 +26,6 @@ static void	cd_utils(t_data *data)
 	getcwd(buf, 1023);
 	data->argz[1] = ft_strjoin("PWD=", buf);
 	built_in_export(data, 1, 0, 0);
-	/*tmp = getenv("PWD");
-	chdir(data->argz[1]);
-	pwd = ft_strdup(data->argz[1]);
-	data->argz[2] = ft_strdup("OLDPWD=");
-	free(data->argz[1]);
-	data->argz[1] = ft_strjoin(data->argz[2], tmp);
-	built_in_export(data, 1, 0, 0);
-	free(data->argz[2]);
-	data->argz[2] = ft_strdup("PWD=");
-	new_pwd = ft_strjoin("/", pwd);
-	free(data->argz[1]);
-	data->argz[1] = triple_strjoin(data->argz[2], tmp, new_pwd);
-	mega_free(NULL, pwd, new_pwd, NULL);
-	built_in_export(data, 1, 0, 0);*/
 }
 
 void	built_in_cd(t_data *data)

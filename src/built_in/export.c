@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 13:41:04 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:13:09 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,6 @@ void	built_in_export(t_data *data, int i, int j, int z)
 	char	*result;
 	char	*name;
 
-	if (!data->env)
-		return ;
 	if (data->argz[1] != NULL)
 		export_checks(data, i, j);
 	else
