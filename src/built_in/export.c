@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/14 10:19:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:08:32 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,16 @@ static int	export_check_three(t_data *data, int *i, int *j)
 	return (1);
 }
 
-static int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
+static int	export_check_two(t_data *data, t_list *p_val, char *c_val, int *i)
 {
+	if (ft_isalpha(data->argz[*i][0]) == 0)
+	{
+		ft_putstr_fd(data->argz[*i], 2);
+		ft_putstr_fd(" : not a valid identifier\n", 2);
+		g_err_code = 1;
+		free (c_val);
+		return (0);
+	}
 	while (p_val != NULL)
 	{
 		if (ft_strncmp(p_val->env_copy, c_val,
@@ -50,19 +58,11 @@ static int	export_check_two(t_data *data, t_list *p_val, char *c_val, int i)
 		{
 			free(p_val->env_copy);
 			p_val->env_copy = NULL;
-			p_val->env_copy = ft_strdup(data->argz[i]);
+			p_val->env_copy = ft_strdup(data->argz[*i]);
 			free (c_val);
 			return (0);
 		}	
 		p_val = p_val->next;
-	}
-	if (ft_isalpha(data->argz[i][0]) == 0)
-	{
-		ft_putstr_fd(data->argz[i], 2);
-		ft_putstr_fd(" : not a valid identifier\n", 2);
-		g_err_code = 1;
-		free (c_val);
-		return (0);
 	}
 	return (1);
 }
@@ -102,7 +102,7 @@ static void	export_checks(t_data *data, int i, int j)
 	p_val = data->env;
 	while (data->argz[i])
 	{
-		if (export_check_two(data, p_val, c_val, i) == 0)
+		if (export_check_two(data, p_val, c_val, &i) == 0)
 			return ;
 		if (export_check_three(data, &i, &j) == 0)
 		{	
