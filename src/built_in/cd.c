@@ -15,10 +15,20 @@
 static void	cd_utils(t_data *data)
 {
 	char	*tmp;
-	char	*new_pwd;
-	char	*pwd;
+	char	buf[1024];
+	//char	*new_pwd;
+	//char	*pwd;
 
-	tmp = getenv("PWD");
+	chdir(data->argz[1]);
+	free (data->argz[1]);
+	tmp = env_search(data->env, "PWD");
+	data->argz[1] = ft_strjoin("OLDPWD=", tmp);
+	built_in_export(data, 1, 0, 0);
+	mega_free(data->argz[1], tmp, NULL, NULL);
+	getcwd(buf, 1023);
+	data->argz[1] = ft_strjoin("PWD=", buf);
+	built_in_export(data, 1, 0, 0);
+	/*tmp = getenv("PWD");
 	chdir(data->argz[1]);
 	pwd = ft_strdup(data->argz[1]);
 	data->argz[2] = ft_strdup("OLDPWD=");
@@ -31,7 +41,7 @@ static void	cd_utils(t_data *data)
 	free(data->argz[1]);
 	data->argz[1] = triple_strjoin(data->argz[2], tmp, new_pwd);
 	mega_free(NULL, pwd, new_pwd, NULL);
-	built_in_export(data, 1, 0, 0);
+	built_in_export(data, 1, 0, 0);*/
 }
 
 void	built_in_cd(t_data *data)

@@ -31,7 +31,7 @@ int	error_inredir(char *failed_redir, int error)
 void	error_quotes(t_data *data)
 {
 	data->exec_stat = 0;
-	ft_putstr_fd("Don't forget to close those quotes tight ", STDOUT_FILENO);
+	ft_putstr_fd("Don't forget to close those quotes tight \n", STDOUT_FILENO);
 	ft_putstr_fd("Or you'll face an error with all its might!\n", STDOUT_FILENO);
 }
 
@@ -43,13 +43,13 @@ void	error_path(char *cmd)
 	{	
 		g_err_code = 126;
 		if (access(cmd, X_OK) == -1 && access(cmd, F_OK) == 0)
-			ft_putstr_fd(": Permission denied", STDERR_FILENO);
+			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 		else if (access(cmd, F_OK) == 0
 			&& cmd[0] != '/')
-			ft_putstr_fd(": Is a directory", STDERR_FILENO);
+			ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
 		else
 		{	
-			ft_putstr_fd(": No such file or directory", STDERR_FILENO);
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 			g_err_code += 1;
 		}
 	}

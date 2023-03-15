@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:21:45 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/14 11:33:22 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:22:09 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,6 @@ void	skip_arg(char *line, int *z, int end)
 	}
 }
 
-void	malloc_dat_shiat(t_data *data, int end)
-{
-	int	m_size;
-	int	z;
-
-	m_size = 0;
-	z = 0;
-	while (z < end)
-	{
-		if (data->line[z] != ' ')
-		{
-			skip_arg(data->line, &z, end);
-			m_size++;
-		}
-		else
-			z++;
-	}
-	data->argz = ft_calloc(sizeof(char *), m_size + 2);
-}
-
 char	**path_lst(t_data *data)
 {
 	char	*path_list;
@@ -66,20 +46,33 @@ char	**path_lst(t_data *data)
 	return (paths);
 }
 
-int	check_already_pathed(t_data *data, char *cmd, int z)
+static int	check_if_dir(char *cmd)
+{
+	DIR	*test;
+
+	test = opendir(cmd);
+	if (test == NULL && access(cmd, X_OK) == 0)
+		return (0);
+	if (test != NULL)
+		closedir(test);
+	return (1);
+}
+
+int	check_already_pathed(t_data *data, char *cmd)
 {
 	if (cmd[0] == '/' || check_if_builtin(cmd) == 1
 		|| cmd[0] == '.')
 	{
 		if (cmd[0] == '.')
 		{
-			z += 2;
-			while (cmd[z] != '/' && cmd[z])
-				z++;
-			if (cmd[z] == '/' && access(cmd, R_OK) == 0)
+			if (check_if_dir(cmd) == 1)
+			{
+				free_loop(data->argz);
+				data->argz = NULL;
 				return (1);
+			}
 			else
-				return (0);
+				data->argz[0] = ft_strdup(cmd);
 		}		
 		else if (access(cmd, R_OK) == 0 || check_if_builtin(cmd) == 1)
 			data->argz[0] = ft_strdup(cmd);

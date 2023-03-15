@@ -50,7 +50,7 @@ void	path_finder(t_data *data, char *cmd)
 	int		z;
 
 	z = 0;
-	if (check_already_pathed(data, cmd, 0) == 1)
+	if (check_already_pathed(data, cmd) == 1)
 		return ;
 	paths = path_lst(data);
 	if (paths != NULL)

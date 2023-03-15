@@ -42,4 +42,24 @@ void	handle_sigquit(int sig)
 	(void) sig;
 	g_err_code = 131;
 	ft_putstr_fd("Quit (core dumped)\n", 1);
-}	
+}
+
+void	malloc_dat_shiat(t_data *data, int end)
+{
+	int	m_size;
+	int	z;
+
+	m_size = 0;
+	z = 0;
+	while (z < end)
+	{
+		if (data->line[z] != ' ')
+		{
+			skip_arg(data->line, &z, end);
+			m_size++;
+		}
+		else
+			z++;
+	}
+	data->argz = ft_calloc(sizeof(char *), m_size + 2);
+}

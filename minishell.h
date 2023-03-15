@@ -48,6 +48,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
 
 extern int	g_err_code;
 
@@ -136,7 +137,7 @@ char	**path_lst(t_data *data);
 void	malloc_dat_shiat(t_data *data, int end);
 void	skip_arg(char *line, int *z, int end);
 void	skip_redir(char *line, int *z, int end);
-int		check_already_pathed(t_data *data, char *cmd, int z);
+int		check_already_pathed(t_data *data, char *cmd);
 
 //toolbox3.c
 char	*env_search(t_list *env, char *var);
