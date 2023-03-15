@@ -49,7 +49,11 @@ void	init_data(t_data *data, char **envp)
 
 void	reset_data(t_data *data)
 {
+	if (data->infile != -1)
+		close (data->infile);
 	data->infile = -1;
+	if (data->prev_outfile != -1)
+		close (data->prev_outfile);
 	data->prev_outfile = data->outfile;
 	data->outfile = -1;
 	free_loop(data->argz);
