@@ -19,11 +19,11 @@ void	export_env(t_list **env, char **envp)
 	int	z;
 
 	z = 0;
-	if (!envp[z++])
+	/*if (!envp[z++])
 	{
 		ft_putstr_fd("va te faire enculer laisse le env", 2);
 		exit(1);
-	}
+	}*/
 	while (envp[z])
 	{
 		ft_lstadd_back(env, ft_lstnew(ft_strdup(envp[z])));
@@ -31,11 +31,28 @@ void	export_env(t_list **env, char **envp)
 	}
 }
 
+void	create_env(t_list **env)
+{
+	char	*tmp;
+	char	buf[1024];
+	
+	getcwd(buf, 1023);
+	tmp = ft_strjoin("PWD=", buf);
+	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));
+	free (tmp);
+	tmp = ft_strjoin("OLDPWD=", buf);
+	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));
+	free (tmp);
+}
+
 void	init_data(t_data *data, char **envp)
 {
 	data->env = NULL;
 	data->envp = NULL;
-	export_env(&data->env, envp);
+	if (envp[0] != NULL)
+		export_env(&data->env, envp);
+	else
+		create_env(&data->env);
 	data->infile = -1;
 	data->outfile = -1;
 	data->argz = NULL;
@@ -59,6 +76,7 @@ void	reset_data(t_data *data)
 	free_loop(data->argz);
 	data->argz = NULL;
 	trim_leftovers(data->line);
+
 	data->err_stat = 0;
 }
 
