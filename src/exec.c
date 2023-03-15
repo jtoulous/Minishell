@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:33:20 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/11 09:22:20 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:14:57 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,12 @@ void	first_multiple(t_data *data)
 	int		pid;
 
 	data->envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
-	{	
-		data->nb_forks++;
-		pid = fork();
-		signal(SIGINT, handle_sigchild);
-		signal(SIGQUIT, handle_sigquit);
-		if (pid == 0)
-			first_child(data);
-	}
+	data->nb_forks++;
+	pid = fork();
+	signal(SIGINT, handle_sigchild);
+	signal(SIGQUIT, handle_sigquit);
+	if (pid == 0)
+		first_child(data);
 	free_loop(data->envp);
 }
 
@@ -65,16 +62,13 @@ void	last_multiple(t_data *data, int z)
 	int		pid;
 
 	data->envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
-	{
-		data->nb_forks++;
-		pid = fork();
-		signal(SIGINT, handle_sigchild);
-		signal(SIGQUIT, handle_sigquit);
-		if (pid == 0)
-			last_child(data, z);
-		data->last_pid = pid;
-	}
+	data->nb_forks++;
+	pid = fork();
+	signal(SIGINT, handle_sigchild);
+	signal(SIGQUIT, handle_sigquit);
+	if (pid == 0)
+		last_child(data, z);
+	data->last_pid = pid;
 	free_loop(data->envp);
 }
 
@@ -83,14 +77,11 @@ void	multiple_exec(t_data *data, int z)
 	int		pid;
 
 	data->envp = convert_env(data->env);
-	if (check_if_fork(data) != 1)
-	{
-		data->nb_forks++;
-		pid = fork();
-		signal(SIGINT, handle_sigchild);
-		signal(SIGQUIT, handle_sigquit);
-		if (pid == 0)
-			multiple_child(data, z);
-	}
+	data->nb_forks++;
+	pid = fork();
+	signal(SIGINT, handle_sigchild);
+	signal(SIGQUIT, handle_sigquit);
+	if (pid == 0)
+		multiple_child(data, z);
 	free_loop(data->envp);
 }

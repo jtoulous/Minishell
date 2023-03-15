@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 09:17:14 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:41:58 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	built_in_env(t_data *data)
 	int	y;
 
 	z = 1;
+	if (!data->envp[0])
+		return;
 	while (data->envp[z])
 	{
 		y = 0;

@@ -6,17 +6,21 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/13 14:04:37 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:39:23 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+#include <linux/limits.h>
+#include <unistd.h>
 
 void	export_env(t_list **env, char **envp)
 {
 	int	z;
 
 	z = 0;
+	if (!envp[0])
+		return;
 	while (envp[z])
 	{
 		ft_lstadd_back(env, ft_lstnew(ft_strdup(envp[z])));
