@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 09:25:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 10:00:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:15:18 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ static void	export_checks(t_data *data, int i, int j)
 		free(c_val);
 		i++;
 	}
-	free (c_val);
 }
 
 void	built_in_export(t_data *data, int i, int j, int z)
