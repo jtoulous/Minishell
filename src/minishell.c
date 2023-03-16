@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:36:35 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 15:01:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:46:26 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		//data.line = readline("\001\e[0;31mküçük_kabuk>\002\e[0;m ");
 		data.line = readline("mküçük_kabuk> ");
 		if (data.line == NULL)
 			break ;

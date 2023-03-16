@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:27:32 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 14:27:48 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:51:24 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,11 @@ void	built_in_pwd(t_data *data)
 		printf("%s\n", cwd);
 }
 
-void	built_in_env(t_data *data)
+void	built_in_env(t_data *data, int z, int y)
 {
-	int	z;
-	int	y;
-
-<<<<<<< HEAD
-	z = 0;
 	if (!data->envp[0])
-		return;
-=======
+		return ;
 	z = 1;
->>>>>>> 37e258b60fbd0ef11561946012444c0df385998e
 	while (data->envp[z])
 	{
 		y = 0;

@@ -6,17 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:33 by agoichon          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/15 15:45:47 by jtoulous         ###   ########.fr       */
-=======
+/*   Updated: 2023/03/16 09:53:07 by agoichon         ###   ########.fr       */
 /*   Updated: 2023/03/15 15:12:43 by agoichon         ###   ########.fr       */
->>>>>>> 37e258b60fbd0ef11561946012444c0df385998e
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-#include <linux/limits.h>
-#include <unistd.h>
 
 void	export_env(t_list **env, char **envp)
 {
@@ -28,20 +23,6 @@ void	export_env(t_list **env, char **envp)
 		ft_lstadd_back(env, ft_lstnew(ft_strdup(envp[z])));
 		z++;
 	}
-}
-
-void	create_env(t_list **env)
-{
-	char	*tmp;
-	char	buf[1024];
-
-	getcwd(buf, 1023);
-	tmp = ft_strjoin("PWD=", buf);
-	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));
-	free (tmp);
-	tmp = ft_strjoin("OLDPWD=", buf);
-	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));
-	free (tmp);
 }
 
 void	init_data(t_data *data, char **envp)

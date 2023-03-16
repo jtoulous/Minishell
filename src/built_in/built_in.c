@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:27:29 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/14 10:12:56 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:51:40 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	built_in_bis(t_data *data)
 	}
 	if (ft_strncmp(data->argz[0], "env", ft_strlen(data->argz[0])) == 0)
 	{
-		built_in_env(data);
+		built_in_env(data, 1, 0);
 		return (0);
 	}
 	if (ft_strncmp(data->argz[0], "exit", ft_strlen(data->argz[0])) == 0)

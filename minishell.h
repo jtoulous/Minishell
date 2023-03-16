@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:31:53 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/14 10:13:24 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:53:47 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ char	**convert_env(t_list *env);
 
 //toolbox2.c
 void	export_env(t_list **env, char **envp);
+void	create_env(t_list **env);
 void	init_data(t_data *data, char **envp);
 void	reset_data(t_data *data);
 void	pipes_prep(t_data *data, int nb_cmdz);
@@ -193,7 +194,7 @@ void	built_in_echo(t_data *data);
 //path.c
 void	built_in_cd(t_data *data);
 void	built_in_pwd(t_data *data);
-void	built_in_env(t_data *data);
+void	built_in_env(t_data *data, int z, int y);
 
 //exit.c
 int		built_in_exit(t_data *data);

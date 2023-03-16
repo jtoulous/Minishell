@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:06:06 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/15 14:50:55 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/16 08:52:49 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void	cd_utils(t_data *data)
 	char	buf[1024];
 
 	chdir(data->argz[1]);
-	free (data->argz[1]);
 	tmp = env_search(data->env, "PWD");
+	if (!tmp)
+		return ;
+	free (data->argz[1]);
 	data->argz[1] = ft_strjoin("OLDPWD=", tmp);
 	built_in_export(data, 1, 0, 0);
 	mega_free(data->argz[1], tmp, NULL, NULL);

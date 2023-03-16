@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 09:58:55 by agoichon          #+#    #+#             */
-/*   Updated: 2023/03/09 15:05:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:47:47 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ char	*export_tools(char **argz, int i)
 		j++;
 	}
 	return (rtn);
+}
+
+void	create_env(t_list **env)
+{
+	char	*tmp;
+	char	buf[1024];
+
+	getcwd(buf, 1023);
+	tmp = ft_strjoin("PWD=", buf);
+	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));
+	free (tmp);
+	tmp = ft_strjoin("OLDPWD=", buf);
+	ft_lstadd_back(env, ft_lstnew(ft_strdup(tmp)));
+	free (tmp);
 }
