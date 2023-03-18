@@ -47,9 +47,7 @@ void	first_child(t_data *data)
 
 void	last_child(t_data *data, int z)
 {
-	if (data->prev_outfile != -1)
-		dup2(data->prev_outfile, STDIN_FILENO);
-	else if (data->infile != -1)
+	if (data->infile != -1)
 		dup2(data->infile, STDIN_FILENO);
 	else
 		dup2(data->pipes[z - 1][0], STDIN_FILENO);
@@ -66,9 +64,7 @@ void	last_child(t_data *data, int z)
 
 void	multiple_child(t_data *data, int z)
 {
-	if (data->prev_outfile != -1)
-		dup2(data->prev_outfile, STDIN_FILENO);
-	else if (data->infile != -1)
+	if (data->infile != -1)
 		dup2(data->infile, STDIN_FILENO);
 	else
 		dup2(data->pipes[z - 1][0], STDIN_FILENO);

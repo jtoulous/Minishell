@@ -59,7 +59,7 @@ typedef struct pipex_data
 	int		**pipes;
 	int		infile;
 	int		outfile;
-	int		prev_outfile;
+	//int		prev_outfile;
 	int		exec_stat;
 	int		nb_cmds;
 	int		nb_forks;
