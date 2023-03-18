@@ -47,6 +47,8 @@ void	reset_data(t_data *data)
 {
 	if (data->infile != -1)
 		close (data->infile);
+	if (data->outfile != -1)
+		close (data->outfile);
 	data->infile = -1;
 	data->outfile = -1;
 	free_loop(data->argz);
