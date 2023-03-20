@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		data.line = readline("mküçük_kabuk> ");
+		data.line = readline("küçük_kabuk> ");
 		if (data.line == NULL)
 			break ;
 		add_history(data.line);

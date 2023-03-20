@@ -24,7 +24,6 @@ void	simple_child(t_data *data)
 		execve(data->argz[0], data->argz, data->envp);
 	free_loop(data->envp);
 	free_and_close_all(data, 3);
-	mega_close(0, 1, 2, -1);
 	exit (0);
 }
 
@@ -41,7 +40,6 @@ void	first_child(t_data *data)
 		execve(data->argz[0], data->argz, data->envp);
 	free_and_close_all(data, 3);
 	free_loop(data->envp);
-	mega_close(0, 1, 2, -1);
 	exit (0);
 }
 
@@ -58,7 +56,6 @@ void	last_child(t_data *data, int z)
 		execve(data->argz[0], data->argz, data->envp);
 	free_and_close_all(data, 3);
 	free_loop(data->envp);
-	mega_close(0, 1, 2, -1);
 	exit (0);
 }
 
@@ -77,6 +74,5 @@ void	multiple_child(t_data *data, int z)
 		execve(data->argz[0], data->argz, data->envp);
 	free_and_close_all(data, 3);
 	free_loop(data->envp);
-	mega_close(0, 1, 2, -1);
 	exit (0);
 }
